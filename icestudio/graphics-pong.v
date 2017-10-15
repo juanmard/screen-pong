@@ -36,25 +36,36 @@ module graphics_pong (
     parameter background = black;
 
 	// Parámetros... son comunes al bloque dynamic. Definir exteriormente para modificar un único valor.
-    parameter size_ball = 10;
+    localparam size_ball = 10;
     localparam separator = 20;
     localparam width_screen = 640;
-    localparam width_player = 20;
-    localparam height_player = 80;
+    localparam height_screen = 480;
+    localparam width_player = 12;
+    localparam height_player = 90;
 
     // Draw or not the ball.
     always @(posedge clk)
     begin
-        // If we're inside the ball...
+        // Drawing the ball...
         if ((x_px >= x_ball) && (x_px < x_ball + size_ball) && (y_px >= y_ball) && (y_px < y_ball + size_ball))
                 color_px = white;
         else
+            // Drawing Player 1.
             if ((x_px >= separator) && (x_px < separator + width_player) && (y_px >= pos_player1) && (y_px < pos_player1 + height_player))
-                color_px = blue;
+                color_px = white;
             else
+                // Drawing Player 2.
                 if ((x_px >= width_screen-separator-width_player) && (x_px < width_screen-separator) && (y_px >= pos_player2) && (y_px < pos_player2 +height_player))
-                    color_px = green;
+                    color_px = white;
                 else
-                    color_px = background;
+                    // Drawing lines.
+                    if (
+                         ((x_px > width_screen/2-2) && (x_px < width_screen/2+2) && y_px[3])       // Midle
+//                        || ((y_px > 0) && (y_px < 4) && x_px[3])                                 // Top
+//                        || ((y_px > height_screen-4) && (y_px < height_screen) && x_px[3])       // Bottom
+                       )
+                       color_px = white;
+                    else
+                        color_px = background;
     end
 endmodule

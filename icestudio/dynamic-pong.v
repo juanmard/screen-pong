@@ -18,10 +18,10 @@
 module dynamic_pong (
                 input wire        clk,             // System clock.
                 input wire        clr,             // Asynchronous reset.
-                input wire [9:0]  pos_player1,     // X position for actual logo.
-                input wire [9:0]  pos_player2,     // Y position for actual logo.
-                output reg [9:0]  x_ball,          // X position for actual logo.
-                output reg [9:0]  y_ball,          // Y position for actual logo.
+                input wire [9:0]  pos_player1,     // Position player 1.
+                input wire [9:0]  pos_player2,     // Position player 2.
+                output reg [9:0]  x_ball,          // X position for ball.
+                output reg [9:0]  y_ball,          // Y position for ball.
                 input wire        inc_vel,         // Increase velocity.
                 input wire        dec_vel,         // Decrease velocity.
                 output wire       mute,            // Silence actual sound.
@@ -36,18 +36,19 @@ module dynamic_pong (
     parameter [1:0] stop = 2'b00;
 
 	// Parámetros... son comunes al bloque graphics. Definir exteriormente para modificar un único valor.
-    parameter size_ball = 10;
+    localparam size_ball = 10;
     localparam separator = 20;
     localparam width_screen = 640;
-    localparam width_player = 20;
-    localparam height_player = 80;
+    localparam height_screen = 480;
+    localparam width_player = 12;
+    localparam height_player = 90;
 
     // Border definition.
     parameter border = 0;
-    parameter [9:0] x_logo_min = border;
-    parameter [9:0] x_logo_max = 640 - size_ball - border;
-    parameter [9:0] y_logo_min = border;
-    parameter [9:0] y_logo_max = 480 - size_ball - border;
+    parameter [9:0] x_min = border;
+    parameter [9:0] x_max = width_screen - size_ball - border;
+    parameter [9:0] y_min = border;
+    parameter [9:0] y_max = height_screen - size_ball - border;
 
     // Velocity increment in both direction.
     wire pixel;
@@ -69,7 +70,7 @@ module dynamic_pong (
         counter <= counter + 1;
     end
 
-    // Behaviour debounce.
+    // Init ball parameters.
     always @(posedge clk or posedge clr)
     begin
         if (clr)
@@ -77,8 +78,8 @@ module dynamic_pong (
         begin
            //incx = 1;
            //incy = 2;
-		   //x_logo = (640 - width_logo)/2;
-		   //y_logo = (480 - height_logo)/2;
+		   //x_ball = (width_screen - size_ball)/2;
+		   //y_ball = (height_screen - size_ball)/2;
            //mute = 0;
            //code_sound = go;
         end
@@ -87,23 +88,52 @@ module dynamic_pong (
     // If counter is zero, new animation and new delay.
     always @ (posedge counter[delay])
     begin
-        // Actualize x. Any border in x? Change velocity direction.
-        // Note: For a correct working this was to be a blobking assingment (this =, not this <=).
+        //---
+        // Actualiza las componentes 'x' e 'y' de la velocidad de la pelota.
+        //---
+
+        //---
+        // Comprueba los choques para cambiar la dirección de la velocidad en 'x'.
+        //---
         x_ball = x_ball + incx;
         if (
-            (x_ball > x_logo_max) || (x_ball <= x_logo_min) ||  // Límites del campo (en un futuro serán los goles, por ahora rebota).
-            ((y_ball >= pos_player1) && (y_ball < pos_player1 + height_player) && (x_ball <= width_player + separator)) ||  // Choque con jugador 1.
-            ((y_ball >= pos_player2) && (y_ball < pos_player2 + height_player) && (x_ball >= width_screen - separator - width_player - size_ball))   // Choque con jugador 2.
+            // Límites del campo (en un futuro serán los goles, por ahora rebota).
+            (x_ball > x_max) || (x_ball <= x_min)
+        )
+        begin
+           //incx = 1;
+           //incy = 2;
+		   x_ball <= 320;
+		   y_ball <= 240;            
+        end
+        
+        if (    
+            // Choque frontal con los jugadores.
+            ((y_ball >= pos_player1) && (y_ball < pos_player1 + height_player) && (x_ball <= width_player + separator))
+            || ((y_ball >= pos_player2) && (y_ball < pos_player2 + height_player) && (x_ball >= width_screen - separator - width_player - size_ball))
             )
         begin
             incx <= -incx;
             //mute = 0;
             //code_sound <= pong;
         end
-
-        // Actualize y. Any border in y? Change velocity direction.
+        
+        //---
+        // Comprueba los choques para cambiar la dirección de la velocidad en 'y'.
+        //---
         y_ball = y_ball + incy;
-        if ((y_ball > y_logo_max) || (y_ball <= y_logo_min))
+        if (
+            // Choques superior e inferior con el borde del campo.
+            (y_ball > y_max) || (y_ball <= y_min)
+            
+            // Choques con la parte superior de los jugadores.
+            // || ((y_ball >= pos_player1-size_ball) && (x_ball >= separator) && (x_ball < separator + width_player))
+            // || ((y_ball >= pos_player2-size_ball) && (x_ball >= width_screen - separator - width_player) && (x_ball < width_screen - separator))
+
+            // Choques con la parte inferior de los jugadores.
+            // || ((y_ball <= pos_player1+height_player) && (x_ball >= separator) && (x_ball < separator + width_player))
+            // || ((y_ball <= pos_player2+height_player) && (x_ball >= width_screen - separator - width_player) && (x_ball < width_screen - separator))
+           )
         begin
             incy <= -incy;
             //mute = 0;
