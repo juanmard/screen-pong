@@ -1,0 +1,6 @@
+[submodule "iPxs-Pong/collection-iPxs"]
+	path = iPxs-Pong/collection-iPxs
+	url = https://github.com/sergicuen/collection-iPxs
+[submodule "iPxs-Pong/collection-Pong"]
+	path = iPxs-Pong/collection-Pong
+	url = https://github.com/juanmard/collection-Pong

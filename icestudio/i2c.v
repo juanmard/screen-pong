@@ -1,9 +1,3 @@
-
-
-//@include i2c.v
-
-//Instantiate I2C module.
-//Instanciar el módulo I2C.
 module i2c
 (
     input  wire       clk,            // System clock.
@@ -50,18 +44,15 @@ wire      scl_in;
 reg       scl_clk;
 reg       scl_enable = 0;
 wire      sda_in;
-wire       sda_enable;
+wire      sda_enable;
 reg       sda_int = 1'b1;
 reg [7:0] data_rx;
 reg [3:0] bit_cnt = 4'h7;
 reg [7:0] data_tx;
 reg [7:0] addr_rw;
 
-
-
 //reg busy;
 //reg [7:0] data_rd;
-
 
 always @ (posedge clk or posedge rst)
 begin
