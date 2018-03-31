@@ -14,12 +14,18 @@ This complete version can be found under the subdirectory _**icestudio**_ within
 The structure of this second version can be found in the _**iPxs-Pong**_ subdirectory and a collection for icestudio in github's [collection-Pong](https://github.com/juanmard/collection-Pong).
 
 ## Pong v1.0 (in _icestudio_ path).
+
+![video v1.0](https://raw.githubusercontent.com/juanmard/screen-pong/master/icestudio/gallery/screen-pong.gif)
+
 ### Install
 Install _**icestudio**_ and simply open the file "screen-pong.ice" with it.
 
 ![General structure v1.0](https://raw.githubusercontent.com/juanmard/screen-pong/master/gallery/screen-pong.png)
 
 ## Pong v2.0 (in _iPxs-Pong_ path).
+
+![video v2.0](https://raw.githubusercontent.com/juanmard/screen-pong/master/iPxs-Pong/gallery/iPxs-Pong.gif)
+
 ### Install.
 Download _**collection-Pong**_ in _zip_ format from _github_ or open any of the existing examples in the subdirectory and test it.
 
