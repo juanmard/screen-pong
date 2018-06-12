@@ -274,7 +274,7 @@
           "id": "4c2e61df-faeb-4294-b88e-a264e05112e3",
           "type": "basic.code",
           "data": {
-            "code": "// Control game by buttons.\nreg [9:0] reg1 = 100;\nreg [9:0] reg2 = 100;\n\nassign pos_ply1 = reg1;\nassign pos_ply2 = reg2;\n\nalways @(posedge clk)\nbegin\n   if (inc_ply1) reg1 <= reg1 + speed;\n   if (dec_ply1) reg1 <= reg1 - speed;\n   if (inc_ply2) reg2 <= reg2 + speed;\n   if (dec_ply2) reg2 <= reg2 - speed;\nend\n",
+            "code": "// Control game by buttons.\nreg [9:0] reg1 = 100;\nreg [9:0] reg2 = 100;\n\nassign pos_ply1 = reg1;\nassign pos_ply2 = reg2;\n\nalways @(posedge clk)\nbegin\n   if (inc_ply1) reg1 <= reg1 + speed;\n   if (dec_ply1) reg1 <= reg1 - speed;\n   if (inc_ply2) reg2 <= reg2 + speed;\n   if (dec_ply2) reg2 <= reg2 - speed;\n   if (reg1 < 5) reg1 <= 5; \n   if (reg2 < 5) reg2 <= 5;\n   if (reg1 > 470) reg1 <= 470;\n   if (reg2 > 470) reg2 <= 470;\nend\n",
             "params": [
               {
                 "name": "speed"
@@ -409,10 +409,10 @@
     },
     "state": {
       "pan": {
-        "x": 25.8705,
-        "y": 85.8148
+        "x": 174.0185,
+        "y": 101.7407
       },
-      "zoom": 0.7485
+      "zoom": 0.8812
     }
   },
   "dependencies": {}
