@@ -1,5 +1,5 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "package": {
     "name": "Example-01",
     "version": "1.0",
@@ -8,7 +8,7 @@
     "image": ""
   },
   "design": {
-    "board": "TinyFPGA-B2",
+    "board": "TinyFPGA-BX",
     "graph": {
       "blocks": [
         {
@@ -19,8 +19,8 @@
             "pins": [
               {
                 "index": "0",
-                "name": "PIN_4",
-                "value": "B2"
+                "name": "PIN_13",
+                "value": "H2"
               }
             ],
             "virtual": false
@@ -38,8 +38,8 @@
             "pins": [
               {
                 "index": "0",
-                "name": "PIN_5",
-                "value": "A2"
+                "name": "PIN_12",
+                "value": "J1"
               }
             ],
             "virtual": false
@@ -57,8 +57,8 @@
             "pins": [
               {
                 "index": "0",
-                "name": "PIN_8",
-                "value": "C1"
+                "name": "PIN_11",
+                "value": "H1"
               }
             ],
             "virtual": false
@@ -76,8 +76,8 @@
             "pins": [
               {
                 "index": "0",
-                "name": "PIN_7",
-                "value": "B1"
+                "name": "PIN_10",
+                "value": "G2"
               }
             ],
             "virtual": false
@@ -95,8 +95,8 @@
             "pins": [
               {
                 "index": "0",
-                "name": "PIN_6",
-                "value": "A1"
+                "name": "PIN_9",
+                "value": "E1"
               }
             ],
             "virtual": false
@@ -104,6 +104,25 @@
           "position": {
             "x": 1320,
             "y": 312
+          }
+        },
+        {
+          "id": "09025817-4864-4b2e-b218-868755005810",
+          "type": "basic.output",
+          "data": {
+            "name": "USBPU",
+            "pins": [
+              {
+                "index": "0",
+                "name": "USBPU",
+                "value": "A3"
+              }
+            ],
+            "virtual": false
+          },
+          "position": {
+            "x": 1304,
+            "y": 480
           }
         },
         {
@@ -154,8 +173,8 @@
             "local": false
           },
           "position": {
-            "x": 736,
-            "y": 8
+            "x": 728,
+            "y": -32
           }
         },
         {
@@ -167,8 +186,8 @@
             "local": false
           },
           "position": {
-            "x": 888,
-            "y": 8
+            "x": 920,
+            "y": -32
           }
         },
         {
@@ -295,6 +314,34 @@
           "size": {
             "width": 96,
             "height": 64
+          }
+        },
+        {
+          "id": "39402a07-2714-45be-9a2d-d55a6f57d352",
+          "type": "c4dd08263a85a91ba53e2ae2b38de344c5efcb52",
+          "position": {
+            "x": 1152,
+            "y": 480
+          },
+          "size": {
+            "width": 96,
+            "height": 64
+          }
+        },
+        {
+          "id": "8a2381d5-c390-4284-a001-4d6d64fb3452",
+          "type": "basic.info",
+          "data": {
+            "info": "Sólo necesario para TinyFPGA.<br>\nDesactiva USB.",
+            "readonly": true
+          },
+          "position": {
+            "x": 1152,
+            "y": 424
+          },
+          "size": {
+            "width": 280,
+            "height": 48
           }
         }
       ],
@@ -442,7 +489,13 @@
           "target": {
             "block": "b50a421d-3d1a-475e-82e1-9cfafdce0c8c",
             "port": "dd547e84-2482-4477-aff1-225c9a71083f"
-          }
+          },
+          "vertices": [
+            {
+              "x": 952,
+              "y": 56
+            }
+          ]
         },
         {
           "source": {
@@ -452,7 +505,13 @@
           "target": {
             "block": "b50a421d-3d1a-475e-82e1-9cfafdce0c8c",
             "port": "49d3540e-ccfd-420d-9253-46ffee09d162"
-          }
+          },
+          "vertices": [
+            {
+              "x": 808,
+              "y": 56
+            }
+          ]
         },
         {
           "source": {
@@ -521,15 +580,19 @@
             "block": "ebf22461-ebae-4e0d-8f63-3604fa73626d",
             "port": "dyn_clk"
           }
+        },
+        {
+          "source": {
+            "block": "39402a07-2714-45be-9a2d-d55a6f57d352",
+            "port": "19c8f68d-5022-487f-9ab0-f0a3cd58bead"
+          },
+          "target": {
+            "block": "09025817-4864-4b2e-b218-868755005810",
+            "port": "in"
+          },
+          "vertices": []
         }
       ]
-    },
-    "state": {
-      "pan": {
-        "x": -9.7619,
-        "y": 153.119
-      },
-      "zoom": 0.622
     }
   },
   "dependencies": {
@@ -669,13 +732,6 @@
               "size": 23
             }
           ]
-        },
-        "state": {
-          "pan": {
-            "x": -1596,
-            "y": 402.5
-          },
-          "zoom": 1
         }
       }
     },
@@ -865,13 +921,6 @@
               "size": 26
             }
           ]
-        },
-        "state": {
-          "pan": {
-            "x": -1067.1351,
-            "y": 350.2838
-          },
-          "zoom": 0.7061
         }
       }
     },
@@ -987,13 +1036,6 @@
               }
             }
           ]
-        },
-        "state": {
-          "pan": {
-            "x": 42,
-            "y": 35.5
-          },
-          "zoom": 1
         }
       }
     },
@@ -1216,13 +1258,6 @@
               }
             }
           ]
-        },
-        "state": {
-          "pan": {
-            "x": 110.7108,
-            "y": 201.5663
-          },
-          "zoom": 0.6732
         }
       }
     },
@@ -1428,13 +1463,6 @@
               }
             }
           ]
-        },
-        "state": {
-          "pan": {
-            "x": -192,
-            "y": 194.5
-          },
-          "zoom": 1
         }
       }
     },
@@ -1638,13 +1666,6 @@
               "size": 23
             }
           ]
-        },
-        "state": {
-          "pan": {
-            "x": -1104.8777,
-            "y": 342.9892
-          },
-          "zoom": 0.7572
         }
       }
     },
@@ -1906,13 +1927,68 @@
               "size": 10
             }
           ]
-        },
-        "state": {
-          "pan": {
-            "x": 82.1007,
-            "y": 81.018
-          },
-          "zoom": 0.7518
+        }
+      }
+    },
+    "c4dd08263a85a91ba53e2ae2b38de344c5efcb52": {
+      "package": {
+        "name": "Bit 0",
+        "version": "1.0.0",
+        "description": "Assign 0 to the output wire",
+        "author": "Jesús Arroyo",
+        "image": "%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2247.303%22%20height=%2227.648%22%20viewBox=%220%200%2044.346456%2025.919999%22%3E%3Ctext%20style=%22line-height:125%25%22%20x=%22325.37%22%20y=%22315.373%22%20font-weight=%22400%22%20font-size=%2212.669%22%20font-family=%22sans-serif%22%20letter-spacing=%220%22%20word-spacing=%220%22%20transform=%22translate(-307.01%20-298.51)%22%3E%3Ctspan%20x=%22325.37%22%20y=%22315.373%22%20style=%22-inkscape-font-specification:'Courier%2010%20Pitch'%22%20font-family=%22Courier%2010%20Pitch%22%3E0%3C/tspan%3E%3C/text%3E%3C/svg%3E"
+      },
+      "design": {
+        "graph": {
+          "blocks": [
+            {
+              "id": "19c8f68d-5022-487f-9ab0-f0a3cd58bead",
+              "type": "basic.output",
+              "data": {
+                "name": ""
+              },
+              "position": {
+                "x": 608,
+                "y": 192
+              }
+            },
+            {
+              "id": "b959fb96-ac67-4aea-90b3-ed35a4c17bf5",
+              "type": "basic.code",
+              "data": {
+                "code": "// Bit 0\n\nassign v = 1'b0;",
+                "params": [],
+                "ports": {
+                  "in": [],
+                  "out": [
+                    {
+                      "name": "v"
+                    }
+                  ]
+                }
+              },
+              "position": {
+                "x": 96,
+                "y": 96
+              },
+              "size": {
+                "width": 384,
+                "height": 256
+              }
+            }
+          ],
+          "wires": [
+            {
+              "source": {
+                "block": "b959fb96-ac67-4aea-90b3-ed35a4c17bf5",
+                "port": "v"
+              },
+              "target": {
+                "block": "19c8f68d-5022-487f-9ab0-f0a3cd58bead",
+                "port": "in"
+              }
+            }
+          ]
         }
       }
     }

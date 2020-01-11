@@ -1,5 +1,5 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "package": {
     "name": "Example-01",
     "version": "1.0",
@@ -8,7 +8,7 @@
     "image": ""
   },
   "design": {
-    "board": "TinyFPGA-B2",
+    "board": "TinyFPGA-BX",
     "graph": {
       "blocks": [
         {
@@ -19,8 +19,8 @@
             "pins": [
               {
                 "index": "0",
-                "name": "PIN_4",
-                "value": "B2"
+                "name": "PIN_13",
+                "value": "H2"
               }
             ],
             "virtual": false
@@ -38,8 +38,8 @@
             "pins": [
               {
                 "index": "0",
-                "name": "PIN_5",
-                "value": "A2"
+                "name": "PIN_12",
+                "value": "J1"
               }
             ],
             "virtual": false
@@ -57,8 +57,8 @@
             "pins": [
               {
                 "index": "0",
-                "name": "PIN_8",
-                "value": "C1"
+                "name": "PIN_11",
+                "value": "H1"
               }
             ],
             "virtual": false
@@ -76,8 +76,8 @@
             "pins": [
               {
                 "index": "0",
-                "name": "PIN_7",
-                "value": "B1"
+                "name": "PIN_10",
+                "value": "G2"
               }
             ],
             "virtual": false
@@ -95,8 +95,8 @@
             "pins": [
               {
                 "index": "0",
-                "name": "PIN_6",
-                "value": "A1"
+                "name": "PIN_9",
+                "value": "E1"
               }
             ],
             "virtual": false
@@ -135,7 +135,7 @@
               {
                 "index": "0",
                 "name": "PIN_23",
-                "value": "A7"
+                "value": "B6"
               }
             ],
             "virtual": false,
@@ -147,6 +147,25 @@
           }
         },
         {
+          "id": "7cb71332-9b3a-4f49-93a4-5d5875c36835",
+          "type": "basic.output",
+          "data": {
+            "name": "USBPU",
+            "pins": [
+              {
+                "index": "0",
+                "name": "USBPU",
+                "value": "A3"
+              }
+            ],
+            "virtual": false
+          },
+          "position": {
+            "x": 1056,
+            "y": 408
+          }
+        },
+        {
           "id": "e3ea457b-6dbe-4269-ab40-54e58c14b776",
           "type": "basic.input",
           "data": {
@@ -155,7 +174,7 @@
               {
                 "index": "0",
                 "name": "PIN_22",
-                "value": "A8"
+                "value": "A7"
               }
             ],
             "virtual": false,
@@ -175,7 +194,7 @@
               {
                 "index": "0",
                 "name": "PIN_21",
-                "value": "A9"
+                "value": "B7"
               }
             ],
             "virtual": false,
@@ -298,6 +317,34 @@
           "size": {
             "width": 96,
             "height": 64
+          }
+        },
+        {
+          "id": "250dbf18-7083-4cd5-ac98-5f997e806d7b",
+          "type": "c4dd08263a85a91ba53e2ae2b38de344c5efcb52",
+          "position": {
+            "x": 904,
+            "y": 408
+          },
+          "size": {
+            "width": 96,
+            "height": 64
+          }
+        },
+        {
+          "id": "d276f84a-24a6-444c-a9f8-cbf476726275",
+          "type": "basic.info",
+          "data": {
+            "info": "Sólo necesario para TinyFPGA.<br>\nDesactiva USB.",
+            "readonly": true
+          },
+          "position": {
+            "x": 904,
+            "y": 352
+          },
+          "size": {
+            "width": 280,
+            "height": 48
           }
         }
       ],
@@ -598,15 +645,19 @@
             "block": "bc95968c-b1bf-4e90-8de3-00f63665fadd",
             "port": "f2a67f7b-0098-4cbf-afd4-f46fe2fe0db8"
           }
+        },
+        {
+          "source": {
+            "block": "250dbf18-7083-4cd5-ac98-5f997e806d7b",
+            "port": "19c8f68d-5022-487f-9ab0-f0a3cd58bead"
+          },
+          "target": {
+            "block": "7cb71332-9b3a-4f49-93a4-5d5875c36835",
+            "port": "in"
+          },
+          "vertices": []
         }
       ]
-    },
-    "state": {
-      "pan": {
-        "x": 67.8667,
-        "y": 154.7778
-      },
-      "zoom": 0.5806
     }
   },
   "dependencies": {
@@ -796,13 +847,6 @@
               "size": 26
             }
           ]
-        },
-        "state": {
-          "pan": {
-            "x": -1067.1351,
-            "y": 350.2838
-          },
-          "zoom": 0.7061
         }
       }
     },
@@ -942,13 +986,6 @@
               "size": 23
             }
           ]
-        },
-        "state": {
-          "pan": {
-            "x": -1596,
-            "y": 402.5
-          },
-          "zoom": 1
         }
       }
     },
@@ -1095,13 +1132,6 @@
               }
             }
           ]
-        },
-        "state": {
-          "pan": {
-            "x": 93.5948,
-            "y": 215.2647
-          },
-          "zoom": 0.6699
         }
       }
     },
@@ -1367,13 +1397,6 @@
               }
             }
           ]
-        },
-        "state": {
-          "pan": {
-            "x": 51.0949,
-            "y": 113.557
-          },
-          "zoom": 0.7073
         }
       }
     },
@@ -1397,7 +1420,7 @@
               },
               "position": {
                 "x": 96,
-                "y": 144
+                "y": 104
               }
             },
             {
@@ -1465,7 +1488,7 @@
               },
               "position": {
                 "x": 448,
-                "y": 56
+                "y": -32
               }
             },
             {
@@ -1478,7 +1501,7 @@
               },
               "position": {
                 "x": 560,
-                "y": 56
+                "y": -32
               }
             },
             {
@@ -1490,8 +1513,8 @@
                 "local": true
               },
               "position": {
-                "x": 776,
-                "y": 56
+                "x": 832,
+                "y": -32
               }
             },
             {
@@ -1526,7 +1549,7 @@
               "id": "a6ebb2cb-1e56-4e41-a94a-c032839e995d",
               "type": "e16a0158a267695519f555e8f8f54c3d26404345",
               "position": {
-                "x": 752,
+                "x": 808,
                 "y": 224
               },
               "size": {
@@ -1677,19 +1700,12 @@
               },
               "vertices": [
                 {
-                  "x": 712,
-                  "y": 144
+                  "x": 704,
+                  "y": 96
                 }
               ]
             }
           ]
-        },
-        "state": {
-          "pan": {
-            "x": -27.3973,
-            "y": 50.0753
-          },
-          "zoom": 0.7021
         }
       }
     },
@@ -1912,13 +1928,6 @@
               }
             }
           ]
-        },
-        "state": {
-          "pan": {
-            "x": 110.7108,
-            "y": 201.5663
-          },
-          "zoom": 0.6732
         }
       }
     },
@@ -2124,13 +2133,6 @@
               }
             }
           ]
-        },
-        "state": {
-          "pan": {
-            "x": -192,
-            "y": 194.5
-          },
-          "zoom": 1
         }
       }
     },
@@ -2334,13 +2336,6 @@
               "size": 23
             }
           ]
-        },
-        "state": {
-          "pan": {
-            "x": -1104.8777,
-            "y": 342.9892
-          },
-          "zoom": 0.7572
         }
       }
     },
@@ -2602,13 +2597,68 @@
               "size": 10
             }
           ]
-        },
-        "state": {
-          "pan": {
-            "x": 82.1007,
-            "y": 81.018
-          },
-          "zoom": 0.7518
+        }
+      }
+    },
+    "c4dd08263a85a91ba53e2ae2b38de344c5efcb52": {
+      "package": {
+        "name": "Bit 0",
+        "version": "1.0.0",
+        "description": "Assign 0 to the output wire",
+        "author": "Jesús Arroyo",
+        "image": "%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2247.303%22%20height=%2227.648%22%20viewBox=%220%200%2044.346456%2025.919999%22%3E%3Ctext%20style=%22line-height:125%25%22%20x=%22325.37%22%20y=%22315.373%22%20font-weight=%22400%22%20font-size=%2212.669%22%20font-family=%22sans-serif%22%20letter-spacing=%220%22%20word-spacing=%220%22%20transform=%22translate(-307.01%20-298.51)%22%3E%3Ctspan%20x=%22325.37%22%20y=%22315.373%22%20style=%22-inkscape-font-specification:'Courier%2010%20Pitch'%22%20font-family=%22Courier%2010%20Pitch%22%3E0%3C/tspan%3E%3C/text%3E%3C/svg%3E"
+      },
+      "design": {
+        "graph": {
+          "blocks": [
+            {
+              "id": "19c8f68d-5022-487f-9ab0-f0a3cd58bead",
+              "type": "basic.output",
+              "data": {
+                "name": ""
+              },
+              "position": {
+                "x": 608,
+                "y": 192
+              }
+            },
+            {
+              "id": "b959fb96-ac67-4aea-90b3-ed35a4c17bf5",
+              "type": "basic.code",
+              "data": {
+                "code": "// Bit 0\n\nassign v = 1'b0;",
+                "params": [],
+                "ports": {
+                  "in": [],
+                  "out": [
+                    {
+                      "name": "v"
+                    }
+                  ]
+                }
+              },
+              "position": {
+                "x": 96,
+                "y": 96
+              },
+              "size": {
+                "width": 384,
+                "height": 256
+              }
+            }
+          ],
+          "wires": [
+            {
+              "source": {
+                "block": "b959fb96-ac67-4aea-90b3-ed35a4c17bf5",
+                "port": "v"
+              },
+              "target": {
+                "block": "19c8f68d-5022-487f-9ab0-f0a3cd58bead",
+                "port": "in"
+              }
+            }
+          ]
         }
       }
     }
