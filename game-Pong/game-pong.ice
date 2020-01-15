@@ -877,8 +877,8 @@
                 "name": "endframe"
               },
               "position": {
-                "x": 1072,
-                "y": 48
+                "x": 1128,
+                "y": 88
               }
             },
             {
@@ -892,7 +892,7 @@
               },
               "position": {
                 "x": -96,
-                "y": 48
+                "y": 88
               }
             },
             {
@@ -900,12 +900,12 @@
               "type": "basic.constant",
               "data": {
                 "name": "width_screen",
-                "value": "640",
+                "value": "800",
                 "local": true
               },
               "position": {
-                "x": 304,
-                "y": -104
+                "x": 320,
+                "y": -168
               }
             },
             {
@@ -913,12 +913,12 @@
               "type": "basic.constant",
               "data": {
                 "name": "height_screen",
-                "value": "480",
+                "value": "600",
                 "local": true
               },
               "position": {
-                "x": 736,
-                "y": -104
+                "x": 776,
+                "y": -168
               }
             },
             {
@@ -954,8 +954,8 @@
                 "y": 16
               },
               "size": {
-                "width": 864,
-                "height": 128
+                "width": 912,
+                "height": 200
               }
             }
           ],
@@ -1899,18 +1899,6 @@
               }
             },
             {
-              "id": "dc8a240b-418f-4d66-8998-471adbd81721",
-              "type": "basic.input",
-              "data": {
-                "name": "reset",
-                "clock": false
-              },
-              "position": {
-                "x": 536,
-                "y": 192
-              }
-            },
-            {
               "id": "74018913-428e-4596-9384-f4c70e27eee3",
               "type": "basic.input",
               "data": {
@@ -1923,6 +1911,18 @@
               }
             },
             {
+              "id": "dc8a240b-418f-4d66-8998-471adbd81721",
+              "type": "basic.input",
+              "data": {
+                "name": "reset",
+                "clock": false
+              },
+              "position": {
+                "x": 536,
+                "y": 216
+              }
+            },
+            {
               "id": "794a94d0-6974-4819-9aa0-067f01fe3eea",
               "type": "basic.input",
               "data": {
@@ -1931,7 +1931,7 @@
               },
               "position": {
                 "x": 536,
-                "y": 256
+                "y": 264
               }
             },
             {
@@ -1942,7 +1942,7 @@
               },
               "position": {
                 "x": 2168,
-                "y": 296
+                "y": 304
               }
             },
             {
@@ -2026,7 +2026,7 @@
               "type": "185dceef69b2a8cc5e589cd5f053a7187980b80a",
               "position": {
                 "x": 1992,
-                "y": 304
+                "y": 312
               },
               "size": {
                 "width": 96,
@@ -2038,7 +2038,7 @@
               "type": "34789d4b7bed6b0cbe7a47c97bee4deeeff0d5cc",
               "position": {
                 "x": 1424,
-                "y": 176
+                "y": 184
               },
               "size": {
                 "width": 96,
@@ -2285,22 +2285,6 @@
             },
             {
               "source": {
-                "block": "dc8a240b-418f-4d66-8998-471adbd81721",
-                "port": "out"
-              },
-              "target": {
-                "block": "8e4def04-ec61-4962-b2e2-1a1e6546bc89",
-                "port": "91c8dac9-d40a-47ab-9aef-d32bcd611edd"
-              },
-              "vertices": [
-                {
-                  "x": 808,
-                  "y": 240
-                }
-              ]
-            },
-            {
-              "source": {
                 "block": "7a9bd8aa-776b-4eb4-bf4d-34a11780e696",
                 "port": "out"
               },
@@ -2460,6 +2444,16 @@
               "target": {
                 "block": "8e4def04-ec61-4962-b2e2-1a1e6546bc89",
                 "port": "54c76961-40f7-4037-8ed2-671998312c12"
+              }
+            },
+            {
+              "source": {
+                "block": "dc8a240b-418f-4d66-8998-471adbd81721",
+                "port": "out"
+              },
+              "target": {
+                "block": "8e4def04-ec61-4962-b2e2-1a1e6546bc89",
+                "port": "91c8dac9-d40a-47ab-9aef-d32bcd611edd"
               }
             }
           ]
@@ -4282,7 +4276,7 @@
                 "name": "reset_goals"
               },
               "position": {
-                "x": 880,
+                "x": 1128,
                 "y": 40
               }
             },
@@ -4294,7 +4288,7 @@
                 "clock": false
               },
               "position": {
-                "x": 168,
+                "x": 56,
                 "y": 48
               }
             },
@@ -4305,7 +4299,7 @@
                 "name": "goal_ply1"
               },
               "position": {
-                "x": 880,
+                "x": 1128,
                 "y": 112
               }
             },
@@ -4317,7 +4311,7 @@
                 "clock": false
               },
               "position": {
-                "x": 168,
+                "x": 56,
                 "y": 152
               }
             },
@@ -4328,7 +4322,7 @@
                 "name": "goal_ply2"
               },
               "position": {
-                "x": 880,
+                "x": 1128,
                 "y": 184
               }
             },
@@ -4340,7 +4334,7 @@
                 "clock": false
               },
               "position": {
-                "x": 168,
+                "x": 56,
                 "y": 256
               }
             },
@@ -4353,7 +4347,7 @@
                 "size": 10
               },
               "position": {
-                "x": 880,
+                "x": 1128,
                 "y": 256
               }
             },
@@ -4366,7 +4360,7 @@
                 "size": 10
               },
               "position": {
-                "x": 880,
+                "x": 1128,
                 "y": 328
               }
             },
@@ -4380,7 +4374,7 @@
                 "size": 10
               },
               "position": {
-                "x": 168,
+                "x": 56,
                 "y": 360
               }
             },
@@ -4391,7 +4385,7 @@
                 "name": "mute"
               },
               "position": {
-                "x": 880,
+                "x": 1128,
                 "y": 400
               }
             },
@@ -4405,7 +4399,7 @@
                 "size": 10
               },
               "position": {
-                "x": 168,
+                "x": 56,
                 "y": 464
               }
             },
@@ -4418,7 +4412,7 @@
                 "size": 2
               },
               "position": {
-                "x": 880,
+                "x": 1128,
                 "y": 472
               }
             },
@@ -4426,7 +4420,7 @@
               "id": "5f733219-8002-4bdc-a9ad-0794b401925f",
               "type": "basic.code",
               "data": {
-                "code": "// @include DynPong.v\n\n//-- Instantiate DynPong module.\nDynPong\nDynPong1(\n    dyn_clk,\n    reset,\n    play,\n    pos_ply1,\n    pos_ply2,\n    reset_goals,\n    goal_ply1,\n    goal_ply2,\n    x_ball,\n    y_ball,\n    mute,\n    sound\n);",
+                "code": "//////////////////////////////////////////////////////////////////////////////////\n// Company: Ridotech\n// Engineer: Juan Manuel Rico\n// \n// Create Date: 17/03/2018 \n// Module Name: DynPong\n// Description: Dynamic behavior Pong's game.\n//\n// Dependencies: \n//\n// Revision: \n// Revision 0.01 - File Created\n//\n// Additional Comments:\n//\n//////////////////////////////////////////////////////////////////////////////////\n/*\nmodule DynPong (\n    input wire       dyn_clk,            // Dynamic clock.\n    input wire       reset,              // Reset the game.\n    input wire       play,               // Play-Pause the game.\n    input wire [9:0] pos_ply1,           // Actual player 1 position.\n    input wire [9:0] pos_ply2,           // Actual player 2 position.\n    output reg       reset_goals,        // Goals to zero.\n    output reg       goal_ply1,          // New goal for player 1.\n    output reg       goal_ply2,          // New goal for player 2.\n    output reg [9:0] x_ball = 10'd100,   // New x ball position.\n    output reg [9:0] y_ball = 10'd100,   // New y ball position.\n    output reg       mute = 1'b1,        // Silence the sound.\n    output reg [1:0] sound = 2'd0        // New type of sound.\n);\n*/\n\n// Screen.\nlocalparam width_screen = 800;\nlocalparam height_screen = 600;\nlocalparam size_ball = 10;\nlocalparam size_player = 80;\nlocalparam offset_players = 20;\nlocalparam width_players = 10;\n\n// Sound.\nreg [7:0] mseg = 0;\n\n// Speed and direction.\nreg [2:0] speed_x = 2;\nreg [2:0] speed_y = 2;\n\nreg dx = 1'b0;\nreg dy = 1'b0;\n\n// Outs.\nreg reset_goals;              // Goals to zero.\nreg goal_ply1;                // New goal for player 1.\nreg goal_ply2;                // New goal for player 2.\nreg [9:0] x_ball = 10'd100;   // New x ball position.\nreg [9:0] y_ball = 10'd100;   // New y ball position.\nreg mute = 1'b1;              // Silence the sound.\nreg [1:0] sound = 2'd0;       // New type of sound.\n\n\n// Task 1: Move the ball.\nalways @(posedge dyn_clk)\nbegin\n    // Check reset.\n    if (reset)\n    begin\n        x_ball <= width_screen/2;\n        y_ball <= height_screen/2;\n        dx <= ~dx;\n        dy <= 1'b0;\n    end\n\n    // Check the goals.\n    if (x_ball == 0)\n        begin\n        goal_ply2 <= 1'b1;\n        sound <= 3; \n        mseg <= 40;\n        end\n    else\n        goal_ply2 <= 1'b0;\n\n    if (x_ball == width_screen-size_ball)\n        begin\n        goal_ply1 <= 1'b1;\n        sound <= 3;\n        mseg <= 40;\n        end\n    else\n        goal_ply1 <= 1'b0;\n\n    // Check bouncing... for vertical objects.\n    if  (\n        // Check the player 1 position.\n        ((x_ball < offset_players + width_players) &&\n        (y_ball > pos_ply1) && \n        (y_ball < pos_ply1 + size_player) &&\n        (dx == 1'b1)) \n        ||\n        // Check the player 2 position.\n        ((x_ball > width_screen - offset_players - width_players - size_ball) &&\n        (y_ball > pos_ply2) && \n        (y_ball < pos_ply2 + size_player) &&\n        (dx == 1'b0))\n        ||\n        // Check the player 1 goal and bouncing.\n        (x_ball == width_screen-size_ball)\n        ||\n        // Check the player 2 goal and bouncing.\n        (x_ball == 0)\n        )\n        begin\n        dx = ~dx;\n        // It's not a goal, so... another sound.\n        if (!((x_ball == width_screen-size_ball) || (x_ball == 0)))\n            begin\n            sound <= 2;\n            mseg <= 30;\n            end\n        end\n\n    // Check bouncing with top and bottom court.\n    if ((y_ball == 0) || (y_ball == height_screen-size_ball))\n        begin\n        dy = ~dy;\n        sound <= 1;\n        mseg <= 10;\n        end\n\n    // Check mute sound.\n    if (mseg == 0)\n        begin\n        mute <= 1'b1;\n        end\n    else\n        begin\n        mseg <= mseg - 1;\n        mute <= 1'b0;\n        end\n\n    // Update x ball position.\n    if (dx)\n        x_ball <= x_ball - speed_x;\n    else\n        x_ball <= x_ball + speed_x; \n\n    // Update y ball position.\n    if (dy)\n        y_ball <= y_ball - speed_y;\n    else\n        y_ball <= y_ball + speed_y; \nend\n\n// endmodule\n",
                 "params": [],
                 "ports": {
                   "in": [
@@ -4482,11 +4476,11 @@
                 }
               },
               "position": {
-                "x": 408,
+                "x": 328,
                 "y": 32
               },
               "size": {
-                "width": 384,
+                "width": 648,
                 "height": 512
               }
             }
