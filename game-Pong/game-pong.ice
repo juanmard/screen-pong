@@ -2917,8 +2917,8 @@
                 "clock": false
               },
               "position": {
-                "x": 88,
-                "y": 152
+                "x": -24,
+                "y": 184
               }
             },
             {
@@ -2931,8 +2931,8 @@
                 "size": 26
               },
               "position": {
-                "x": 88,
-                "y": 248
+                "x": -24,
+                "y": 304
               }
             },
             {
@@ -2944,8 +2944,8 @@
                 "size": 26
               },
               "position": {
-                "x": 800,
-                "y": 248
+                "x": 1032,
+                "y": 304
               }
             },
             {
@@ -2958,8 +2958,8 @@
                 "size": 10
               },
               "position": {
-                "x": 88,
-                "y": 344
+                "x": -24,
+                "y": 424
               }
             },
             {
@@ -2971,8 +2971,8 @@
                 "local": false
               },
               "position": {
-                "x": 368,
-                "y": 16
+                "x": 336,
+                "y": 8
               }
             },
             {
@@ -2984,8 +2984,8 @@
                 "local": false
               },
               "position": {
-                "x": 544,
-                "y": 16
+                "x": 680,
+                "y": 8
               }
             },
             {
@@ -3008,7 +3008,7 @@
               "id": "dae4449a-b437-441e-bb52-2b1d32d4afd9",
               "type": "basic.code",
               "data": {
-                "code": "// @include PxsPlayer.v\r\n\r\n\r\n//-- Instantiate PxsPlayer module.\r\nPxsPlayer #(\r\n.type(type), \r\n.pos_offset(pos_offset)\r\n) \r\nPxsPlayer1(\r\n    px_clk,\r\n    RGBStr_i,\r\n    pos,\r\n    RGBStr_o\r\n);\r\n",
+                "code": "//////////////////////////////////////////////////////////////////////////////////\n// Company: Ridotech\n// Engineer: Juan Manuel Rico\n// \n// Create Date: 12/03/2018\n// Module Name: PxsPlayer\n// Description: Draw a player in a stream RGB.\n//\n// Dependencies: \n//\n// Revision: \n// Revision 0.01 - File Created\n//\n// Additional Comments:\n//\n//////////////////////////////////////////////////////////////////////////////////\n/*\nmodule PxsPlayer\n#(\n   parameter type = 1'b0,          // Type of player. [Horizontal, Vertical]\n   parameter pos_offset = 100      // Offset from border.\n)(\n   input wire        px_clk,       // Pixel clock.\n   input wire [25:0] RGBStr_i,     // Input RGB stream.\n   input wire [9:0]  pos,          // Player position. \n   output reg [25:0] RGBStr_o      // Output RGB stream.\n);\n*/\n\n// Alias \n`define Active 0:0\n`define VS 1:1\n`define HS 2:2\n`define YC 12:3\n`define XC 22:13\n`define R 23:23\n`define G 24:24\n`define B 25:25\n`define RGB 25:23\n`define VGA 22:0\n   \n// Player dimension.\nparameter size_player = 80;\nparameter width_player = 10;\n\nlocalparam width_screen = 800;\nlocalparam height_screen = 600;\n\nparameter [3:0] white = 3'b111;\n\n// Output RGB stream.\nreg [25:0] RGBStr_o;\n\n// Draw player.\nalways @(posedge px_clk)\nbegin\n    // Clone VGA stream in a RGB stream.\n    RGBStr_o[`VGA] <= RGBStr_i[`VGA];\n\n    // Which player type?\n    case (type)\n        // Vertical player.\n        1'b0 :\n             begin\n             RGBStr_o[`RGB] <= (\n                               (RGBStr_i[`YC] > pos) && (RGBStr_i[`YC] < pos+size_player) &&\n                               (RGBStr_i[`XC] > pos_offset) && (RGBStr_i[`XC] < pos_offset + width_player)\n                               ) ? white : RGBStr_i[`RGB];\n             end\n        // Horizontal player.\n        1'b1 :\n             begin\n             RGBStr_o[`RGB] <= (\n                               (RGBStr_i[`XC] > pos) && (RGBStr_i[`XC] < pos+size_player) &&\n                               (RGBStr_i[`YC] > pos_offset) && (RGBStr_i[`YC] < pos_offset + width_player)\n                               ) ? white : RGBStr_i[`RGB];\n             end\n    endcase\nend\n\n// endmodule\n",
                 "params": [
                   {
                     "name": "type"
@@ -3043,12 +3043,12 @@
                 }
               },
               "position": {
-                "x": 328,
-                "y": 136
+                "x": 208,
+                "y": 152
               },
               "size": {
-                "width": 352,
-                "height": 288
+                "width": 688,
+                "height": 360
               }
             }
           ],
