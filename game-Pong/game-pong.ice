@@ -57,8 +57,8 @@
             "pins": [
               {
                 "index": "0",
-                "name": "",
-                "value": ""
+                "name": "CLK",
+                "value": "B2"
               }
             ],
             "virtual": false,
@@ -902,7 +902,7 @@
               "type": "basic.constant",
               "data": {
                 "name": "width_screen",
-                "value": "800",
+                "value": "400",
                 "local": true
               },
               "position": {
@@ -915,7 +915,7 @@
               "type": "basic.constant",
               "data": {
                 "name": "height_screen",
-                "value": "600",
+                "value": "300",
                 "local": true
               },
               "position": {
@@ -1310,7 +1310,8 @@
               "data": {
                 "name": "VGAStr",
                 "range": "[22:0]",
-                "size": 23
+                "size": 23,
+                "virtual": true
               },
               "position": {
                 "x": 2528,
@@ -1475,7 +1476,8 @@
               "data": {
                 "name": "x_px",
                 "range": "[9:0]",
-                "size": 10
+                "size": 10,
+                "virtual": true
               },
               "position": {
                 "x": 960,
@@ -1488,7 +1490,8 @@
               "data": {
                 "name": "y_px",
                 "range": "[9:0]",
-                "size": 10
+                "size": 10,
+                "virtual": true
               },
               "position": {
                 "x": 960,
@@ -1499,7 +1502,8 @@
               "id": "0e4ec6f7-fe91-47bb-8666-305db4da1e5b",
               "type": "basic.output",
               "data": {
-                "name": "hsync"
+                "name": "hsync",
+                "virtual": true
               },
               "position": {
                 "x": 960,
@@ -1523,7 +1527,8 @@
               "id": "d1e8b4bb-5fc8-4ed7-bb56-e77d0d3599d8",
               "type": "basic.output",
               "data": {
-                "name": "vsync"
+                "name": "vsync",
+                "virtual": true
               },
               "position": {
                 "x": 960,
@@ -1534,7 +1539,8 @@
               "id": "1abb0e43-39a7-4a67-a9f3-814c1bcfa121",
               "type": "basic.output",
               "data": {
-                "name": "activevideo"
+                "name": "activevideo",
+                "virtual": true
               },
               "position": {
                 "x": 960,
@@ -1685,7 +1691,8 @@
               "type": "basic.input",
               "data": {
                 "name": "sys_clk",
-                "clock": false
+                "clock": false,
+                "virtual": true
               },
               "position": {
                 "x": -40,
@@ -1696,7 +1703,8 @@
               "id": "ba122a35-a693-43a1-aa3f-33dd3b036d1d",
               "type": "basic.output",
               "data": {
-                "name": "px_clk"
+                "name": "px_clk",
+                "virtual": true
               },
               "position": {
                 "x": 992,
@@ -2564,7 +2572,8 @@
               "type": "basic.input",
               "data": {
                 "name": "px_clk",
-                "clock": false
+                "clock": false,
+                "virtual": true
               },
               "position": {
                 "x": 96,
@@ -2578,7 +2587,8 @@
                 "name": "RGBStr_i",
                 "range": "[25:0]",
                 "clock": false,
-                "size": 26
+                "size": 26,
+                "virtual": true
               },
               "position": {
                 "x": 96,
@@ -2591,7 +2601,8 @@
               "data": {
                 "name": "RGBStr_o",
                 "range": "[25:0]",
-                "size": 26
+                "size": 26,
+                "virtual": true
               },
               "position": {
                 "x": 1112,
@@ -2605,7 +2616,8 @@
                 "name": "pos_ply1",
                 "range": "[9:0]",
                 "clock": false,
-                "size": 10
+                "size": 10,
+                "virtual": true
               },
               "position": {
                 "x": 96,
@@ -2619,7 +2631,8 @@
                 "name": "pos_ply2",
                 "range": "[9:0]",
                 "clock": false,
-                "size": 10
+                "size": 10,
+                "virtual": true
               },
               "position": {
                 "x": 96,
@@ -2873,7 +2886,8 @@
               "type": "basic.input",
               "data": {
                 "name": "px_clk",
-                "clock": false
+                "clock": false,
+                "virtual": true
               },
               "position": {
                 "x": -24,
@@ -2887,7 +2901,8 @@
                 "name": "RGBStr_i",
                 "range": "[25:0]",
                 "clock": false,
-                "size": 26
+                "size": 26,
+                "virtual": true
               },
               "position": {
                 "x": -24,
@@ -2900,7 +2915,8 @@
               "data": {
                 "name": "RGBStr_o",
                 "range": "[25:0]",
-                "size": 26
+                "size": 26,
+                "virtual": true
               },
               "position": {
                 "x": 1032,
@@ -2914,7 +2930,8 @@
                 "name": "pos",
                 "range": "[9:0]",
                 "clock": false,
-                "size": 10
+                "size": 10,
+                "virtual": true
               },
               "position": {
                 "x": -24,
@@ -3095,7 +3112,8 @@
               "type": "basic.input",
               "data": {
                 "name": "px_clk",
-                "clock": false
+                "clock": false,
+                "virtual": true
               },
               "position": {
                 "x": 1616,
@@ -3109,7 +3127,8 @@
                 "name": "RGBStr_i",
                 "range": "[25:0]",
                 "clock": false,
-                "size": 26
+                "size": 26,
+                "virtual": true
               },
               "position": {
                 "x": 1616,
@@ -3122,7 +3141,8 @@
               "data": {
                 "name": "RGBStr_o",
                 "range": "[25:0]",
-                "size": 26
+                "size": 26,
+                "virtual": true
               },
               "position": {
                 "x": 2568,
@@ -3136,7 +3156,8 @@
                 "name": "pos_x",
                 "range": "[9:0]",
                 "clock": false,
-                "size": 10
+                "size": 10,
+                "virtual": true
               },
               "position": {
                 "x": 1616,
@@ -3150,7 +3171,8 @@
                 "name": "pos_y",
                 "range": "[9:0]",
                 "clock": false,
-                "size": 10
+                "size": 10,
+                "virtual": true
               },
               "position": {
                 "x": 1616,
@@ -5140,7 +5162,7 @@
               "type": "basic.constant",
               "data": {
                 "name": "color",
-                "value": "3'b101",
+                "value": "3'b110",
                 "local": true
               },
               "position": {
