@@ -2698,7 +2698,7 @@
               "type": "basic.constant",
               "data": {
                 "name": "ply2_offset",
-                "value": "610",
+                "value": "770",
                 "local": true
               },
               "position": {
@@ -3166,7 +3166,7 @@
                 "size": 26
               },
               "position": {
-                "x": 2432,
+                "x": 2568,
                 "y": -192
               }
             },
@@ -3202,7 +3202,7 @@
               "id": "fabbd2ae-d75a-443d-9b7e-b8205b86adb7",
               "type": "basic.code",
               "data": {
-                "code": "// @include PxsBall.v\r\n\r\n\r\n//-- Instantiate PxsBall module.\r\nPxsBall \r\nPxsBall1(\r\n    px_clk,\r\n    RGBStr_i,\r\n    pos_x,\r\n    pos_y,\r\n    RGBStr_o\r\n    );\r\n",
+                "code": "//////////////////////////////////////////////////////////////////////////////////\r\n// Company: Ridotech\r\n// Engineer: Juan Manuel Rico\r\n// \r\n// Create Date: 17/03/2018 \r\n// Module Name: PxsBall\r\n// Description: Draw a simple ball in a stream RGB.\r\n//\r\n// Dependencies: \r\n//\r\n// Revision: \r\n// Revision 0.01 - File Created\r\n//\r\n// Additional Comments:\r\n//\r\n//////////////////////////////////////////////////////////////////////////////////\r\n/*\r\nmodule PxsBall (\r\n                input wire        px_clk,      // Pixel clock.\r\n                input wire [25:0] RGBStr_i,    // Input RGB stream.\r\n                input wire [9:0]  pos_x,       // X ball position.\r\n                input wire [9:0]  pos_y,       // Y ball position.\r\n                output reg [25:0] RGBStr_o     // Output RGB stream.\r\n               );\r\n*/\r\n\r\n// Address alias. \r\n`define Active 0:0\r\n`define VS 1:1\r\n`define HS 2:2\r\n`define YC 12:3\r\n`define XC 22:13\r\n`define R 23:23\r\n`define G 24:24\r\n`define B 25:25\r\n`define RGB 25:23\r\n`define VGA 22:0\r\n\r\n// Ball color and dimension.\r\nparameter [3:0] white = 3'b111;\r\nparameter size_ball = 10;\r\n\r\n// Output RGB stream.\r\nreg [25:0] RGBStr_o;\r\n\r\n// Draw a ball in a RGB stream.\r\nalways @(posedge px_clk)\r\nbegin\r\n    // Clone VGA stream in a RGB stream.\r\n    RGBStr_o[`VGA] <= RGBStr_i[`VGA];\r\n    \r\n    // Draw ball.\r\n    RGBStr_o[`RGB] <= (\r\n               (RGBStr_i[`YC] > pos_y) && (RGBStr_i[`YC] < pos_y+size_ball) &&\r\n               (RGBStr_i[`XC] > pos_x) && (RGBStr_i[`XC] < pos_x+size_ball)\r\n             ) ? white : RGBStr_i[`RGB];\r\nend\r\n\r\n// endmodule\r\n\r\n",
                 "params": [],
                 "ports": {
                   "in": [
@@ -3235,11 +3235,11 @@
                 }
               },
               "position": {
-                "x": 1864,
+                "x": 1832,
                 "y": -296
               },
               "size": {
-                "width": 416,
+                "width": 624,
                 "height": 264
               }
             },
