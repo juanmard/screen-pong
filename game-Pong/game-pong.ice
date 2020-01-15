@@ -1075,8 +1075,8 @@
                 "name": "px_clk"
               },
               "position": {
-                "x": 1000,
-                "y": 48
+                "x": 1080,
+                "y": 56
               }
             },
             {
@@ -1101,16 +1101,16 @@
                 "size": 23
               },
               "position": {
-                "x": 1000,
-                "y": 144
+                "x": 1080,
+                "y": 152
               }
             },
             {
               "id": "1a50030c-6f74-48ad-b0b0-e928d4c6d5e9",
               "type": "691d984a94b89833a169721f34d525f1b32f9576",
               "position": {
-                "x": 856,
-                "y": 96
+                "x": 872,
+                "y": 104
               },
               "size": {
                 "width": 96,
@@ -1143,16 +1143,6 @@
             }
           ],
           "wires": [
-            {
-              "source": {
-                "block": "cab79a76-d2c0-4653-962b-6a550967a348",
-                "port": "3c1e3bb9-fedd-4958-922d-f6bea987a9cd"
-              },
-              "target": {
-                "block": "6e4ac81b-0abc-4441-a529-d2cb74e0a28c",
-                "port": "in"
-              }
-            },
             {
               "source": {
                 "block": "cab79a76-d2c0-4653-962b-6a550967a348",
@@ -1461,62 +1451,6 @@
         "graph": {
           "blocks": [
             {
-              "id": "3c1e3bb9-fedd-4958-922d-f6bea987a9cd",
-              "type": "basic.output",
-              "data": {
-                "name": "px_clk"
-              },
-              "position": {
-                "x": 960,
-                "y": 96
-              }
-            },
-            {
-              "id": "d1e8b4bb-5fc8-4ed7-bb56-e77d0d3599d8",
-              "type": "basic.output",
-              "data": {
-                "name": "vsync"
-              },
-              "position": {
-                "x": 960,
-                "y": 184
-              }
-            },
-            {
-              "id": "0e4ec6f7-fe91-47bb-8666-305db4da1e5b",
-              "type": "basic.output",
-              "data": {
-                "name": "hsync"
-              },
-              "position": {
-                "x": 960,
-                "y": 264
-              }
-            },
-            {
-              "id": "1d7cba26-8a20-4d0d-a807-3d04c9da167d",
-              "type": "basic.input",
-              "data": {
-                "name": "clk",
-                "clock": true
-              },
-              "position": {
-                "x": -56,
-                "y": 304
-              }
-            },
-            {
-              "id": "1abb0e43-39a7-4a67-a9f3-814c1bcfa121",
-              "type": "basic.output",
-              "data": {
-                "name": "activevideo"
-              },
-              "position": {
-                "x": 960,
-                "y": 344
-              }
-            },
-            {
               "id": "9c481124-0c6c-4f08-80f6-2ec1a16afd9b",
               "type": "basic.output",
               "data": {
@@ -1526,7 +1460,7 @@
               },
               "position": {
                 "x": 960,
-                "y": 432
+                "y": 96
               }
             },
             {
@@ -1539,51 +1473,84 @@
               },
               "position": {
                 "x": 960,
-                "y": 512
+                "y": 200
               }
             },
             {
-              "id": "77ae2e1b-9769-490a-a072-5562ea351075",
-              "type": "basic.constant",
+              "id": "0e4ec6f7-fe91-47bb-8666-305db4da1e5b",
+              "type": "basic.output",
               "data": {
-                "name": "FDivider",
-                "value": "62",
-                "local": false
+                "name": "hsync"
               },
               "position": {
-                "x": 384,
-                "y": -40
+                "x": 960,
+                "y": 304
+              }
+            },
+            {
+              "id": "1d7cba26-8a20-4d0d-a807-3d04c9da167d",
+              "type": "basic.input",
+              "data": {
+                "name": "px_clk",
+                "clock": false,
+                "virtual": true
+              },
+              "position": {
+                "x": -104,
+                "y": 304
+              }
+            },
+            {
+              "id": "d1e8b4bb-5fc8-4ed7-bb56-e77d0d3599d8",
+              "type": "basic.output",
+              "data": {
+                "name": "vsync"
+              },
+              "position": {
+                "x": 960,
+                "y": 400
+              }
+            },
+            {
+              "id": "1abb0e43-39a7-4a67-a9f3-814c1bcfa121",
+              "type": "basic.output",
+              "data": {
+                "name": "activevideo"
+              },
+              "position": {
+                "x": 960,
+                "y": 504
+              }
+            },
+            {
+              "id": "5a86b8bd-4bd1-4227-a099-b98e16ddb491",
+              "type": "basic.info",
+              "data": {
+                "info": "<table class=\"wrapped confluenceTable\"><colgroup><col> <col> <col> <col> <col> <col> <col> <col> <col> <col> <col> <col> <col> </colgroup><tbody><tr><td rowspan=\"2\" class=\"confluenceTd\"><strong>Resolution (pixels)<br></strong></td><td rowspan=\"2\" class=\"confluenceTd\"><strong>Refresh Rate (Hz)</strong></td><td rowspan=\"2\" class=\"confluenceTd\"><strong>Pixel Clock (MHz)</strong></td><td style=\"text-align: center;\" colspan=\"4\" class=\"confluenceTd\"><strong>Horizontal (pixel clocks)</strong></td><td style=\"text-align: center;\" colspan=\"4\" class=\"confluenceTd\"><strong>Vertical (rows)</strong></td><td rowspan=\"2\" class=\"confluenceTd\"><strong>h_sync Polarity</strong></td><td rowspan=\"2\" class=\"confluenceTd\"><strong>v_sync Polarity</strong></td></tr><tr><td class=\"confluenceTd\"><strong>Display</strong></td><td class=\"confluenceTd\"><strong>Front Porch</strong></td><td class=\"confluenceTd\"><strong>Sync Pulse</strong></td><td class=\"confluenceTd\"><strong>Back Porch</strong></td><td class=\"confluenceTd\"><strong>Display</strong></td><td class=\"confluenceTd\"><strong>Front Porch</strong></td><td class=\"confluenceTd\"><strong>Sync Pulse</strong></td><td class=\"confluenceTd\"><strong>Back Porch</strong></td></tr><tr><td class=\"confluenceTd\">640x350</td><td class=\"confluenceTd\">70</td><td class=\"confluenceTd\">25.175</td><td class=\"confluenceTd\">640</td><td class=\"confluenceTd\">16</td><td class=\"confluenceTd\">96</td><td class=\"confluenceTd\">48</td><td class=\"confluenceTd\">350</td><td class=\"confluenceTd\">37</td><td class=\"confluenceTd\">2</td><td class=\"confluenceTd\">60</td><td class=\"confluenceTd\">p</td><td class=\"confluenceTd\">n</td></tr><tr><td class=\"confluenceTd\">640x350</td><td class=\"confluenceTd\">85</td><td class=\"confluenceTd\">31.5</td><td class=\"confluenceTd\">640</td><td class=\"confluenceTd\">32</td><td class=\"confluenceTd\">64</td><td class=\"confluenceTd\">96</td><td class=\"confluenceTd\">350</td><td class=\"confluenceTd\">32</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">60</td><td class=\"confluenceTd\">p</td><td class=\"confluenceTd\">n</td></tr><tr><td class=\"confluenceTd\">640x400</td><td class=\"confluenceTd\">70</td><td class=\"confluenceTd\">25.175</td><td class=\"confluenceTd\">640</td><td class=\"confluenceTd\">16</td><td class=\"confluenceTd\">96</td><td class=\"confluenceTd\">48</td><td class=\"confluenceTd\">400</td><td class=\"confluenceTd\">12</td><td class=\"confluenceTd\">2</td><td class=\"confluenceTd\">35</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">640x400</td><td class=\"confluenceTd\">85</td><td class=\"confluenceTd\">31.5</td><td class=\"confluenceTd\">640</td><td class=\"confluenceTd\">32</td><td class=\"confluenceTd\">64</td><td class=\"confluenceTd\">96</td><td class=\"confluenceTd\">400</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">41</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">640x480</td><td class=\"confluenceTd\">60</td><td class=\"confluenceTd\">25.175</td><td class=\"confluenceTd\">640</td><td class=\"confluenceTd\">16</td><td class=\"confluenceTd\">96</td><td class=\"confluenceTd\">48</td><td class=\"confluenceTd\">480</td><td class=\"confluenceTd\">10</td><td class=\"confluenceTd\">2</td><td class=\"confluenceTd\">33</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">n</td></tr><tr><td class=\"confluenceTd\">640x480</td><td class=\"confluenceTd\">73</td><td class=\"confluenceTd\">31.5</td><td class=\"confluenceTd\">640</td><td class=\"confluenceTd\">24</td><td class=\"confluenceTd\">40</td><td class=\"confluenceTd\">128</td><td class=\"confluenceTd\">480</td><td class=\"confluenceTd\">9</td><td class=\"confluenceTd\">2</td><td class=\"confluenceTd\">29</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">n</td></tr><tr><td class=\"confluenceTd\">640x480</td><td class=\"confluenceTd\">75</td><td class=\"confluenceTd\">31.5</td><td class=\"confluenceTd\">640</td><td class=\"confluenceTd\">16</td><td class=\"confluenceTd\">64</td><td class=\"confluenceTd\">120</td><td class=\"confluenceTd\">480</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">16</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">n</td></tr><tr><td class=\"confluenceTd\">640x480</td><td class=\"confluenceTd\">85</td><td class=\"confluenceTd\">36</td><td class=\"confluenceTd\">640</td><td class=\"confluenceTd\">56</td><td class=\"confluenceTd\">56</td><td class=\"confluenceTd\">80</td><td class=\"confluenceTd\">480</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">25</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">n</td></tr><tr><td class=\"confluenceTd\">640x480</td><td class=\"confluenceTd\">100</td><td class=\"confluenceTd\">43.16</td><td class=\"confluenceTd\">640</td><td class=\"confluenceTd\">40</td><td class=\"confluenceTd\">64</td><td class=\"confluenceTd\">104</td><td class=\"confluenceTd\">480</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">25</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">720x400</td><td class=\"confluenceTd\">85</td><td class=\"confluenceTd\">35.5</td><td class=\"confluenceTd\">720</td><td class=\"confluenceTd\">36</td><td class=\"confluenceTd\">72</td><td class=\"confluenceTd\">108</td><td class=\"confluenceTd\">400</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">42</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">768x576</td><td class=\"confluenceTd\">60</td><td class=\"confluenceTd\">34.96</td><td class=\"confluenceTd\">768</td><td class=\"confluenceTd\">24</td><td class=\"confluenceTd\">80</td><td class=\"confluenceTd\">104</td><td class=\"confluenceTd\">576</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">17</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">768x576</td><td class=\"confluenceTd\">72</td><td class=\"confluenceTd\">42.93</td><td class=\"confluenceTd\">768</td><td class=\"confluenceTd\">32</td><td class=\"confluenceTd\">80</td><td class=\"confluenceTd\">112</td><td class=\"confluenceTd\">576</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">21</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">768x576</td><td class=\"confluenceTd\">75</td><td class=\"confluenceTd\">45.51</td><td class=\"confluenceTd\">768</td><td class=\"confluenceTd\">40</td><td class=\"confluenceTd\">80</td><td class=\"confluenceTd\">120</td><td class=\"confluenceTd\">576</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">22</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">768x576</td><td class=\"confluenceTd\">85</td><td class=\"confluenceTd\">51.84</td><td class=\"confluenceTd\">768</td><td class=\"confluenceTd\">40</td><td class=\"confluenceTd\">80</td><td class=\"confluenceTd\">120</td><td class=\"confluenceTd\">576</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">25</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">768x576</td><td class=\"confluenceTd\">100</td><td class=\"confluenceTd\">62.57</td><td class=\"confluenceTd\">768</td><td class=\"confluenceTd\">48</td><td class=\"confluenceTd\">80</td><td class=\"confluenceTd\">128</td><td class=\"confluenceTd\">576</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">31</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">800x600</td><td class=\"confluenceTd\">56</td><td class=\"confluenceTd\">36</td><td class=\"confluenceTd\">800</td><td class=\"confluenceTd\">24</td><td class=\"confluenceTd\">72</td><td class=\"confluenceTd\">128</td><td class=\"confluenceTd\">600</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">2</td><td class=\"confluenceTd\">22</td><td class=\"confluenceTd\">p</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">800x600</td><td class=\"confluenceTd\">60</td><td class=\"confluenceTd\">40</td><td class=\"confluenceTd\">800</td><td class=\"confluenceTd\">40</td><td class=\"confluenceTd\">128</td><td class=\"confluenceTd\">88</td><td class=\"confluenceTd\">600</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">4</td><td class=\"confluenceTd\">23</td><td class=\"confluenceTd\">p</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">800x600</td><td class=\"confluenceTd\">75</td><td class=\"confluenceTd\">49.5</td><td class=\"confluenceTd\">800</td><td class=\"confluenceTd\">16</td><td class=\"confluenceTd\">80</td><td class=\"confluenceTd\">160</td><td class=\"confluenceTd\">600</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">21</td><td class=\"confluenceTd\">p</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">800x600</td><td class=\"confluenceTd\">72</td><td class=\"confluenceTd\">50</td><td class=\"confluenceTd\">800</td><td class=\"confluenceTd\">56</td><td class=\"confluenceTd\">120</td><td class=\"confluenceTd\">64</td><td class=\"confluenceTd\">600</td><td class=\"confluenceTd\">37</td><td class=\"confluenceTd\">6</td><td class=\"confluenceTd\">23</td><td class=\"confluenceTd\">p</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">800x600</td><td class=\"confluenceTd\">85</td><td class=\"confluenceTd\">56.25</td><td class=\"confluenceTd\">800</td><td class=\"confluenceTd\">32</td><td class=\"confluenceTd\">64</td><td class=\"confluenceTd\">152</td><td class=\"confluenceTd\">600</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">27</td><td class=\"confluenceTd\">p</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">800x600</td><td class=\"confluenceTd\">100</td><td class=\"confluenceTd\">68.18</td><td class=\"confluenceTd\">800</td><td class=\"confluenceTd\">48</td><td class=\"confluenceTd\">88</td><td class=\"confluenceTd\">136</td><td class=\"confluenceTd\">600</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">32</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1024x768</td><td class=\"confluenceTd\">43</td><td class=\"confluenceTd\">44.9</td><td class=\"confluenceTd\">1024</td><td class=\"confluenceTd\">8</td><td class=\"confluenceTd\">176</td><td class=\"confluenceTd\">56</td><td class=\"confluenceTd\">768</td><td class=\"confluenceTd\">0</td><td class=\"confluenceTd\">8</td><td class=\"confluenceTd\">41</td><td class=\"confluenceTd\">p</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1024x768</td><td class=\"confluenceTd\">60</td><td class=\"confluenceTd\">65</td><td class=\"confluenceTd\">1024</td><td class=\"confluenceTd\">24</td><td class=\"confluenceTd\">136</td><td class=\"confluenceTd\">160</td><td class=\"confluenceTd\">768</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">6</td><td class=\"confluenceTd\">29</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">n</td></tr><tr><td class=\"confluenceTd\">1024x768</td><td class=\"confluenceTd\">70</td><td class=\"confluenceTd\">75</td><td class=\"confluenceTd\">1024</td><td class=\"confluenceTd\">24</td><td class=\"confluenceTd\">136</td><td class=\"confluenceTd\">144</td><td class=\"confluenceTd\">768</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">6</td><td class=\"confluenceTd\">29</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">n</td></tr><tr><td class=\"confluenceTd\">1024x768</td><td class=\"confluenceTd\">75</td><td class=\"confluenceTd\">78.8</td><td class=\"confluenceTd\">1024</td><td class=\"confluenceTd\">16</td><td class=\"confluenceTd\">96</td><td class=\"confluenceTd\">176</td><td class=\"confluenceTd\">768</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">28</td><td class=\"confluenceTd\">p</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1024x768</td><td class=\"confluenceTd\">85</td><td class=\"confluenceTd\">94.5</td><td class=\"confluenceTd\">1024</td><td class=\"confluenceTd\">48</td><td class=\"confluenceTd\">96</td><td class=\"confluenceTd\">208</td><td class=\"confluenceTd\">768</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">36</td><td class=\"confluenceTd\">p</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1024x768</td><td class=\"confluenceTd\">100</td><td class=\"confluenceTd\">113.31</td><td class=\"confluenceTd\">1024</td><td class=\"confluenceTd\">72</td><td class=\"confluenceTd\">112</td><td class=\"confluenceTd\">184</td><td class=\"confluenceTd\">768</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">42</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1152x864</td><td class=\"confluenceTd\">75</td><td class=\"confluenceTd\">108</td><td class=\"confluenceTd\">1152</td><td class=\"confluenceTd\">64</td><td class=\"confluenceTd\">128</td><td class=\"confluenceTd\">256</td><td class=\"confluenceTd\">864</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">32</td><td class=\"confluenceTd\">p</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1152x864</td><td class=\"confluenceTd\">85</td><td class=\"confluenceTd\">119.65</td><td class=\"confluenceTd\">1152</td><td class=\"confluenceTd\">72</td><td class=\"confluenceTd\">128</td><td class=\"confluenceTd\">200</td><td class=\"confluenceTd\">864</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">39</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1152x864</td><td class=\"confluenceTd\">100</td><td class=\"confluenceTd\">143.47</td><td class=\"confluenceTd\">1152</td><td class=\"confluenceTd\">80</td><td class=\"confluenceTd\">128</td><td class=\"confluenceTd\">208</td><td class=\"confluenceTd\">864</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">47</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1152x864</td><td class=\"confluenceTd\">60</td><td class=\"confluenceTd\">81.62</td><td class=\"confluenceTd\">1152</td><td class=\"confluenceTd\">64</td><td class=\"confluenceTd\">120</td><td class=\"confluenceTd\">184</td><td class=\"confluenceTd\">864</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">27</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1280x1024</td><td class=\"confluenceTd\">60</td><td class=\"confluenceTd\">108</td><td class=\"confluenceTd\">1280</td><td class=\"confluenceTd\">48</td><td class=\"confluenceTd\">112</td><td class=\"confluenceTd\">248</td><td class=\"confluenceTd\">1024</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">38</td><td class=\"confluenceTd\">p</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1280x1024</td><td class=\"confluenceTd\">75</td><td class=\"confluenceTd\">135</td><td class=\"confluenceTd\">1280</td><td class=\"confluenceTd\">16</td><td class=\"confluenceTd\">144</td><td class=\"confluenceTd\">248</td><td class=\"confluenceTd\">1024</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">38</td><td class=\"confluenceTd\">p</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1280x1024</td><td class=\"confluenceTd\">85</td><td class=\"confluenceTd\">157.5</td><td class=\"confluenceTd\">1280</td><td class=\"confluenceTd\">64</td><td class=\"confluenceTd\">160</td><td class=\"confluenceTd\">224</td><td class=\"confluenceTd\">1024</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">44</td><td class=\"confluenceTd\">p</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1280x1024</td><td class=\"confluenceTd\">100</td><td class=\"confluenceTd\">190.96</td><td class=\"confluenceTd\">1280</td><td class=\"confluenceTd\">96</td><td class=\"confluenceTd\">144</td><td class=\"confluenceTd\">240</td><td class=\"confluenceTd\">1024</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">57</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1280x800</td><td class=\"confluenceTd\">60</td><td class=\"confluenceTd\">83.46</td><td class=\"confluenceTd\">1280</td><td class=\"confluenceTd\">64</td><td class=\"confluenceTd\">136</td><td class=\"confluenceTd\">200</td><td class=\"confluenceTd\">800</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">24</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1280x960</td><td class=\"confluenceTd\">60</td><td class=\"confluenceTd\">102.1</td><td class=\"confluenceTd\">1280</td><td class=\"confluenceTd\">80</td><td class=\"confluenceTd\">136</td><td class=\"confluenceTd\">216</td><td class=\"confluenceTd\">960</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">30</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1280x960</td><td class=\"confluenceTd\">72</td><td class=\"confluenceTd\">124.54</td><td class=\"confluenceTd\">1280</td><td class=\"confluenceTd\">88</td><td class=\"confluenceTd\">136</td><td class=\"confluenceTd\">224</td><td class=\"confluenceTd\">960</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">37</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1280x960</td><td class=\"confluenceTd\">75</td><td class=\"confluenceTd\">129.86</td><td class=\"confluenceTd\">1280</td><td class=\"confluenceTd\">88</td><td class=\"confluenceTd\">136</td><td class=\"confluenceTd\">224</td><td class=\"confluenceTd\">960</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">38</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1280x960</td><td class=\"confluenceTd\">85</td><td class=\"confluenceTd\">148.5</td><td class=\"confluenceTd\">1280</td><td class=\"confluenceTd\">64</td><td class=\"confluenceTd\">160</td><td class=\"confluenceTd\">224</td><td class=\"confluenceTd\">960</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">47</td><td class=\"confluenceTd\">p</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1280x960</td><td class=\"confluenceTd\">100</td><td class=\"confluenceTd\">178.99</td><td class=\"confluenceTd\">1280</td><td class=\"confluenceTd\">96</td><td class=\"confluenceTd\">144</td><td class=\"confluenceTd\">240</td><td class=\"confluenceTd\">960</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">53</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1368x768</td><td class=\"confluenceTd\">60</td><td class=\"confluenceTd\">85.86</td><td class=\"confluenceTd\">1368</td><td class=\"confluenceTd\">72</td><td class=\"confluenceTd\">144</td><td class=\"confluenceTd\">216</td><td class=\"confluenceTd\">768</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">23</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1400x1050</td><td class=\"confluenceTd\">60</td><td class=\"confluenceTd\">122.61</td><td class=\"confluenceTd\">1400</td><td class=\"confluenceTd\">88</td><td class=\"confluenceTd\">152</td><td class=\"confluenceTd\">240</td><td class=\"confluenceTd\">1050</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">33</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1400x1050</td><td class=\"confluenceTd\">72</td><td class=\"confluenceTd\">149.34</td><td class=\"confluenceTd\">1400</td><td class=\"confluenceTd\">96</td><td class=\"confluenceTd\">152</td><td class=\"confluenceTd\">248</td><td class=\"confluenceTd\">1050</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">40</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1400x1050</td><td class=\"confluenceTd\">75</td><td class=\"confluenceTd\">155.85</td><td class=\"confluenceTd\">1400</td><td class=\"confluenceTd\">96</td><td class=\"confluenceTd\">152</td><td class=\"confluenceTd\">248</td><td class=\"confluenceTd\">1050</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">42</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1400x1050</td><td class=\"confluenceTd\">85</td><td class=\"confluenceTd\">179.26</td><td class=\"confluenceTd\">1400</td><td class=\"confluenceTd\">104</td><td class=\"confluenceTd\">152</td><td class=\"confluenceTd\">256</td><td class=\"confluenceTd\">1050</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">49</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1400x1050</td><td class=\"confluenceTd\">100</td><td class=\"confluenceTd\">214.39</td><td class=\"confluenceTd\">1400</td><td class=\"confluenceTd\">112</td><td class=\"confluenceTd\">152</td><td class=\"confluenceTd\">264</td><td class=\"confluenceTd\">1050</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">58</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1440x900</td><td class=\"confluenceTd\">60</td><td class=\"confluenceTd\">106.47</td><td class=\"confluenceTd\">1440</td><td class=\"confluenceTd\">80</td><td class=\"confluenceTd\">152</td><td class=\"confluenceTd\">232</td><td class=\"confluenceTd\">900</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">28</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1600x1200</td><td class=\"confluenceTd\">60</td><td class=\"confluenceTd\">162</td><td class=\"confluenceTd\">1600</td><td class=\"confluenceTd\">64</td><td class=\"confluenceTd\">192</td><td class=\"confluenceTd\">304</td><td class=\"confluenceTd\">1200</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">46</td><td class=\"confluenceTd\">p</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1600x1200</td><td class=\"confluenceTd\">65</td><td class=\"confluenceTd\">175.5</td><td class=\"confluenceTd\">1600</td><td class=\"confluenceTd\">64</td><td class=\"confluenceTd\">192</td><td class=\"confluenceTd\">304</td><td class=\"confluenceTd\">1200</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">46</td><td class=\"confluenceTd\">p</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1600x1200</td><td class=\"confluenceTd\">70</td><td class=\"confluenceTd\">189</td><td class=\"confluenceTd\">1600</td><td class=\"confluenceTd\">64</td><td class=\"confluenceTd\">192</td><td class=\"confluenceTd\">304</td><td class=\"confluenceTd\">1200</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">46</td><td class=\"confluenceTd\">p</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1600x1200</td><td class=\"confluenceTd\">75</td><td class=\"confluenceTd\">202.5</td><td class=\"confluenceTd\">1600</td><td class=\"confluenceTd\">64</td><td class=\"confluenceTd\">192</td><td class=\"confluenceTd\">304</td><td class=\"confluenceTd\">1200</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">46</td><td class=\"confluenceTd\">p</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1600x1200</td><td class=\"confluenceTd\">85</td><td class=\"confluenceTd\">229.5</td><td class=\"confluenceTd\">1600</td><td class=\"confluenceTd\">64</td><td class=\"confluenceTd\">192</td><td class=\"confluenceTd\">304</td><td class=\"confluenceTd\">1200</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">46</td><td class=\"confluenceTd\">p</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1600x1200</td><td class=\"confluenceTd\">100</td><td class=\"confluenceTd\">280.64</td><td class=\"confluenceTd\">1600</td><td class=\"confluenceTd\">128</td><td class=\"confluenceTd\">176</td><td class=\"confluenceTd\">304</td><td class=\"confluenceTd\">1200</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">67</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1680x1050</td><td class=\"confluenceTd\">60</td><td class=\"confluenceTd\">147.14</td><td class=\"confluenceTd\">1680</td><td class=\"confluenceTd\">104</td><td class=\"confluenceTd\">184</td><td class=\"confluenceTd\">288</td><td class=\"confluenceTd\">1050</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">33</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1792x1344</td><td class=\"confluenceTd\">60</td><td class=\"confluenceTd\">204.8</td><td class=\"confluenceTd\">1792</td><td class=\"confluenceTd\">128</td><td class=\"confluenceTd\">200</td><td class=\"confluenceTd\">328</td><td class=\"confluenceTd\">1344</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">46</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1792x1344</td><td class=\"confluenceTd\">75</td><td class=\"confluenceTd\">261</td><td class=\"confluenceTd\">1792</td><td class=\"confluenceTd\">96</td><td class=\"confluenceTd\">216</td><td class=\"confluenceTd\">352</td><td class=\"confluenceTd\">1344</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">69</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1856x1392</td><td class=\"confluenceTd\">60</td><td class=\"confluenceTd\">218.3</td><td class=\"confluenceTd\">1856</td><td class=\"confluenceTd\">96</td><td class=\"confluenceTd\">224</td><td class=\"confluenceTd\">352</td><td class=\"confluenceTd\">1392</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">43</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1856x1392</td><td class=\"confluenceTd\">75</td><td class=\"confluenceTd\">288</td><td class=\"confluenceTd\">1856</td><td class=\"confluenceTd\">128</td><td class=\"confluenceTd\">224</td><td class=\"confluenceTd\">352</td><td class=\"confluenceTd\">1392</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">104</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1920x1200</td><td class=\"confluenceTd\">60</td><td class=\"confluenceTd\">193.16</td><td class=\"confluenceTd\">1920</td><td class=\"confluenceTd\">128</td><td class=\"confluenceTd\">208</td><td class=\"confluenceTd\">336</td><td class=\"confluenceTd\">1200</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">38</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1920x1440</td><td class=\"confluenceTd\">60</td><td class=\"confluenceTd\">234</td><td class=\"confluenceTd\">1920</td><td class=\"confluenceTd\">128</td><td class=\"confluenceTd\">208</td><td class=\"confluenceTd\">344</td><td class=\"confluenceTd\">1440</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">56</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\">p</td></tr><tr><td class=\"confluenceTd\">1920x1440</td><td class=\"confluenceTd\">75</td><td class=\"confluenceTd\">297</td><td class=\"confluenceTd\">1920</td><td class=\"confluenceTd\">144</td><td class=\"confluenceTd\">224</td><td class=\"confluenceTd\">352</td><td class=\"confluenceTd\">1440</td><td class=\"confluenceTd\">1</td><td class=\"confluenceTd\">3</td><td class=\"confluenceTd\">56</td><td class=\"confluenceTd\">n</td><td class=\"confluenceTd\"><p>p</p></td></tr></tbody></table>",
+                "readonly": true
+              },
+              "position": {
+                "x": -120,
+                "y": 624
+              },
+              "size": {
+                "width": 1144,
+                "height": 144
               }
             },
             {
               "id": "acff07b8-f9b5-452f-936b-0e148483079c",
               "type": "basic.code",
               "data": {
-                "code": "// @include VGASyncGen.v\n\n\n//-- Instantiate VgaSyncGenr module.\nVGASyncGen #(FDivider)\nVGASyncGen1 (\n    clk,                // System clock.\n    hsync,              // Horizontal syncro.\n    vsync,              // Vertical syncro.\n    x_px,               // Actual x pixel.\n    y_px,               // Actual y pixel.\n    activevideo,        // Active video.\n    px_clk              // Pixel clock 31.5Mhz (PLL).\n    );\n",
-                "params": [
-                  {
-                    "name": "FDivider"
-                  }
-                ],
+                "code": "//////////////////////////////////////////////////////////////////////////////////\n// Company: Ridotech\n// Engineer: Juan Manuel Rico\n// \n// Create Date:    14/01/2020\n// Module Name:    VGASyncGen\n// Description:    Genera señales VGA.\n//\n// Dependencies: \n//\n// Revision: \n// Revision 0.01 - File Created.\n//\n// Additional Comments: \n//\n//////////////////////////////////////////////////////////////////////////////////\n/*\nmodule VGASyncGen\n(\n            input  wire      px_clk         // Pixel clock.\n            output reg [9:0] x_px,          // X position for actual pixel.\n            output reg [9:0] y_px,          // Y position for actual pixel.\n            output wire      hsync,         // Horizontal sync out.\n            output wire      vsync,         // Vertical sync out.\n            output wire      activevideo    // Video activo.\n         );\n*/\n\n/*\nhttp://www.epanorama.net/faq/vga2rgb/calc.html\n[*User-Defined_mode,(640X480)]\nPIXEL_CLK   =   31500\nH_DISP      =   640\nV_DISP      =   480\nH_FPORCH    =   24\nH_SYNC      =   40\nH_BPORCH    =   128\nV_FPORCH    =   9\nV_SYNC      =   3\nV_BPORCH    =   28\n*/\n\n// TODO: Utilizar una tabla de parámetros para obtener los valores para\n//       distintas resoluciones y poder modificar desde pines externos.\n//\n// https://www.digikey.com/eewiki/pages/viewpage.action?pageId=15925278#VGAController(VHDL)-Appendix:VGATimingSpecifications\n//\n// parameter [8:0] vga_table = {\"800x600@72\",72,50,800,56,120,64,600,37,6,23,'p','p'},\n//\n\n// Video structure constants.\nparameter activeHvideo = 800;               // Width of visible pixels.\nparameter activeVvideo =  600;              // Height of visible lines.\nparameter hfp = 56;                         // Horizontal front porch length.\nparameter hpulse = 120;                     // Hsync pulse length.\nparameter hbp = 64;                         // Horizontal back porch length.\nparameter vfp = 37;                         // Vertical front porch length.\nparameter vpulse = 6;                       // Vsync pulse length.\nparameter vbp = 23;                         // Vertical back porch length.\nparameter blackH = hfp + hpulse + hbp;      // Hide pixels in one line.\nparameter blackV = vfp + vpulse + vbp;      // Hide lines in one frame.\nparameter hpixels = blackH + activeHvideo;  // Total horizontal pixels.\nparameter vlines = blackV + activeVvideo;   // Total lines.\n\n// Registers for storing the horizontal & vertical counters.\nreg [10:0] hc;\nreg [10:0] vc;\n\nreg [9:0] x_px;          // X position for actual pixel.\nreg [9:0] y_px;          // Y position for actual pixel.\n\n// Counting pixels.\nalways @(posedge px_clk)\nbegin\n    // Keep counting until the end of the line.\n    if (hc < hpixels - 1)\n        hc <= hc + 1;\n    else\n    // When we hit the end of the line, reset the horizontal\n    // counter and increment the vertical counter.\n    // If vertical counter is at the end of the frame, then\n    // reset that one too.\n    begin\n        hc <= 0;\n        if (vc < vlines - 1)\n           vc <= vc + 1;\n        else\n           vc <= 0;\n    end\n end\n\n// Generate sync pulses (active low) and active video.\nassign hsync = (hc >= hfp && hc < hfp + hpulse) ? 0:1;\nassign vsync = (vc >= vfp && vc < vfp + vpulse) ? 0:1;\nassign activevideo = (hc >= blackH && vc >= blackV) ? 1:0;\n//assign endframe = (hc == hpixels-1 && vc == vlines-1) ? 1'b1 : 1'b0 ;\n\n// Generate new pixel position.\nalways @(posedge px_clk)\nbegin\n    // First check if we are within vertical active video range.\n    if (activevideo)\n    begin\n        x_px <= hc - blackH;\n        y_px <= vc - blackV;\n    end\n    else\n    // We are outside active video range so initial position it's ok.\n    begin\n        x_px <= 0;\n        y_px <= 0;\n    end\n end\n\n//endmodule",
+                "params": [],
                 "ports": {
                   "in": [
                     {
-                      "name": "clk"
+                      "name": "px_clk"
                     }
                   ],
                   "out": [
-                    {
-                      "name": "px_clk"
-                    },
-                    {
-                      "name": "vsync"
-                    },
-                    {
-                      "name": "hsync"
-                    },
-                    {
-                      "name": "activevideo"
-                    },
                     {
                       "name": "x_px",
                       "range": "[9:0]",
@@ -1593,67 +1560,30 @@
                       "name": "y_px",
                       "range": "[9:0]",
                       "size": 10
+                    },
+                    {
+                      "name": "hsync"
+                    },
+                    {
+                      "name": "vsync"
+                    },
+                    {
+                      "name": "activevideo"
                     }
                   ]
                 }
               },
               "position": {
-                "x": 144,
-                "y": 88
+                "x": 80,
+                "y": 80
               },
               "size": {
-                "width": 576,
-                "height": 496
-              }
-            },
-            {
-              "id": "af256521-1acd-4448-b46e-51cd08f08e39",
-              "type": "basic.info",
-              "data": {
-                "info": "<b>Feedback divider</b>\n\n62 - 16Mhz - TinyFPGA.</br>\n83 - 12Mhz - iceZum Alhambra.",
-                "readonly": true
-              },
-              "position": {
-                "x": 528,
-                "y": -48
-              },
-              "size": {
-                "width": 352,
-                "height": 96
+                "width": 720,
+                "height": 504
               }
             }
           ],
           "wires": [
-            {
-              "source": {
-                "block": "1d7cba26-8a20-4d0d-a807-3d04c9da167d",
-                "port": "out"
-              },
-              "target": {
-                "block": "acff07b8-f9b5-452f-936b-0e148483079c",
-                "port": "clk"
-              }
-            },
-            {
-              "source": {
-                "block": "77ae2e1b-9769-490a-a072-5562ea351075",
-                "port": "constant-out"
-              },
-              "target": {
-                "block": "acff07b8-f9b5-452f-936b-0e148483079c",
-                "port": "FDivider"
-              }
-            },
-            {
-              "source": {
-                "block": "acff07b8-f9b5-452f-936b-0e148483079c",
-                "port": "px_clk"
-              },
-              "target": {
-                "block": "3c1e3bb9-fedd-4958-922d-f6bea987a9cd",
-                "port": "in"
-              }
-            },
             {
               "source": {
                 "block": "acff07b8-f9b5-452f-936b-0e148483079c",
@@ -1705,6 +1635,16 @@
                 "port": "in"
               },
               "size": 10
+            },
+            {
+              "source": {
+                "block": "1d7cba26-8a20-4d0d-a807-3d04c9da167d",
+                "port": "out"
+              },
+              "target": {
+                "block": "acff07b8-f9b5-452f-936b-0e148483079c",
+                "port": "px_clk"
+              }
             }
           ]
         }
@@ -6413,7 +6353,7 @@
               "id": "6229a320-12f4-4026-82f4-e4175c64ad31",
               "type": "basic.info",
               "data": {
-                "info": "<table>\n<td>\n<H1>Control game by buttons</H1>\n<p>A new control game by buttons.</p>\n<p>Juan Manuel Rico - v1.0</p>\n</td>\n</table>",
+                "info": "<table>\n<td>\n<H1>Control game by buttons</H1>\n<p>A new control game by buttons.</p>\n<p>Juan Manuel Rico - v1.1</p>\n</td>\n</table>",
                 "readonly": true
               },
               "position": {
@@ -6429,7 +6369,7 @@
               "id": "4c2e61df-faeb-4294-b88e-a264e05112e3",
               "type": "basic.code",
               "data": {
-                "code": "// Control game by buttons.\nreg [9:0] reg1 = 100;\nreg [9:0] reg2 = 100;\n\nassign pos_ply1 = reg1;\nassign pos_ply2 = reg2;\n\nalways @(posedge clk)\nbegin\n   if (inc_ply1) reg1 <= reg1 + speed;\n   if (dec_ply1) reg1 <= reg1 - speed;\n   if (inc_ply2) reg2 <= reg2 + speed;\n   if (dec_ply2) reg2 <= reg2 - speed;\n   if (reg1 < 5) reg1 <= 5; \n   if (reg2 < 5) reg2 <= 5;\n   if (reg1 > 470) reg1 <= 470;\n   if (reg2 > 470) reg2 <= 470;\nend\n",
+                "code": "// Control game by buttons.\nparameter screen_height = 600;\nparameter tope_sup = 5;\nparameter tope_inf = screen_height - 10;\n\nreg [9:0] reg1 = 100;\nreg [9:0] reg2 = 100;\n\nassign pos_ply1 = reg1;\nassign pos_ply2 = reg2;\n\nalways @(posedge clk)\nbegin\n   if (inc_ply1) reg1 <= reg1 + speed;\n   if (dec_ply1) reg1 <= reg1 - speed;\n   if (inc_ply2) reg2 <= reg2 + speed;\n   if (dec_ply2) reg2 <= reg2 - speed;\n   if (reg1 < tope_sup) reg1 <= tope_sup; \n   if (reg2 < tope_sup) reg2 <= tope_sup;\n   if (reg1 > tope_inf) reg1 <= tope_inf;\n   if (reg2 > tope_inf) reg2 <= tope_inf;\nend\n",
                 "params": [
                   {
                     "name": "speed"
