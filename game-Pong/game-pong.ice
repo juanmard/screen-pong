@@ -50,6 +50,26 @@
           }
         },
         {
+          "id": "d5912afc-be78-48f9-b2e0-3a33edfba620",
+          "type": "basic.input",
+          "data": {
+            "name": "CLK",
+            "pins": [
+              {
+                "index": "0",
+                "name": "",
+                "value": ""
+              }
+            ],
+            "virtual": false,
+            "clock": false
+          },
+          "position": {
+            "x": -152,
+            "y": -72
+          }
+        },
+        {
           "id": "e9b6da23-83a3-4ef0-827c-e07777dbb600",
           "type": "basic.output",
           "data": {
@@ -66,26 +86,6 @@
           "position": {
             "x": 1376,
             "y": -48
-          }
-        },
-        {
-          "id": "d5912afc-be78-48f9-b2e0-3a33edfba620",
-          "type": "basic.input",
-          "data": {
-            "name": "CLK",
-            "pins": [
-              {
-                "index": "0",
-                "name": "",
-                "value": ""
-              }
-            ],
-            "virtual": false,
-            "clock": false
-          },
-          "position": {
-            "x": -96,
-            "y": -8
           }
         },
         {
@@ -261,7 +261,7 @@
           "id": "f503d219-002a-44d6-929f-fb17869f8d40",
           "type": "basic.info",
           "data": {
-            "info": "<b>Ejemplo 13 - Poner a prueba el comportamiento del juego Pong.</b>\n<p>En este ejemplo se prueba el comportamiento completo del juego controlado por botones.</p> \n",
+            "info": "<b>Prueba el comportamiento del juego Pong.</b>\n<p>En este ejemplo se prueba el comportamiento completo del juego controlado por botones.</p> \n",
             "readonly": true
           },
           "position": {
@@ -301,8 +301,8 @@
           "id": "9cc582d8-44ab-4a6d-973c-4de7a55478f1",
           "type": "862d2a36c72ddee13ea44bf906fe1b60efa90941",
           "position": {
-            "x": 536,
-            "y": 128
+            "x": 624,
+            "y": 104
           },
           "size": {
             "width": 96,
@@ -313,8 +313,8 @@
           "id": "8b85b45f-98b2-41e8-a824-7c5a8b844ef0",
           "type": "e304dcebf8f3416db8e9b0230b3a516bbbcd0aaa",
           "position": {
-            "x": 64,
-            "y": -8
+            "x": 8,
+            "y": -72
           },
           "size": {
             "width": 96,
@@ -326,7 +326,7 @@
           "type": "c1b79c924761189a3a7b14d60d74a77e46e892e3",
           "position": {
             "x": 864,
-            "y": 80
+            "y": 24
           },
           "size": {
             "width": 96,
@@ -445,8 +445,8 @@
           },
           "vertices": [
             {
-              "x": 720,
-              "y": 56
+              "x": 664,
+              "y": -8
             }
           ]
         },
@@ -461,8 +461,8 @@
           },
           "vertices": [
             {
-              "x": 672,
-              "y": 120
+              "x": 616,
+              "y": 56
             }
           ],
           "size": 23
@@ -614,8 +614,8 @@
           },
           "vertices": [
             {
-              "x": 192,
-              "y": 120
+              "x": 136,
+              "y": 56
             }
           ],
           "size": 23
@@ -629,22 +629,6 @@
             "block": "983dd8ce-b070-44fd-8691-6674ec9c4ce9",
             "port": "dc8a240b-418f-4d66-8998-471adbd81721"
           }
-        },
-        {
-          "source": {
-            "block": "8c9a930d-bb9c-4d9c-920c-0b85710ef4d8",
-            "port": "1e201ff8-5636-44f0-87aa-f8ee3cee39ad"
-          },
-          "target": {
-            "block": "c40e488b-b045-45ca-96bf-bb88977bc80f",
-            "port": "df786a34-643e-405c-8d28-645e47cf50c6"
-          },
-          "vertices": [
-            {
-              "x": 472,
-              "y": 248
-            }
-          ]
         },
         {
           "source": {
@@ -664,6 +648,16 @@
           "target": {
             "block": "8b85b45f-98b2-41e8-a824-7c5a8b844ef0",
             "port": "0fca9eef-e2b8-43ed-bd1b-6470767c7dd1"
+          }
+        },
+        {
+          "source": {
+            "block": "8c9a930d-bb9c-4d9c-920c-0b85710ef4d8",
+            "port": "1e201ff8-5636-44f0-87aa-f8ee3cee39ad"
+          },
+          "target": {
+            "block": "c40e488b-b045-45ca-96bf-bb88977bc80f",
+            "port": "df786a34-643e-405c-8d28-645e47cf50c6"
           }
         }
       ]
