@@ -2498,7 +2498,7 @@
                 "size": 26
               },
               "position": {
-                "x": 2504,
+                "x": 2584,
                 "y": -112
               }
             },
@@ -2520,7 +2520,7 @@
               "id": "fabbd2ae-d75a-443d-9b7e-b8205b86adb7",
               "type": "basic.code",
               "data": {
-                "code": "// @include PxsCourt.v\r\n\r\n\r\n//-- Instantiate PxsCourt module.\r\nPxsCourt\r\nPxsCourt1(\r\n    px_clk,\r\n    VGAStr_i,\r\n    RGBStr_o\r\n    );\r\n",
+                "code": "//////////////////////////////////////////////////////////////////////////////////\n// Company: Ridotech\n// Engineer: Juan Manuel Rico\n// \n// Create Date: 16/03/2018 \n// Module Name: PxsCourt\n// Description: Draw a tennis court in a stream RGB.\n//\n// Dependencies: \n//\n// Revision: \n// Revision 1.00 - File Created\n//\n// Additional Comments:\n//\n//////////////////////////////////////////////////////////////////////////////////\n/*\nmodule PxsCourt (\n                input wire        px_clk,       // Pixel clock.\n                input wire [22:0] VGAStr_i,     // Input VGA stream.\n                output reg [25:0] RGBStr_o      // Output RGB stream.\n                );\n*/\n\n// Address alias.\n`define Active 0:0\n`define VS     1:1\n`define HS     2:2\n`define YC     12:3\n`define XC     22:13\n`define R      23:23\n`define G      24:24\n`define B      25:25\n`define RGB    25:23\n`define VGA    22:0\n`define separator_line 6:6\n\n// Dimensions.\nlocalparam width_line = 6;\nlocalparam width_screen = 800;\nlocalparam height_screen = 600;\n\n// Colors.\nlocalparam black = 3'b000;\nlocalparam white = 3'b111;\n\n// Output RGB stream.\nreg [25:0] RGBStr_o;\n\n// Task 1: Draw lines.\nalways @(posedge px_clk)\nbegin\n    // Clone VGA stream in a RGB stream.\n    RGBStr_o[`VGA] <= VGAStr_i[`VGA];\n\n    // Draw lines.\n    RGBStr_o[`RGB] <= (\n                       // Middle line.\n                       ((VGAStr_i[`XC] > (width_screen/2 - width_line/2)) && (VGAStr_i[`XC] < (width_screen/2 + width_line/2)) && (VGAStr_i[`separator_line])) ||\n                       // Top line.\n                       ((VGAStr_i[`YC] > 0) && (VGAStr_i[`YC] < width_line)) ||\n                       // Bottom line.\n                       ((VGAStr_i[`YC] > (height_screen - width_line)) && (VGAStr_i[`YC] < height_screen))\n                      ) ? white : black;\nend\n\n// endmodule\n",
                 "params": [],
                 "ports": {
                   "in": [
@@ -2543,11 +2543,11 @@
                 }
               },
               "position": {
-                "x": 1864,
+                "x": 1784,
                 "y": -296
               },
               "size": {
-                "width": 448,
+                "width": 672,
                 "height": 432
               }
             }
@@ -4739,7 +4739,7 @@
               "id": "cdf5a304-1d6f-421f-832d-cadd0750cf74",
               "type": "basic.code",
               "data": {
-                "code": "parameter width_screen  = 640;\nparameter width_digit   = 30;\nparameter separator     = 5;\nparameter width_counter = 2*width_digit + separator;\nparameter offset        = 20;\n\nassign pos_xply1 = width_screen/2 - width_counter - offset;\nassign pos_xply2 = width_screen/2 + offset;\nassign pos_y = offset;",
+                "code": "parameter width_screen  = 800;\nparameter width_digit   = 30;\nparameter separator     = 5;\nparameter width_counter = 2*width_digit + separator;\nparameter offset        = 20;\n\nassign pos_xply1 = width_screen/2 - width_counter - offset;\nassign pos_xply2 = width_screen/2 + offset;\nassign pos_y = offset;",
                 "params": [],
                 "ports": {
                   "in": [],
