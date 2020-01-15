@@ -5920,7 +5920,7 @@
                 "size": 26
               },
               "position": {
-                "x": 872,
+                "x": 1176,
                 "y": 296
               }
             },
@@ -5949,7 +5949,7 @@
               },
               "position": {
                 "x": 72,
-                "y": 368
+                "y": 360
               }
             },
             {
@@ -5975,15 +5975,15 @@
                 "local": false
               },
               "position": {
-                "x": 512,
-                "y": 32
+                "x": 632,
+                "y": 24
               }
             },
             {
               "id": "0e5ce188-8b5e-45e0-bead-fea6e6a6a785",
               "type": "basic.code",
               "data": {
-                "code": "// @include PxsDigit.v\r\n\r\n//-- Instantiate PxsDigit module.\r\nPxsDigit\r\n#(\r\n    color\r\n)\r\nPxsDigit1\r\n(\r\n    px_clk,\r\n    RGBStr_i,\r\n    pos_x,\r\n    pos_y,\r\n    number,\r\n    RGBStr_o\r\n);\r\n",
+                "code": "//////////////////////////////////////////////////////////////////////////////////\n// Company: Ridotech\n// Engineer: Juan Manuel Rico\n// \n// Create Date: 18/03/2018 \n// Module Name: PxsDigit\n// Description: Draw a simple digit in a stream RGB.\n//\n// Dependencies: \n//\n// Revision: \n// Revision 0.01 - File Created\n//\n// Additional Comments:\n//\n//\n//////////////////////////////////////////////////////////////////////////////////\n/*\nmodule PxsDigit #(\n        parameter color = 3'b111)\n        (\n        input wire        px_clk,      // Pixel clock.\n        input wire [25:0] RGBStr_i,    // Input RGB stream.\n        input wire [9:0]  pos_x,       // X number position.\n        input wire [9:0]  pos_y,       // Y number position.\n        input wire [3:0]  number,      // Number to stream.\n        output reg [25:0] RGBStr_o     // Output RGB stream.\n        );\n*/\n\n// Address alias. \n`define Active 0:0\n`define VS 1:1\n`define HS 2:2\n`define YC 12:3\n`define XC 22:13\n`define R 23:23\n`define G 24:24\n`define B 25:25\n`define RGB 25:23\n`define VGA 22:0\n\n// Number color and dimension.\nparameter wseg = 30;             // Width of a horizontal segment.\nparameter hseg = 10;             // Height of a horizontal segment.\n\n// Output RGB stream.\nreg [25:0] RGBStr_o;\nreg [6:0] segments;\n\n// Task 1: Get the segments.\nalways @(posedge px_clk)\nbegin\n    case (number)\n        4'd0: segments <= 7'b1111110;    // Zero\n        4'd1: segments <= 7'b0110000;    // One\n        4'd2: segments <= 7'b1101101;    // Two\n        4'd3: segments <= 7'b1111001;    // Three\n        4'd4: segments <= 7'b0110011;    // Four\n        4'd5: segments <= 7'b1011011;    // Five\n        4'd6: segments <= 7'b1011111;    // Six\n        4'd7: segments <= 7'b1110000;    // Seven\n        4'd8: segments <= 7'b1111111;    // Eight\n        4'd9: segments <= 7'b1110011;    // Nine\n        4'hA: segments <= 7'b1110111;    // A\n        4'hB: segments <= 7'b0011111;    // B\n        4'hC: segments <= 7'b1001110;    // C\n        4'hD: segments <= 7'b0111101;    // D\n        4'hE: segments <= 7'b1001111;    // E\n        4'hF: segments <= 7'b1000111;    // F\n//      default: segments = 7'b0000000;  // Off\n    endcase\nend\n\n// Task 2: Draw the number.\nalways @(posedge px_clk)\nbegin\n    // Clone VGA stream from in, to an out RGB stream.\n    RGBStr_o[`VGA] <= RGBStr_i[`VGA];\n\n    // Draw the number.\n    RGBStr_o[`RGB] <= (\n               // Draw segment \"a\".\n               (segments[6]) &&\n               (RGBStr_i[`YC] > pos_y) && (RGBStr_i[`YC] < pos_y + hseg) &&\n               (RGBStr_i[`XC] > pos_x) && (RGBStr_i[`XC] < pos_x + wseg)\n               ) || (\n               // Draw segment \"b\".\n               (segments[5]) &&\n               (RGBStr_i[`YC] > pos_y) && (RGBStr_i[`YC] < pos_y+wseg) &&\n               (RGBStr_i[`XC] > pos_x+wseg-hseg) && (RGBStr_i[`XC] < pos_x+wseg)\n               ) || (\n               // Draw segment \"c\".\n               (segments[4]) &&\n               (RGBStr_i[`YC] > pos_y+wseg-hseg) && (RGBStr_i[`YC] < pos_y+2*wseg-hseg) &&\n               (RGBStr_i[`XC] > pos_x+wseg-hseg) && (RGBStr_i[`XC] < pos_x+wseg)\n               ) || (\n               // Draw segment \"d\".\n               (segments[3]) &&\n               (RGBStr_i[`YC] > pos_y+2*(wseg-hseg)) && (RGBStr_i[`YC] < pos_y+2*wseg-hseg) &&\n               (RGBStr_i[`XC] > pos_x) && (RGBStr_i[`XC] < pos_x+wseg)\n               ) || (\n               // Draw segment \"e\".\n               (segments[2]) &&\n               (RGBStr_i[`YC] > pos_y+wseg-hseg) && (RGBStr_i[`YC] < pos_y+2*wseg-hseg) &&\n               (RGBStr_i[`XC] > pos_x) && (RGBStr_i[`XC] < pos_x+hseg)\n               ) || (\n               // Draw segment \"f\".\n               (segments[1]) &&\n               (RGBStr_i[`YC] > pos_y) && (RGBStr_i[`YC] < pos_y+wseg) &&\n               (RGBStr_i[`XC] > pos_x) && (RGBStr_i[`XC] < pos_x+hseg)\n               ) || (\n               // Draw segment \"g\".\n               (segments[0]) &&\n               (RGBStr_i[`YC] > pos_y+wseg-hseg) && (RGBStr_i[`YC] < pos_y+wseg) &&\n               (RGBStr_i[`XC] > pos_x) && (RGBStr_i[`XC] < pos_x+wseg)\n               ) ? color : RGBStr_i[`RGB];\nend\n\n// endmodule\n",
                 "params": [
                   {
                     "name": "color"
@@ -6025,12 +6025,12 @@
                 }
               },
               "position": {
-                "x": 384,
+                "x": 288,
                 "y": 144
               },
               "size": {
-                "width": 352,
-                "height": 368
+                "width": 776,
+                "height": 360
               }
             }
           ],
