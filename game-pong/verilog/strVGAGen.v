@@ -45,7 +45,6 @@ syncVGAGen syncVGAGen_0 (
 
 // From sync to stream VGA.
 zipVGAStr zipVGAStr_0 (
-    .px_clk(px_clk),
     .x_px(x_px),
     .y_px(y_px),
     .hsync(hsync),

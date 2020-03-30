@@ -16,7 +16,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 module syncVGAGen
 (
-    input  wire       px_clk         // Pixel clock.
+    input  wire       px_clk,        // Pixel clock.
     output wire [9:0] x_px,          // X position for actual pixel.
     output wire [9:0] y_px,          // Y position for actual pixel.
     output wire       hsync,         // Horizontal sync out.
