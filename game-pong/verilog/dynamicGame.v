@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Company:     Ridotech
 // Engineer:    Juan Manuel Rico
-// Create Date: 29/03/2020
+// Create Date: 31/03/2020
 // Module Name: dynamicGame.v
 //
 // Description: Dynamic behavior Pong's game.
@@ -9,7 +9,7 @@
 // Dependencies: 
 //
 // Revisions: 
-//     0.01 - File created.
+//     0.02 - File created.
 //
 // Additional Comments:
 //
@@ -21,12 +21,12 @@ module dynamicGame (
     input wire  [9:0] pos_ply1,           // Actual player 1 position.
     input wire  [9:0] pos_ply2,           // Actual player 2 position.
     output wire       reset_goals,        // Goals to zero.
-    output wire       goal_ply1,          // New goal for player 1.
-    output wire       goal_ply2,          // New goal for player 2.
-    output wire [9:0] x_ball,             // New x ball position.
-    output wire [9:0] y_ball,             // New y ball position.
-    output wire       mute,               // Silence the sound.
-    output wire [1:0] sound               // New type of sound.
+    output wire       goal_ply1,          // Goal for player 1.
+    output wire       goal_ply2,          // Goal for player 2.
+    output wire [9:0] x_ball,             // X ball position.
+    output wire [9:0] y_ball,             // Y ball position.
+    output wire [1:0] channel,            // Channel of sound.
+    output wire [1:0] sound               // Type of sound.
 );
 
     // Screen parameters.
@@ -38,8 +38,22 @@ module dynamicGame (
     localparam offset_players = 20;
     localparam width_players = 10;
 
-    // Sound.
-    reg [7:0] mseg = 0;
+    // Sound control.
+    // Type sounds.
+    localparam ping = 2'd1;
+    localparam pong = 2'd2;
+    localparam goal = 2'd3;
+
+    // Channel of sounds.
+    localparam none  = 2'd0;
+    localparam right = 2'd1;
+    localparam left  = 2'd2;
+    localparam both  = 2'd3;
+
+    // Registers of sound.
+    reg [7:0] mseg = 0;           // Time of sound.
+    reg [1:0] channel = none;     // Channel of sounds.
+    reg [1:0] sound = ping;       // Type of sound.
 
     // Speed and direction.
     reg [2:0] speed_x = 2;
@@ -50,12 +64,10 @@ module dynamicGame (
 
     // Outputs.
     reg reset_goals_reg;          // Goals to zero.
-    reg goal_ply1_reg;            // New goal for player 1.
-    reg goal_ply2_reg;            // New goal for player 2.
-    reg [9:0] x_pos = 10'd100;    // New x ball position.
-    reg [9:0] y_pos = 10'd100;    // New y ball position.
-    reg mute = 1'b1;              // Silence the sound.
-    reg [1:0] sound = 2'd0;       // New type of sound.
+    reg goal_ply1_reg;            // Goal for player 1.
+    reg goal_ply2_reg;            // Goal for player 2.
+    reg [9:0] x_pos = 10'd100;    // X ball position.
+    reg [9:0] y_pos = 10'd100;    // Y ball position.
 
     // Outputs assign.
     assign x_ball = x_pos;
@@ -83,76 +95,79 @@ module dynamicGame (
             dy <= 1'b1;
         end
 
-        // Check the goals.
-        if (x_pos <= 0)
+        // Check time sound.
+        if (mseg == 0)
         begin
-            x_pos <= 0;
-            goal_ply2_reg <= 1'b1;
-            sound <= 2'd3; 
-            mseg <= 7'd40;
+            channel <= none;
         end
         else
-            goal_ply2_reg <= 1'b0;
-
-        if (x_pos >= width_screen - size_ball)
-        begin
-            goal_ply1_reg <= 1'b1;
-            x_pos <= width_screen - size_ball;
-            sound <= 2'd3;
-            mseg <= 7'd40;
-        end
-        else
-            goal_ply1_reg <= 1'b0;
-
-        // Check bouncing... for vertical objects.
-        if  (
-            // Check the player 1 position.
-            ((x_pos < offset_players + width_players) &&
-            (y_pos > pos_ply1) && 
-            (y_pos < pos_ply1 + size_player - size_ball) &&
-            (dx == 0)) 
-            ||
-            // Check the player 2 position.
-            ((x_pos > width_screen - offset_players - width_players - size_ball) &&
-            (y_pos > pos_ply2) && 
-            (y_pos < pos_ply2 + size_player - size_ball) &&
-            (dx == 1))
-            ||
-            // Check the player 1 goal and bouncing.
-            (x_pos >= width_screen-size_ball)
-            ||
-            // Check the player 2 goal and bouncing.
-            (x_pos <= 0)
-            )
-        begin
-            // Change direction in x.
-            dx = ~dx;
-            
-            // It's not a goal, so... another sound.
-            if (!((x_pos >= width_screen-size_ball) || (x_pos <= 0)))
-            begin
-                sound <= 2'd2;
-                mseg <= 7'd30;
-            end
-        end
+            mseg <= mseg - 1;
 
         // Check bouncing with top and bottom court.
         if ((y_pos <= 0) || (y_pos >= height_screen-size_ball))
         begin
             // Change direction in y.
             dy = ~dy;
-            sound <= 2'd1;
+            sound <= ping;
+            channel <= both;
             mseg <= 7'd10;
         end
 
-        // Check mute sound.
-        if (mseg == 0)
-            mute <= 1'b1;
-        else
+        // Check the vertical player left position.
+        if  (
+            (x_pos < offset_players + width_players) &&
+            (x_pos > offset_players) &&
+            (y_pos > pos_ply1) && 
+            (y_pos < pos_ply1 + size_player - size_ball) &&
+            (dx == 0)
+            )
         begin
-            mseg <= mseg - 1;
-            mute <= 1'b0;
+            dx = ~dx;
+            sound <= pong;
+            channel <= left;
+            mseg <= 7'd30;
         end
+
+        // Check the vertical player right position.
+        if  (
+            (x_pos > width_screen - offset_players - width_players - size_ball) &&
+            (x_pos < width_screen - width_players - size_ball) &&
+            (y_pos > pos_ply2) && 
+            (y_pos < pos_ply2 + size_player - size_ball) &&
+            (dx == 1)
+            )
+        begin
+            dx = ~dx;
+            sound <= pong;
+            channel <= right;
+            mseg <= 7'd30;
+        end
+
+        // Check goal left.
+        if (x_pos <= 0)
+        begin
+            x_pos <= 0;
+            goal_ply2_reg <= 1'b1;
+            dx = ~dx;
+            sound <= goal;
+            channel <= left;
+            mseg <= 7'd40;
+        end
+        else
+            goal_ply2_reg <= 1'b0;
+
+        // Check goal right.
+        if (x_pos >= width_screen - size_ball)
+        begin
+            goal_ply1_reg <= 1'b1;
+            x_pos <= width_screen - size_ball;
+            dx = ~dx;
+            sound <= goal;
+            channel <= right;
+            mseg <= 7'd40;
+        end
+        else
+            goal_ply1_reg <= 1'b0;
 
         // Update x ball position.
         if (dx)

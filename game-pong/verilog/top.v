@@ -30,7 +30,8 @@ module top (
     output wire PIN_10,     // VGA - G.
     output wire PIN_9,      // VGA - B.
 
-    output wire PIN_20      // Buzzer.
+    output wire PIN_20,     // Right channel.
+    output wire PIN_19      // Left channel.
 );
 
     // Drive USB pull-up resistor to '0' to disable USB
@@ -80,7 +81,8 @@ module top (
         .pos_ply1(pos_ply1),
         .pos_ply2(pos_ply2),
         .strRGB (strRGB),
-        .buzzer (PIN_20)
+        .right (PIN_20),
+        .left (PIN_19)
     );
 
     // Unzip RGB stream module.

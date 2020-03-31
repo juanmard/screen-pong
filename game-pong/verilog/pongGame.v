@@ -23,7 +23,8 @@ module pongGame (
     input wire  [9:0]  pos_ply1,    // Position player 1.
     input wire  [9:0]  pos_ply2,    // Position player 2.
     output wire [25:0] strRGB,      // Stream RGB out.
-    output wire buzzer              // Buzzer sound signal.
+    output wire right,              // Right sound signal.
+    output wire left                // Left sound signal.
 );
     // Wire module conections.
     wire [25:0] strRGB_p0;
@@ -36,7 +37,7 @@ module pongGame (
     wire goal_ply1;
     wire goal_ply2;
     wire [1:0] sound;
-    wire mute;
+    wire [1:0] channel;
 
     // Assings.
     assign reset = 1'b0;
@@ -82,10 +83,10 @@ module pongGame (
     // Sound card module.
     soundCard soundCard_0 (
         .snd_clk (snd_clk),
-        .mute (mute),
+        .channel (channel),
         .sound (sound),
-        .right (buzzer)
-//        .left ()
+        .right_o (right),
+        .left_o (left)
     );
 
     // Get endframe signal for dynamic logic.
@@ -97,7 +98,7 @@ module pongGame (
     // Change dynamic's game every frame.
     dynamicGame dynamicGame_0 (
         .dyn_clk (endframe),
-        .reset(reset),
+        .reset (reset),
         .play (play),
         .pos_ply1 (pos_ply1),
         .pos_ply2 (pos_ply2),
@@ -106,8 +107,8 @@ module pongGame (
         .goal_ply2 (goal_ply2),
         .x_ball (x_ball),
         .y_ball (y_ball),
-        .mute(mute),
-        .sound(sound)
+        .channel (channel),
+        .sound (sound)
     );
 
 endmodule
