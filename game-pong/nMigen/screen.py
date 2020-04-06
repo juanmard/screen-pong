@@ -30,6 +30,8 @@ class screen:
         hseg         = 10                       # Height of a horizontal segment.
         separation   = 5                        # Digit separation.
 
+        width_counter = 2*wseg + separation     # Width counter (2 Digits).
+        offset_count  = 20                      # Offset counter.
 
 
 

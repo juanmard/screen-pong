@@ -61,13 +61,13 @@ class number (Elaboratable):
         stop_dec = Signal()
 
         # Check new pulse.
-        with m.If (~self.inc): m.d.dyn += stop_inc.eq(0)
-        with m.If (~self.dec): m.d.dyn += stop_dec.eq(0)
+        with m.If (self.inc == 0): m.d.dyn += stop_inc.eq(0)
+        with m.If (self.dec == 0): m.d.dyn += stop_dec.eq(0)
 
         # Check increment, decrement and reset.
         with m.If (self.reset):
              m.d.dyn += number.eq(0)
-        with m.Elif (self.inc & ~stop_inc):
+        with m.Elif (self.inc & (stop_inc == 0)):
                 m.d.dyn += stop_inc.eq(1)
                 with m.If (number == 9):
                     m.d.dyn += number.eq(0)
@@ -75,7 +75,7 @@ class number (Elaboratable):
                 with m.Else ():
                     m.d.dyn += number.eq(number+1)
                     m.d.dyn += self.carry.eq(0)
-        with m.Elif (self.dec & ~stop_dec):
+        with m.Elif (self.dec & (stop_dec == 0)):
                 m.d.dyn += stop_dec.eq(1)
                 with m.If (number == 0):
                     m.d.dyn += number.eq(9)
