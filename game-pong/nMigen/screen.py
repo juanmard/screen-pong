@@ -17,7 +17,19 @@ class screen:
         hpixels      = blackH + activeHvideo    # Total horizontal pixels.
         vlines       = blackV + activeVvideo    # Total lines.
 
-        # Dimensions.
+        # Dimentions.
         wline        = 10                       # Width line of court.
         size_ball    = 10                       # Size ball.
+
+        # Player dimentions.
+        size_player  = 80                       # Player longitude.
+        width_player = 10                       # Player width.
+
+        # Digit dimentions.
+        wseg         = 30                       # Width of a horizontal segment.
+        hseg         = 10                       # Height of a horizontal segment.
+        separation   = 5                        # Digit separation.
+
+
+
 

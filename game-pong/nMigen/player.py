@@ -1,10 +1,10 @@
 # ////////////////////////////////////////////////////////////////////////////////
 # // Company:     Ridotech
 # // Engineer:    Juan Manuel Rico
-# // Create Date: 29/03/2020
-# // Module Name: ball.py
+# // Create Date: 06/04/2020
+# // Module Name: player.py
 # //
-# // Description: Draw a simple ball in a stream RGB.
+# // Description: Draw a player in a stream RGB.
 # //
 # // Dependencies: 
 # //
@@ -33,13 +33,14 @@ class st (IntEnum):
     G       = 6
     B       = 7
 
-class ball (Elaboratable):
+class player (Elaboratable):
 
-    def __init__(self, strRGB_i, x, y):
+    def __init__(self, strRGB_i, pos, type_ply=1, offset=20):
         # Inputs.
-        self.x = x                  # Draw ball position X.
-        self.y = y                  # Draw ball position Y.
-        self.strRGB_i = strRGB_i
+        self.pos = pos                  # Player position.
+        self.type_ply = type_ply        # Type player (vertical, horizontal).
+        self.offset = offset            # Offset from border.
+        self.strRGB_i = strRGB_i        # Stream RGB input.
 
         # Outputs.
         #                x           y           hsync     vsync     active    Red       Green     Blue
@@ -59,14 +60,18 @@ class ball (Elaboratable):
         x = self.strRGB_i[st.XC]
         y = self.strRGB_i[st.YC]
 
-        inside_ball = (y > self.y) & (y < (self.y + screen.size_ball)) & \
-                      (x > self.x) & (x < (self.x + screen.size_ball))
+        if (self.type_ply):
+            inside_player = (y > self.pos) & (y < self.pos + screen.size_player) & \
+                            (x > self.offset) & (x < self.offset + screen.width_player)
+        else:
+            inside_player = (x > self.pos) & (x < self.pos + screen.size_player) & \
+                            (y > self.offset) & (y < self.offset + screen.width_player)
 
-        with m.If (inside_ball): 
+        with m.If (inside_player): 
             # Draw ball.
             m.d.px += self.strRGB_o[st.R].eq(1)
-            m.d.px += self.strRGB_o[st.G].eq(0)
-            m.d.px += self.strRGB_o[st.B].eq(1)
+            m.d.px += self.strRGB_o[st.G].eq(1)
+            m.d.px += self.strRGB_o[st.B].eq(0)
         with m.Else ():
             m.d.px += self.strRGB_o[st.R].eq(self.strRGB_i[st.R])
             m.d.px += self.strRGB_o[st.G].eq(self.strRGB_i[st.G])
@@ -81,28 +86,4 @@ if __name__ == "__main__":
 
     print ("\nMódulo 'nMigen'.\nSólo importar como biblioteca de módulos.\n")
 
-    # m = Module()
-    # platform = TinyFPGABXPlatform()
-
-    # m.submodules += ball = ball (x, y, strRGB)
-    # m.domains.px = px = ClockDomain('px')
-    # px_clk = ClockSignal("px")
-
-    # platform.build(m, do_program=False)
-
-    # sim = Simulator(m)
-    # sim.add_clock(1e-6, domain='px')
-
-    # def process():
-    #     yield
-    #     yield
-    #     yield
-    #     yield
-    #     yield
-    #     yield
-    #     yield
-    #     yield
-    #     yield
-    #     yield
-    #     yield
 

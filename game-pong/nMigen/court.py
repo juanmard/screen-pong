@@ -82,7 +82,7 @@ class court(Elaboratable):
         with m.If ( middle | sup | inf ): 
             m.d.px += self.strRGB_o[st.R].eq(1)
             m.d.px += self.strRGB_o[st.G].eq(1)
-            m.d.px += self.strRGB_o[st.B].eq(0)
+            m.d.px += self.strRGB_o[st.B].eq(1)
         with m.Else ():
             m.d.px += self.strRGB_o[st.R].eq(0)
             m.d.px += self.strRGB_o[st.G].eq(0)
