@@ -1,5 +1,15 @@
 #-------------------------------------------------------------------------------
-# From: https://github.com/kbob/nmigen-examples/blob/master/nmigen_lib/pll.py
+#
+# Original file from:
+#   https://github.com/kbob/nmigen-examples/blob/master/nmigen_lib/pll.py
+#
+# Modified and reorganice for SB_PLL40_CORE instance.
+# Autor: Juan Manuel Rico.
+# Date:  04/04/2020
+#
+# TODO: This instance of a PLL must be included as a platform resource.
+#       Because not all platform have it.
+#
 #-------------------------------------------------------------------------------
 from collections import namedtuple
 import warnings
@@ -7,7 +17,6 @@ import warnings
 from nmigen import *
 from nmigen.lib.cdc import ResetSynchronizer
 from nmigen.cli import main
-
 
 class pxClkGen (Elaboratable):
     """
@@ -67,6 +76,7 @@ class pxClkGen (Elaboratable):
             warnings.warn(
                 f'PLL: requested {f_req} MHz, got {best_fout} MHz)',
                 stacklevel=3)
+
         return best
 
     def elaborate(self, platform):
@@ -95,5 +105,5 @@ class pxClkGen (Elaboratable):
 
 # There is no point in simulating this, but you can generate Verilog.
 if __name__ == '__main__':
-    pll = pxClkGen (12, 30)
+    pll = pxClkGen (12, 33)
     main(pll, ports=pll.ports)

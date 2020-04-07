@@ -26,6 +26,9 @@ class screen:
         width_player   = 10                     # Player width.
         offset_player  = 20                     # Offset player.
 
+        posX_left      = offset_player                                 # X position of player left.
+        posX_right     = width - offset_player - width_player          # X position of player right.
+
         # Digit dimentions.
         wseg         = 30                       # Width of a horizontal segment.
         hseg         = 10                       # Height of a horizontal segment.
