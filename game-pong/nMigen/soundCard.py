@@ -17,17 +17,17 @@
 from nmigen import *
 from nmigen.build import *
 from nmigen_boards.tinyfpga_bx import TinyFPGABXPlatform
-from enum import Enum, unique
+from enum import IntEnum, unique
 
 @unique
-class SOUNDS(Enum):
+class SOUNDS(IntEnum):
     none = 0
-    ping = 3
-    pong = 1
-    goal = 2
+    ping = 1
+    pong = 2
+    goal = 3
 
 @unique
-class CHANNEL(Enum):
+class CHANNEL(IntEnum):
     none  = 0
     left  = 1
     right = 2
@@ -35,14 +35,14 @@ class CHANNEL(Enum):
 
 class soundCard(Elaboratable):
     
-    def __init__(self, channel, sound):
+    def __init__(self, sound, channel):
         # Inputs.
-        self.channel  = channel           # Channels of sound.
         self.sound    = sound             # Type of sound.
+        self.channel  = channel           # Channels of sound.
 
         # Outputs.
-        self.right_ch = Signal()          # Channel right.
         self.left_ch  = Signal()          # Channel left.
+        self.right_ch = Signal()          # Channel right.
 
     def elaborate(self, platform: Platform) -> Module:
         m = Module()
@@ -51,31 +51,31 @@ class soundCard(Elaboratable):
         divcounter = Signal(20)     # Divider counter.
         tick_sound = Signal(1)      # Wave sound.
 
-        # Get tone of sound.
+        # Generate tone of sound.
         with m.Switch(self.sound):
             with m.Case(SOUNDS.none):
-                m.d.sync += tick_sound.eq(0)
+                m.d.comb += tick_sound.eq (0)
             with m.Case(SOUNDS.ping):
-                m.d.sync += tick_sound.eq(divcounter[15])
+                m.d.comb += tick_sound.eq (divcounter[15])
             with m.Case(SOUNDS.pong):
-                m.d.sync += tick_sound.eq(divcounter[17])
+                m.d.comb += tick_sound.eq (divcounter[16])
             with m.Case(SOUNDS.goal):
-                m.d.sync += tick_sound.eq(divcounter[18])
+                m.d.comb += tick_sound.eq (divcounter[18])
 
         # Balance channels.
         with m.Switch(self.channel):
             with m.Case(CHANNEL.right):
+                m.d.comb += self.left_ch.eq  (0)
                 m.d.comb += self.right_ch.eq (tick_sound)
             with m.Case(CHANNEL.left):
-                m.d.comb += self.left_ch.eq (tick_sound)
+                m.d.comb += self.left_ch.eq  (tick_sound)
+                m.d.comb += self.right_ch.eq (0)
             with m.Case(CHANNEL.both):
-                m.d.comb += [
-                    self.left_ch.eq (tick_sound),
-                    self.right_ch.eq (tick_sound),
-                ]
+                m.d.comb += self.left_ch.eq  (tick_sound)
+                m.d.comb += self.right_ch.eq (tick_sound)
 
         # New tick sound.
-        m.d.sync += divcounter.eq(divcounter + 1)
+        m.d.sync += divcounter.eq (divcounter + 1)
 
         return m
 

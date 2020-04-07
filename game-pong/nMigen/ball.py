@@ -65,7 +65,7 @@ class ball (Elaboratable):
         with m.If (inside_ball): 
             # Draw ball.
             m.d.px += self.strRGB_o[st.R].eq(1)
-            m.d.px += self.strRGB_o[st.G].eq(0)
+            m.d.px += self.strRGB_o[st.G].eq(1)
             m.d.px += self.strRGB_o[st.B].eq(1)
         with m.Else ():
             m.d.px += self.strRGB_o[st.R].eq(self.strRGB_i[st.R])

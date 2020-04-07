@@ -75,6 +75,7 @@ class dynamicGame (Elaboratable):
             m.d.dyn += self.dy.eq(1)
 
         # Check time sound.
+        # TODO: Put this in 'soundCard.py' file control with a domain 'snd'.
         with m.If (self.mseg == 0):
             m.d.dyn += self.channel.eq (CHANNEL.none)
         with m.Else ():
@@ -87,7 +88,7 @@ class dynamicGame (Elaboratable):
             m.d.dyn += self.dy.eq (1)
             m.d.dyn += self.y_ball.eq (top_lim)
             # Sound top.
-            m.d.dyn += self.sound.eq (SOUNDS.ping)
+            m.d.dyn += self.sound.eq (SOUNDS.pong)
             m.d.dyn += self.channel.eq (CHANNEL.both)
             m.d.dyn += self.mseg.eq(30)
 
@@ -98,7 +99,7 @@ class dynamicGame (Elaboratable):
             m.d.dyn += self.dy.eq (0)
             m.d.dyn += self.y_ball.eq(bottom_lim)
             # Sound bottom.
-            m.d.dyn += self.sound.eq (SOUNDS.ping)
+            m.d.dyn += self.sound.eq (SOUNDS.pong)
             m.d.dyn += self.channel.eq (CHANNEL.both)
             m.d.dyn += self.mseg.eq(30)
 
@@ -119,7 +120,7 @@ class dynamicGame (Elaboratable):
             m.d.dyn += self.dx.eq (1)
             m.d.dyn += self.x_ball.eq (front_player_left)
             # Sound player left.
-            m.d.dyn += self.sound.eq (SOUNDS.pong)
+            m.d.dyn += self.sound.eq (SOUNDS.ping)
             m.d.dyn += self.channel.eq (CHANNEL.left)
             m.d.dyn += self.mseg.eq(30)
 
@@ -137,7 +138,7 @@ class dynamicGame (Elaboratable):
             m.d.dyn += self.dx.eq (0)
             m.d.dyn += self.x_ball.eq (front_player_right)
             # Sound player right.
-            m.d.dyn += self.sound.eq (SOUNDS.pong)
+            m.d.dyn += self.sound.eq (SOUNDS.ping)
             m.d.dyn += self.channel.eq (CHANNEL.right)
             m.d.dyn += self.mseg.eq(30)
 

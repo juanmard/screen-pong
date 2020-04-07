@@ -2,9 +2,9 @@
 # // Company:     Ridotech
 # // Engineer:    Juan Manuel Rico
 # // Create Date: 06/04/2020
-# // Module Name: ctlButtons.py
+# // Module Name: pong.py
 # //
-# // Description: Control player positions with buttons.
+# // Description: Pong module.
 # //
 # // Dependencies: 
 # //

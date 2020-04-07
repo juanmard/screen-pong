@@ -23,7 +23,7 @@ from enum import Enum, unique, IntEnum
 
 from screen import *
 
-# TODO: Poner todas estas variables en un fichero aparte.
+# TODO: All in a new file.
 @unique
 class COLORS (Enum):
     black   = 0
@@ -34,10 +34,6 @@ class COLORS (Enum):
     magenta = 5
     yellow  = 6
     white   = 7
-
-# class RGB3Bits ():
-#     def __init__
-#         pass
 
 class st (IntEnum):
     XC      = 0
