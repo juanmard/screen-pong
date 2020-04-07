@@ -22,8 +22,9 @@ class screen:
         size_ball    = 10                       # Size ball.
 
         # Player dimentions.
-        size_player  = 80                       # Player longitude.
-        width_player = 10                       # Player width.
+        size_player    = 80                     # Player longitude.
+        width_player   = 10                     # Player width.
+        offset_player  = 20                     # Offset player.
 
         # Digit dimentions.
         wseg         = 30                       # Width of a horizontal segment.
