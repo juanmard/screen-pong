@@ -29,7 +29,7 @@ module ball (
     `define VGA 22:0
 
     // Ball color and dimension.
-    parameter [3:0] white = 3'b111;
+    parameter [2:0] white = 3'b111;
     parameter size_ball = 10;
 
     // Output pipeline RGB stream register.

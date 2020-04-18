@@ -68,7 +68,7 @@ module top (
         .ply2_up   (PIN_23),
         .ply2_down (PIN_24),
         .pos_ply1 (pos_ply1),
-        .pos_ply2 (pos_ply2),
+        .pos_ply2 (pos_ply2)
     );
 
     // Game module.

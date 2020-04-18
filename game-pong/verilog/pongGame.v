@@ -40,8 +40,6 @@ module pongGame (
     wire [1:0] channel;
 
     // Assings.
-    assign reset = 1'b0;
-    assign play = 1'b0;
     assign reset_goals = 1'b0;
 
     // Draw a tenis court.

@@ -26,7 +26,7 @@ module verticalPlayers (
 
     // Draw a player 1.
     player #(
-        .type(1'b0),
+        .type_ply(1'b0),
         .pos_offset(20)
     )
     player_1 (
@@ -38,7 +38,7 @@ module verticalPlayers (
 
     // Draw a player 2.
     player #(
-        .type(1'b0),
+        .type_ply(1'b0),
         .pos_offset(770)
     )
     player_2 (
