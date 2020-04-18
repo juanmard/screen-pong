@@ -103,7 +103,7 @@ $ ./main_tb -g 800x600
 ```
 Cuando todo el proceso se complete se obtendrá una ventana donde se visualizarán las señales de la VGA en forma de imagen. En este caso el del módulo 'game-pong'.
 
-![Simulación con GTK](https://raw.githubusercontent.com/juanmard/screen-pong/gtk-verilator/game-pong/verilog/gallery/vga_sim.png)
+![Simulación con GTK](https://raw.githubusercontent.com/juanmard/screen-pong/gtk-verilator/game-pong/verilog/gallery/vga_sim.jpg)
 
 Para mayor información acudir al blog de ZipCPU:
 
