@@ -51,7 +51,7 @@ module dynamicGame (
     localparam both  = 2'd3;
 
     // Registers of sound.
-    reg [7:0] mseg = 0;           // Time of sound.
+    reg [6:0] mseg = 0;           // Time of sound.
     reg [1:0] channel = none;     // Channel of sounds.
     reg [1:0] sound = ping;       // Type of sound.
 
@@ -76,38 +76,40 @@ module dynamicGame (
     assign goal_ply1 = goal_ply1_reg;
     assign goal_ply2 = goal_ply2_reg;
 
-    // TODO: change speed ball how speed change player.
-    //reg [9:0] pos_ply1_ant;
-    //reg [9:0] pos_ply2_ant;
-    //reg [2:0] spped_ply1 ;
-    //reg [2:0] speed_ply2;
-    // if (dy) && (dy_player) then speed_y = speed_y+1;
-
     // Task 1: Move the ball.
     always @(posedge dyn_clk)
     begin
         // Check reset.
-        if (reset)
-        begin
-            x_pos <= width_screen/2;
-            y_pos <= height_screen/2;
-            dx <= ~dx;
-            dy <= 1'b1;
-        end
+        // if (reset)
+        // begin
+        //     x_pos <= width_screen/2;
+        //     y_pos <= height_screen/2;
+        //     dx <= 1'b1;
+        //     dy <= 1'b1;
+        // end
 
         // Check time sound.
-        if (mseg == 0)
-        begin
+        if (mseg == 0) begin
             channel <= none;
-        end
-        else
+        end else
             mseg <= mseg - 1;
 
-        // Check bouncing with top and bottom court.
-        if ((y_pos <= 0) || (y_pos >= height_screen-size_ball))
+        // Check bouncing with top court.
+        if (y_pos <= speed_y)
+        begin
+            dy <= 1'b1;
+            y_pos <= speed_y;
+            sound <= ping;
+            channel <= both;
+            mseg <= 7'd10;
+        end
+
+        // Check bouncing with bottom court.
+        if (y_pos >= height_screen-size_ball)
         begin
             // Change direction in y.
-            dy = ~dy;
+            dy <= 1'b0;
+            y_pos <= height_screen-size_ball;
             sound <= ping;
             channel <= both;
             mseg <= 7'd10;
@@ -122,7 +124,7 @@ module dynamicGame (
             (dx == 0)
             )
         begin
-            dx = ~dx;
+            dx <= 1'b1;
             sound <= pong;
             channel <= left;
             mseg <= 7'd30;
@@ -137,18 +139,18 @@ module dynamicGame (
             (dx == 1)
             )
         begin
-            dx = ~dx;
+            dx <= 1'b0;
             sound <= pong;
             channel <= right;
             mseg <= 7'd30;
         end
 
         // Check goal left.
-        if (x_pos <= 0)
+        if (x_pos <= speed_x)
         begin
-            x_pos <= 0;
+            x_pos <= speed_x;
             goal_ply2_reg <= 1'b1;
-            dx = ~dx;
+            dx <= 1'b1;
             sound <= goal;
             channel <= left;
             mseg <= 7'd40;
@@ -161,7 +163,7 @@ module dynamicGame (
         begin
             goal_ply1_reg <= 1'b1;
             x_pos <= width_screen - size_ball;
-            dx = ~dx;
+            dx <= 1'b0;
             sound <= goal;
             channel <= right;
             mseg <= 7'd40;

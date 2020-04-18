@@ -16,7 +16,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 module player
 #(
-   parameter type = 1'b0,          // Type of player. [Horizontal, Vertical]
+   parameter type_ply = 1'b0,      // Type of player. [Horizontal, Vertical]
    parameter pos_offset = 100      // Offset from border.
 )(
    input wire         px_clk,       // Pixel clock.
@@ -44,7 +44,7 @@ module player
     localparam width_screen = 800;
     localparam height_screen = 600;
 
-    parameter [3:0] white = 3'b111;
+    parameter [2:0] white = 3'b111;
 
     // Output RGB stream pipeline register.
     reg [25:0] strRGB_reg;
@@ -59,7 +59,7 @@ module player
         strRGB_reg[`VGA] <= strRGB_i[`VGA];
 
         // Which player type?
-        case (type)
+        case (type_ply)
             // Vertical player.
             1'b0 :
                 begin

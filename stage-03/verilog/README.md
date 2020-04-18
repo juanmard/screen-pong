@@ -61,6 +61,55 @@ tinyprog --program game-pong.bin
 
 ```
 
+## Simulación de la señal VGA mediante Verilator/GTK.
+A grandes rasgos, _Verilator_ transformorá nuestros módulos escritos en código _Verilog_ a código C/C++, generando un objeto que podrá utilizarse y ser integrardo en cualquier otro código escrito en C++.
+Para generar una ventana donde mostrar los píxeles de la señal VGA se utilizará la biblioteca GTK.
+
+Este ejemplo se ha probado en un entorno mixto Windows/Linux (WSL - Debian), con lo que se necesitará un servidor X (VcXsrv) y los paquetes necesarios de _Verilator_ y _GTK_.
+
+El procedimiento a seguir es el siguiente:
+
+```bash
+
+# Instalar Verilator y GTK.
+$ sudo apt install verilator
+$ sudo apt install gtkmm-3.0
+
+# Generar el código C/C++ desde módulo Verilog.
+#   Esto creará un subdirectorio 'obj_dir' donde se encuentra
+#   el código generado.
+$ verilator -Wno-fatal -cc top.v
+
+# Generar la biblioteca a partir del código C/C++ generado.
+$ cd obj_dir
+$ make -f Vtop.mk
+$ cd ..
+
+# Compilar el conjunto junto al código de simulación.
+#   Este código se encargará de obtener las señales y representarla
+#   en pantalla (en este caso a modo de píxeles en una ventana GTK).
+#   Se generará un subdirectorio 'obj-pc' donde se encontrarán los
+#   distintos ficheros a enlazar para generar el ejecutable.
+$ cd cpp
+$ make
+
+# Dirigir la salida de consola al servidor X.
+$ export DISPLAY=:0
+
+# Ejecutar la simulación con los parámetros correctos.
+#   En este caso bajo señales de sincronismo de 800x600@72Hz.
+$ ./main_tb -g 800x600
+
+```
+Cuando todo el proceso se complete se obtendrá una ventana donde se visualizarán las señales de la VGA en forma de imagen. En este caso el del módulo 'game-pong'.
+
+![Simulación con GTK](https://raw.githubusercontent.com/juanmard/screen-pong/gtk-verilator/game-pong/verilog/gallery/vga_sim.png)
+
+Para mayor información acudir al blog de ZipCPU:
+
+* [El simulador VGA usando las bibliotecas GTK.](https://zipcpu.com/blog/2018/11/29/llvga.html)
+* [Y como convertir tus módulos de Verilog en código C mediante Verilator.](https://zipcpu.com/blog/2017/06/21/looking-at-verilator.html)
+
 ## Conexión física.
 La conexión física de los pines utilizados es la mostrada en la figura.
 
