@@ -115,7 +115,7 @@ architecture top_A of top is
 
 begin
     --// Drive USB pull-up resistor to '0' to disable USB (TinyFPGA-BX).
-    -- USBPU <= 0;
+    USBPU <= '0';
 
     --// Generated VGA stream module.
     strVGAGen_0: strVGAGen
