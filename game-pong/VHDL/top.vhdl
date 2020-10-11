@@ -49,7 +49,7 @@ architecture top_A of top is
     component strVGAGen
         port (
                 sys_clk: in std_logic;
-                px_clk:  in std_logic;
+                px_clk:  out std_logic;
                 strVGA:  out std_logic_vector (22 downto 0)
         );
     end component; 
