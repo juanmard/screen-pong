@@ -33,7 +33,7 @@ module pongGame (
     wire [9:0] x_ball;
     wire [9:0] y_ball;
     wire endframe;
-    wire reset_goals;
+//    wire reset_goals;
     wire goal_ply1;
     wire goal_ply2;
     wire [1:0] sound;
@@ -42,7 +42,7 @@ module pongGame (
     // Assings.
     assign reset = 1'b0;
     assign play = 1'b0;
-    assign reset_goals = 1'b0;
+    //assign reset_goals = 1'b0;
 
     // Draw a tenis court.
     court court_0 (
@@ -56,7 +56,7 @@ module pongGame (
         .px_clk (px_clk),
         .strRGB_i (strRGB_p0),
         .dyn_clk (endframe),
-        .reset(reset_goals),
+        //.reset(reset_goals),
         .goal_ply1 (goal_ply1),
         .goal_ply2 (goal_ply2),
         .strRGB_o (strRGB_p1)
@@ -102,7 +102,7 @@ module pongGame (
         .play (play),
         .pos_ply1 (pos_ply1),
         .pos_ply2 (pos_ply2),
-        .reset_goals (reset_goals),
+        //.reset_goals (reset_goals),
         .goal_ply1 (goal_ply1),
         .goal_ply2 (goal_ply2),
         .x_ball (x_ball),

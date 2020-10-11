@@ -39,9 +39,6 @@ module pongGame (
     wire [1:0] sound;
     wire [1:0] channel;
 
-    // Assings.
-    assign reset_goals = 1'b0;
-
     // Draw a tenis court.
     court court_0 (
         .px_clk (px_clk),

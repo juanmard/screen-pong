@@ -63,7 +63,7 @@ module dynamicGame (
     reg dy = 1'b1;
 
     // Outputs.
-    reg reset_goals_reg;          // Goals to zero.
+    //reg reset_goals_reg;          // Goals to zero.
     reg goal_ply1_reg;            // Goal for player 1.
     reg goal_ply2_reg;            // Goal for player 2.
     reg [9:0] x_pos = 10'd100;    // X ball position.
@@ -72,7 +72,7 @@ module dynamicGame (
     // Outputs assign.
     assign x_ball = x_pos;
     assign y_ball = y_pos;
-    assign reset_goals = reset_goals_reg; 
+    assign reset_goals = 1'b0; 
     assign goal_ply1 = goal_ply1_reg;
     assign goal_ply2 = goal_ply2_reg;
 
@@ -80,13 +80,14 @@ module dynamicGame (
     always @(posedge dyn_clk)
     begin
         // Check reset.
-        // if (reset)
-        // begin
+        //if (reset)
+        //begin
         //     x_pos <= width_screen/2;
         //     y_pos <= height_screen/2;
         //     dx <= 1'b1;
         //     dy <= 1'b1;
-        // end
+        //    reset_goals_reg <= 1'b0;
+        //end
 
         // Check time sound.
         if (mseg == 0) begin
