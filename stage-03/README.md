@@ -1,17 +1,21 @@
-## Proyecto *"game-pong"* para *TinyFPGA-BX*.
+# stage-03
 
-En este apartado encontrarás una reescritura del proyecto _"screen-pong"_ al que se le ha cambiado el nombre y se ha llamado **"game-pong"**.
+## The project.
+This was the most recent version of the project. It is about taking the original version 2 design _(stage-02)_ and generating the same design with different HDL languages.
 
-Esta nueva reescritura se ha desarrollado únicamente con la placa **"TinyFPGA-BX"** que dispone de un reloj interno de 16Mhz.
+## The design.
 
-La resolución de la salida **VGA** en este caso es de **800x600@72Hz**.
+In it you can find the same design made with different techniques and languages. They are all in their own directories. As of today these are:
+   - _**icestudio**_, the entire design is compacted in a single file in _ICE format_.
+   - _**verilog**_, it includes a test to simulate using _Verilator_.
+   - _**nMigen**_, the design is generated using _Python_.
+   - _**VHDL**_, all _Verilog_ files are, step by step, transformed to _VHDL_ code.
 
-En el subdirectorio _**icestudio**_ se encuentra un único fichero con todo el juego completo y el código _Verilog_ integrado en el mismo mediante bloques de código.
+## The hardware.
 
-En el subdirectorio _**verilog**_ existe una versión de código _Verilog_ separado en distintos ficheros que describen los distintos módulos que componen el sistema.
+For all of them the same hardware is used to synthesize it. It is based on the TinyFPGA-BX board to which we connect the VGA display signals and four buttons to control the player paddles. You can also connect stereo speakers or a buzzer to enjoy the sound.
 
-## Conexión física.
-La conexión física de los pines utilizados es la mostrada en la figura:
+![Esquema TinyFPGA-BX](https://raw.githubusercontent.com/juanmard/screen-pong/master/stage-03/gallery/screen-pong-TinyFPGA-BX.jpg)
 
-![video v1.0](https://raw.githubusercontent.com/juanmard/screen-pong/master/apio-tinyFPGA-BX/doc/screen-pong-TinyFPGA-BX.jpg)
-
+## Install and testing the project.
+TODO: (Look inside subdirectories.)
