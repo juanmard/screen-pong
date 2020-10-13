@@ -6,9 +6,9 @@
 --//
 --// Description: Top module from 'pong' game.
 --//
---// Dependencies: 
+--// Dependencies:
 --//
---// Revisions: 
+--// Revisions:
 --//     0.01 - File created.
 --//
 --// Additional Comments:
@@ -19,9 +19,10 @@
 library IEEE;
     use IEEE.std_logic_1164.all;
     use IEEE.numeric_std.all;
+    use work.streams.all;
 
---// Entity top. 
-entity top is 
+--// Entity top.
+entity top is
     port (
         CLK:    in std_logic;       --// System clock (16Mhz).
 
@@ -44,100 +45,79 @@ entity top is
 end top;
 
 --// Architecture top_A.
-architecture top_A of top is 
+architecture top_A of top is
 
     --// String VGA generator.
     component strVGAGen
         port (
-                sys_clk: in std_logic;
-                px_clk:  out std_logic;
-                strVGA:  out std_logic_vector (22 downto 0)
+            sys_clk : in  std_logic;
+            px_clk  : out std_logic;
+            strVGA  : out std_logic_vector (22 downto 0)
         );
-    end component; 
+    end component;
 
     --// End frame from VGA.
-    component endframeVGA 
+    component endframeVGA
         port (
-            strVGA: in std_logic_vector (22 downto 0);
-            endframe: out std_logic
+            strVGA   : in std_logic_vector (22 downto 0);
+            endframe : out std_logic
         );
     end component;
 
     --// Control game module.
     component ctlButtons
         port (
-            clk:       in std_logic;
-            ply1_up:   in std_logic;
-            ply1_down: in std_logic;
-            ply2_up:   in std_logic;
-            ply2_down: in std_logic;
-            pos_ply1:  out std_logic_vector (9 downto 0);
-            pos_ply2:  out std_logic_vector (9 downto 0)
+            clk       : in  std_logic;
+            ply1_up   : in  std_logic;
+            ply1_down : in  std_logic;
+            ply2_up   : in  std_logic;
+            ply2_down : in  std_logic;
+            pos_ply1  : out std_logic_vector (9 downto 0);
+            pos_ply2  : out std_logic_vector (9 downto 0)
         );
     end component;
 
     --// Game module.
     component pongGame
         port (
-            px_clk:   in std_logic;
-            strVGA:   in std_logic_vector (22 downto 0);
-            reset:    in std_logic;
-            play:     in std_logic;
-            snd_clk:  in std_logic;
-            pos_ply1: in std_logic_vector (9 downto 0);
-            pos_ply2: in std_logic_vector (9 downto 0);
-            strRGB:   out std_logic_vector (25 downto 0);
-            right:    out std_logic;
-            left:     out std_logic
+            px_clk   : in  std_logic;
+            strVGA   : in  std_logic_vector (22 downto 0);
+            reset    : in  std_logic;
+            play     : in  std_logic;
+            snd_clk  : in  std_logic;
+            pos_ply1 : in  std_logic_vector (9 downto 0);
+            pos_ply2 : in  std_logic_vector (9 downto 0);
+            strRGB   : out std_logic_vector (25 downto 0);
+            right    : out std_logic;
+            left     : out std_logic
         );
     end component;
 
     --// Unzip RGB stream module.
     component unzipRGB
         port (
-            strRGB: in std_logic_vector (25 downto 0);
-            vsync:  out std_logic;
-            hsync:  out std_logic;
-            Red:    out std_logic;
-            Green:  out std_logic;
-            Blue:   out std_logic
+            strRGB: in  std_logic_vector (25 downto 0);
+            vsync : out std_logic;
+            hsync : out std_logic;
+            Red   : out std_logic;
+            Green : out std_logic;
+            Blue  : out std_logic
         );
     end component;
 
-    --// Module wire conections. 
-    signal px_clk:   std_logic;                       --// Pixel clk.
-    signal strVGA_gen:   std_logic_vector (22 downto 0);  --// Stream VGA.
-    signal strRGB_gen:   std_logic_vector (25 downto 0);  --// Stream RGB.
-    signal endframe: std_logic;                       --// End frame signal.
-    signal pos_ply1: std_logic_vector (9 downto 0);   --// Position player 1.
-    signal pos_ply2: std_logic_vector (9 downto 0);   --// Position player 2.
-    signal reset:    std_logic;
-    signal play:     std_logic;
-
-    type strVGA_t is record
-        active: std_logic;
-        hsync: std_logic;
-        vsync: std_logic;
-        x: unsigned(9 downto 0);
-        y: unsigned(9 downto 0);
-    end record;
+    --// Module wire conections.
+    signal px_clk     : std_logic;                       --// Pixel clk.
+    signal strVGA_gen : std_logic_vector (22 downto 0);  --// Stream VGA.
+    signal strRGB_gen : std_logic_vector (25 downto 0);  --// Stream RGB.
+    signal endframe   : std_logic;                       --// End frame signal.
+    signal pos_ply1   : std_logic_vector (9 downto 0);   --// Position player 1.
+    signal pos_ply2   : std_logic_vector (9 downto 0);   --// Position player 2.
+    signal reset      : std_logic;
+    signal play       : std_logic;
 
     signal strVGA: strVGA_t;
-
-    type strRGB_t is record
---        strVGA_n: strVGA_t;
-        active: std_logic;
-        hsync: std_logic;
-        vsync: std_logic;
-        x: unsigned(9 downto 0);
-        y: unsigned(9 downto 0);
-        R: std_logic;
-        G: std_logic;
-        B: std_logic;
-    end record;
-
     signal strRGB: strRGB_t;
-    
+
 begin
     --// Drive USB pull-up resistor to '0' to disable USB (TinyFPGA-BX).
     USBPU <= '0';
@@ -157,7 +137,7 @@ begin
     strVGA.y      <= unsigned(strVGA_gen(9 downto 0));
 
     --// Generated VGA endframe module.
-    endframeVGA_0: endframeVGA 
+    endframeVGA_0: endframeVGA
     port map (
         strVGA   => strVGA_gen,
         endframe => endframe
@@ -190,15 +170,14 @@ begin
         left     => PIN_19
     );
 
-    strRGB.R  <= strRGB_gen(25);
-    strRGB.G  <= strRGB_gen(24);
-    strRGB.B  <= strRGB_gen(23);
-    --strRGB.strVGA <= unsigned(strRGB_gen(25 downto 3));
-    strRGB.active <= strRGB_gen(22);
-    strRGB.hsync  <= strRGB_gen(21);
-    strRGB.vsync  <= strRGB_gen(20);
-    strRGB.x      <= unsigned(strRGB_gen(19 downto 10));
-    strRGB.y      <= unsigned(strRGB_gen(9 downto 0));
+    strRGB.R             <= strRGB_gen(25);
+    strRGB.G             <= strRGB_gen(24);
+    strRGB.B             <= strRGB_gen(23);
+    strRGB.strVGA.active <= strRGB_gen(22);
+    strRGB.strVGA.hsync  <= strRGB_gen(21);
+    strRGB.strVGA.vsync  <= strRGB_gen(20);
+    strRGB.strVGA.x      <= unsigned(strRGB_gen(19 downto 10));
+    strRGB.strVGA.y      <= unsigned(strRGB_gen(9 downto 0));
 
     --// Unzip RGB stream module.
     unzipRGB_0: unzipRGB

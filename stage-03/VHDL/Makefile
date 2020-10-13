@@ -8,8 +8,9 @@ PNRFLAGS  ?= --lp8k --package cm81 --pcf pins.pcf -q
 GHDL ?= ghdl
 GHDL_FLAGS += --std=08
 
-VHDL_SYN_FILES = top.vhdl #\
-	endframeVGA.vhdl
+VHDL_SYN_FILES = top.vhdl \
+				streams.vhdl #\
+				endframeVGA.vhdl
 
 VERILOG_SYN_FILES = ball.v \
 	counter.v \
