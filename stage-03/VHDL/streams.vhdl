@@ -1,6 +1,5 @@
-library ieee ;
-    use ieee.std_logic_1164.all;
-    use IEEE.numeric_std.all;
+library ieee;
+context ieee.ieee_std_context;
 
 package streams is
 

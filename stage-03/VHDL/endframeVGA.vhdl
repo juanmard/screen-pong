@@ -8,30 +8,32 @@
 -- //
 -- // Dependencies:
 -- //
--- // Revisions: 
+-- // Revisions:
 -- //     0.01 - File created.
 -- //
 -- // Additional Comments:
 -- //
 -- ////////////////////////////////////////////////////////////////////////////////
 
+library ieee;
+context ieee.ieee_std_context;
+
+use work.streams.strVGA_t;
+
 entity endframeVGA is
-    port (
-        signal strVGA: in std_logic_vector (22 downto 0);    --// Stream VGA input.
-        signal endframe: out std_logic                       --// End frame signal.
-    );
+  port (
+    strVGA   : in  strVGA_t; -- Stream VGA input.
+    endframe : out std_logic -- End frame signal.
+  );
 end endframeVGA;
 
---// Architecture endframeVGA_A.
-architecture endframeVGA_A of endframeVGA is 
-    --// Dimensions.
-    localparam width_screen = 800;
-    localparam height_screen = 600;
+architecture endframeVGA_A of endframeVGA is
 
-    --// Alias address in stream.
-    `define XC 22:13
-    `define YC 12:3
+  constant width_screen  : positive := 799;
+  constant height_screen : positive := 599;
 
-    --// Check endframe.
-    endframe <= ((strVGA[`XC]==width_screen-1) && (strVGA[`YC]==height_screen-1)) ? 1'b1 : 1'b0;
+begin
+
+  endframe <= (strVGA.x?=width_screen) and (strVGA.y?=height_screen);
+
 end endframeVGA_A;
