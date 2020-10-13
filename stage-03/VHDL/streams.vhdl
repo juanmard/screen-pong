@@ -5,11 +5,11 @@ package streams is
 
     -- // Stream VGA.
     type strVGA_t is record
-        active: std_logic;
-        hsync: std_logic;
-        vsync: std_logic;
         x: unsigned(9 downto 0);
         y: unsigned(9 downto 0);
+        hsync: std_logic;
+        vsync: std_logic;
+        active: std_logic;
     end record;
 
     -- // Stream RGB.

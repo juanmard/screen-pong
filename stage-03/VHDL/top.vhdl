@@ -73,11 +73,11 @@ begin
             strVGA => strVGA_gen
     );
 
-    strVGA.active <= strVGA_gen(22);
-    strVGA.hsync  <= strVGA_gen(21);
-    strVGA.vsync  <= strVGA_gen(20);
-    strVGA.x      <= unsigned(strVGA_gen(19 downto 10));
-    strVGA.y      <= unsigned(strVGA_gen(9 downto 0));
+    strVGA.x      <= unsigned(strVGA_gen(22 downto 13));
+    strVGA.y      <= unsigned(strVGA_gen(12 downto 3));
+    strVGA.vsync  <= strVGA_gen(2);
+    strVGA.hsync  <= strVGA_gen(1);
+    strVGA.active <= strVGA_gen(0);
 
     --// Generated VGA endframe module.
     endframeVGA_0: entity work.endframeVGA
@@ -116,11 +116,11 @@ begin
     strRGB.R             <= strRGB_gen(25);
     strRGB.G             <= strRGB_gen(24);
     strRGB.B             <= strRGB_gen(23);
-    strRGB.strVGA.active <= strRGB_gen(22);
-    strRGB.strVGA.hsync  <= strRGB_gen(21);
-    strRGB.strVGA.vsync  <= strRGB_gen(20);
-    strRGB.strVGA.x      <= unsigned(strRGB_gen(19 downto 10));
-    strRGB.strVGA.y      <= unsigned(strRGB_gen(9 downto 0));
+    strRGB.strVGA.x      <= unsigned(strRGB_gen(22 downto 13));
+    strRGB.strVGA.y      <= unsigned(strRGB_gen(12 downto 3));
+    strRGB.strVGA.vsync  <= strRGB_gen(2);
+    strRGB.strVGA.hsync  <= strRGB_gen(1);
+    strRGB.strVGA.active <= strRGB_gen(0);
 
     --// Unzip RGB stream module.
     unzipRGB_0: unzipRGB
