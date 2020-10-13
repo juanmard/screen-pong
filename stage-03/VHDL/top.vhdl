@@ -17,7 +17,8 @@
 
 --// Libraries.
 library IEEE;
-use IEEE.std_logic_1164.all;
+    use IEEE.std_logic_1164.all;
+    use IEEE.numeric_std.all;
 
 --// Entity top. 
 entity top is 
@@ -105,14 +106,38 @@ architecture top_A of top is
 
     --// Module wire conections. 
     signal px_clk:   std_logic;                       --// Pixel clk.
-    signal strVGA:   std_logic_vector (22 downto 0);  --// Stream VGA.
-    signal strRGB:   std_logic_vector (25 downto 0);  --// Stream RGB.
+    signal strVGA_gen:   std_logic_vector (22 downto 0);  --// Stream VGA.
+    signal strRGB_gen:   std_logic_vector (25 downto 0);  --// Stream RGB.
     signal endframe: std_logic;                       --// End frame signal.
     signal pos_ply1: std_logic_vector (9 downto 0);   --// Position player 1.
     signal pos_ply2: std_logic_vector (9 downto 0);   --// Position player 2.
     signal reset:    std_logic;
     signal play:     std_logic;
 
+    type strVGA_t is record
+        active: std_logic;
+        hsync: std_logic;
+        vsync: std_logic;
+        x: unsigned(9 downto 0);
+        y: unsigned(9 downto 0);
+    end record;
+
+    signal strVGA: strVGA_t;
+
+    type strRGB_t is record
+--        strVGA_n: strVGA_t;
+        active: std_logic;
+        hsync: std_logic;
+        vsync: std_logic;
+        x: unsigned(9 downto 0);
+        y: unsigned(9 downto 0);
+        R: std_logic;
+        G: std_logic;
+        B: std_logic;
+    end record;
+
+    signal strRGB: strRGB_t;
+    
 begin
     --// Drive USB pull-up resistor to '0' to disable USB (TinyFPGA-BX).
     USBPU <= '0';
@@ -122,13 +147,19 @@ begin
     port map (
             sys_clk => CLK,
             px_clk => px_clk,
-            strVGA => strVGA
+            strVGA => strVGA_gen
     );
+
+    strVGA.active <= strVGA_gen(22);
+    strVGA.hsync  <= strVGA_gen(21);
+    strVGA.vsync  <= strVGA_gen(20);
+    strVGA.x      <= unsigned(strVGA_gen(19 downto 10));
+    strVGA.y      <= unsigned(strVGA_gen(9 downto 0));
 
     --// Generated VGA endframe module.
     endframeVGA_0: endframeVGA 
     port map (
-        strVGA   => strVGA,
+        strVGA   => strVGA_gen,
         endframe => endframe
     );
 
@@ -148,21 +179,31 @@ begin
     pongGame_0: pongGame
     port map (
         px_clk   => px_clk,
-        strVGA   => strVGA,
+        strVGA   => strVGA_gen,
         reset    => reset,
         play     => play,
         snd_clk  => CLK,
         pos_ply1 => pos_ply1,
         pos_ply2 => pos_ply2,
-        strRGB   => strRGB,
+        strRGB   => strRGB_gen,
         right    => PIN_20,
         left     => PIN_19
     );
 
+    strRGB.R  <= strRGB_gen(25);
+    strRGB.G  <= strRGB_gen(24);
+    strRGB.B  <= strRGB_gen(23);
+    --strRGB.strVGA <= unsigned(strRGB_gen(25 downto 3));
+    strRGB.active <= strRGB_gen(22);
+    strRGB.hsync  <= strRGB_gen(21);
+    strRGB.vsync  <= strRGB_gen(20);
+    strRGB.x      <= unsigned(strRGB_gen(19 downto 10));
+    strRGB.y      <= unsigned(strRGB_gen(9 downto 0));
+
     --// Unzip RGB stream module.
     unzipRGB_0: unzipRGB
     port map (
-        strRGB => strRGB,
+        strRGB => strRGB_gen,
         vsync  => PIN_13,
         hsync  => PIN_12,
         Red    => PIN_11,
