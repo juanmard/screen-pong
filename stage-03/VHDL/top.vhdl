@@ -25,23 +25,21 @@ use work.streams.all;
 --// Entity top.
 entity top is
     port (
-        CLK:    in std_logic;       --// System clock (16Mhz).
+        CLK : in std_logic; -- System clock (16Mhz).
 
-        PIN_21: in std_logic;       --// Player 1 - Up button.
-        PIN_22: in std_logic;       --// Player 1 - Down button.
-        PIN_23: in std_logic;       --// Player 2 - Up button.
-        PIN_24: in std_logic;       --// Player 2 - Down button.
+        Player_One_Up   : in std_logic; -- Player 1 - Up button.
+        Player_One_Down : in std_logic; -- Player 1 - Down button.
+        Player_Two_Up   : in std_logic; -- Player 2 - Up button.
+        Player_Two_Down : in std_logic; -- Player 2 - Down button.
 
-        USBPU:  out std_logic;      --// USB pull resistor.
+        VGA_VSync : out std_logic; -- VGA - VSync.
+        VGA_HSync : out std_logic; -- VGA - HSync.
+        VGA_R     : out std_logic; -- VGA - R.
+        VGA_G     : out std_logic; -- VGA - G.
+        VGA_B     : out std_logic; -- VGA - B.
 
-        PIN_13: out std_logic;      --// VGA - VSync.
-        PIN_12: out std_logic;      --// VGA - HSync.
-        PIN_11: out std_logic;      --// VGA - R.
-        PIN_10: out std_logic;      --// VGA - G.
-        PIN_9:  out std_logic;      --// VGA - B.
-
-        PIN_20: out std_logic;      --// Right channel.
-        PIN_19: out std_logic       --// Left channel.
+        Audio_Right : out std_logic; -- Right channel.
+        Audio_Left  : out std_logic  -- Left channel.
     );
 end top;
 
@@ -62,8 +60,6 @@ architecture top_A of top is
     signal strRGB: strRGB_t;
 
 begin
-    --// Drive USB pull-up resistor to '0' to disable USB (TinyFPGA-BX).
-    USBPU <= '0';
 
     --// Generated VGA stream module.
     strVGAGen_0: strVGAGen
@@ -90,10 +86,10 @@ begin
     ctlButtons_0: ctlButtons
     port map (
         clk       => endframe,
-        ply1_up   => PIN_21,
-        ply1_down => PIN_22,
-        ply2_up   => PIN_23,
-        ply2_down => PIN_24,
+        ply1_up   => Player_One_Up,
+        ply1_down => Player_One_Down,
+        ply2_up   => Player_Two_Up,
+        ply2_down => Player_Two_Down,
         pos_ply1  => pos_ply1,
         pos_ply2  => pos_ply2
     );
@@ -109,8 +105,8 @@ begin
         pos_ply1 => pos_ply1,
         pos_ply2 => pos_ply2,
         strRGB   => strRGB_gen,
-        right    => PIN_20,
-        left     => PIN_19
+        right    => Audio_Right,
+        left     => Audio_Left
     );
 
     strRGB.R             <= strRGB_gen(25);
@@ -122,10 +118,10 @@ begin
     strRGB.strVGA.vsync  <= strRGB_gen(1);
     strRGB.strVGA.active <= strRGB_gen(0);
 
-    PIN_11 <= strRGB.R;
-    PIN_10 <= strRGB.G;
-    PIN_9  <= strRGB.B;
-    PIN_12 <= strRGB.strVGA.hsync;
-    PIN_13 <= strRGB.strVGA.vsync;
+    VGA_R     <= strRGB.R;
+    VGA_G     <= strRGB.G;
+    VGA_B     <= strRGB.B;
+    VGA_HSync <= strRGB.strVGA.hsync;
+    VGA_VSync <= strRGB.strVGA.vsync;
 
 end;

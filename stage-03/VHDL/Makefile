@@ -1,18 +1,28 @@
-#
-#
-#
+# TinyFPGA-BX
+PNRFLAGS  ?= --lp8k --package cm81 --pcf tinyfpga.pcf -q
+BOARD_TOP = TinyFPGABX_Top
 
-YOSYSFLAGS?=
-PNRFLAGS  ?= --lp8k --package cm81 --pcf pins.pcf -q
+# Icestick
+#PNRFLAGS  ?= --hx1k --package tq144 --pcf icestick.pcf -q
+#BOARD_TOP = Icestick_Top
 
-GHDL ?= ghdl
-GHDL_FLAGS += --std=08
+#--
+
+YOSYS_FLAGS ?=
+YOSYS_SYNTH ?= synth_ice40
+GHDL        ?= ghdl
+GHDL_FLAGS  += --std=08
+GHDL_SYNTH  ?= ghdl
+YOSYS       ?= yosys
+NEXTPNR     ?= nextpnr-ice40
+ICEPACK     ?= icepack
 
 VHDL_SYN_FILES = \
 	components.vhdl \
 	streams.vhdl \
 	endframeVGA.vhdl \
-	top.vhdl
+	top.vhdl \
+	$(BOARD_TOP).vhdl
 
 VERILOG_SYN_FILES = \
 	ball.v \
@@ -34,12 +44,6 @@ VERILOG_SYN_FILES = \
 	zipVGAStr.v \
 	endframeVGA.v
 
-GHDL      = ghdl
-GHDLSYNTH = ghdl
-YOSYS     = yosys
-NEXTPNR   = nextpnr-ice40
-ICEPACK   = icepack
-
 # Default target: run all required targets to build the image.
 all: pong.bin
 	@true
@@ -49,11 +53,11 @@ all: pong.bin
 ## Use *Yosys* to generate the synthesized netlist.
 ## This is called the **synthesis** and **tech mapping** step.
 pong.json: $(VHDL_SYN_FILES) $(VERILOG_SYN_FILES)
-	$(YOSYS) $(YOSYSFLAGS) \
+	$(YOSYS) $(YOSYS_FLAGS) \
 		-p \
-		"$(GHDLSYNTH) $(GHDL_FLAGS) $(VHDL_SYN_FILES) -e $(TOPLEVEL); \
-		synth_ice40 \
-		-top top \
+		"$(GHDL_SYNTH) $(GHDL_FLAGS) $(VHDL_SYN_FILES) -e $(TOPLEVEL); \
+		$(YOSYS_SYNTH) \
+		-top $(BOARD_TOP) \
 		-json $@" -q $(VERILOG_SYN_FILES) 2>&1 | tee yosys-report.txt
 
 # Use **nextpnr** to generate the FPGA configuration.
