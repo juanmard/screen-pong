@@ -9,6 +9,7 @@ GHDL ?= ghdl
 GHDL_FLAGS += --std=08
 
 VHDL_SYN_FILES = \
+	components.vhdl \
 	streams.vhdl \
 	endframeVGA.vhdl \
 	top.vhdl
