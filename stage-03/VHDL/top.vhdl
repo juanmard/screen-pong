@@ -49,7 +49,6 @@ architecture top_A of top is
     --// Module wire conections.
     signal px_clk     : std_logic;                       --// Pixel clk.
     signal strVGA_gen : std_logic_vector (22 downto 0);  --// Stream VGA.
-    signal strRGB_gen : std_logic_vector (25 downto 0);  --// Stream RGB.
     signal endframe   : std_logic;                       --// End frame signal.
     signal pos_ply1   : std_logic_vector (9 downto 0);   --// Position player 1.
     signal pos_ply2   : std_logic_vector (9 downto 0);   --// Position player 2.
@@ -95,28 +94,19 @@ begin
     );
 
     --// Game module.
-    pongGame_0: pongGame
+    pongGame_0: entity work.pongGame_vhdl
     port map (
         px_clk   => px_clk,
-        strVGA   => strVGA_gen,
+        strVGA   => strVGA,
         reset    => reset,
         play     => play,
         snd_clk  => CLK,
         pos_ply1 => pos_ply1,
         pos_ply2 => pos_ply2,
-        strRGB   => strRGB_gen,
+        strRGB   => strRGB,
         right    => Audio_Right,
         left     => Audio_Left
     );
-
-    strRGB.R             <= strRGB_gen(25);
-    strRGB.G             <= strRGB_gen(24);
-    strRGB.B             <= strRGB_gen(23);
-    strRGB.strVGA.x      <= unsigned(strRGB_gen(22 downto 13));
-    strRGB.strVGA.y      <= unsigned(strRGB_gen(12 downto 3));
-    strRGB.strVGA.hsync  <= strRGB_gen(2);
-    strRGB.strVGA.vsync  <= strRGB_gen(1);
-    strRGB.strVGA.active <= strRGB_gen(0);
 
     VGA_R     <= strRGB.R;
     VGA_G     <= strRGB.G;

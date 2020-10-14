@@ -21,6 +21,7 @@ VHDL_SYN_FILES = \
 	components.vhdl \
 	streams.vhdl \
 	endframeVGA.vhdl \
+	pongGame.vhdl \
 	top.vhdl \
 	$(BOARD_TOP).vhdl
 
