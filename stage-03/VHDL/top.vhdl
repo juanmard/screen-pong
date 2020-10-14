@@ -118,18 +118,14 @@ begin
     strRGB.B             <= strRGB_gen(23);
     strRGB.strVGA.x      <= unsigned(strRGB_gen(22 downto 13));
     strRGB.strVGA.y      <= unsigned(strRGB_gen(12 downto 3));
-    strRGB.strVGA.vsync  <= strRGB_gen(2);
-    strRGB.strVGA.hsync  <= strRGB_gen(1);
+    strRGB.strVGA.hsync  <= strRGB_gen(2);
+    strRGB.strVGA.vsync  <= strRGB_gen(1);
     strRGB.strVGA.active <= strRGB_gen(0);
 
-    --// Unzip RGB stream module.
-    unzipRGB_0: unzipRGB
-    port map (
-        strRGB => strRGB_gen,
-        vsync  => PIN_13,
-        hsync  => PIN_12,
-        Red    => PIN_11,
-        Green  => PIN_10,
-        Blue   => PIN_9
-    );
-END top_A;
+    PIN_11 <= strRGB.R;
+    PIN_10 <= strRGB.G;
+    PIN_9  <= strRGB.B;
+    PIN_12 <= strRGB.strVGA.hsync;
+    PIN_13 <= strRGB.strVGA.vsync;
+
+end;
