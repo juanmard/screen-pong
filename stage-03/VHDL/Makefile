@@ -21,6 +21,7 @@ VHDL_SYN_FILES = \
 	components.vhdl \
 	streams.vhdl \
 	endframeVGA.vhdl \
+	strVGAGen.vhdl \
 	pongGame.vhdl \
 	top.vhdl \
 	$(BOARD_TOP).vhdl
@@ -38,11 +39,9 @@ VERILOG_SYN_FILES = \
 	SB_PLL40_CORE.v \
 	scoreboard.v \
 	soundCard.v \
-	strVGAGen.v \
 	syncVGAGen.v \
 	unzipRGB.v \
 	verticalPlayers.v \
-	zipVGAStr.v \
 	endframeVGA.v
 
 # Default target: run all required targets to build the image.

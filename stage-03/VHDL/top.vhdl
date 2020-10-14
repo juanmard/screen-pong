@@ -61,18 +61,12 @@ architecture top_A of top is
 begin
 
     --// Generated VGA stream module.
-    strVGAGen_0: strVGAGen
+    strVGAGen_0: entity work.strVGAGen
     port map (
             sys_clk => CLK,
             px_clk => px_clk,
-            strVGA => strVGA_gen
+            strVGA => strVGA
     );
-
-    strVGA.x      <= unsigned(strVGA_gen(22 downto 13));
-    strVGA.y      <= unsigned(strVGA_gen(12 downto 3));
-    strVGA.vsync  <= strVGA_gen(2);
-    strVGA.hsync  <= strVGA_gen(1);
-    strVGA.active <= strVGA_gen(0);
 
     --// Generated VGA endframe module.
     endframeVGA_0: entity work.endframeVGA
