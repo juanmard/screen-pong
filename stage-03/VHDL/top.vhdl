@@ -48,15 +48,13 @@ architecture top_A of top is
 
     --// Module wire conections.
     signal px_clk     : std_logic;                       --// Pixel clk.
-    signal strVGA_gen : std_logic_vector (22 downto 0);  --// Stream VGA.
     signal endframe   : std_logic;                       --// End frame signal.
     signal pos_ply1   : std_logic_vector (9 downto 0);   --// Position player 1.
     signal pos_ply2   : std_logic_vector (9 downto 0);   --// Position player 2.
     signal reset      : std_logic;
     signal play       : std_logic;
-
-    signal strVGA: strVGA_t;
-    signal strRGB: strRGB_t;
+    signal strVGA     : strVGA_t;                       --// Stream VGA.
+    signal strRGB     : strRGB_t;                       --// Stream RGB.
 
 begin
 

@@ -28,8 +28,8 @@ begin
 
   strVGA_stdv(22 downto 13) <= std_logic_vector(strVGA.x);
   strVGA_stdv(12 downto 3)  <= std_logic_vector(strVGA.y);
-  strVGA_stdv(2)            <= strVGA.vsync;
-  strVGA_stdv(1)            <= strVGA.hsync;
+  strVGA_stdv(2)            <= strVGA.hsync;
+  strVGA_stdv(1)            <= strVGA.vsync;
   strVGA_stdv(0)            <= strVGA.active;
 
   pongGame_0: pongGame
