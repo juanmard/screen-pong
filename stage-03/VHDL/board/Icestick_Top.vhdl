@@ -30,6 +30,7 @@ begin
   DesignTop: entity work.top
   port map (
     CLK             => CLK,
+    reset           => '0',
     Player_One_Up   => '0',
     Player_One_Down => '0',
     Player_Two_Up   => '0',

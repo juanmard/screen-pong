@@ -23,6 +23,7 @@ VHDL_SYN_FILES = \
 	endframeVGA.vhdl \
 	strVGAGen.vhdl \
 	pongGame.vhdl \
+	ctlButtons.vhdl \
 	top.vhdl \
 	board/$(BOARD_TOP).vhdl
 
@@ -30,7 +31,6 @@ VERILOG_SYN_FILES = \
 	verilog/ball.v \
 	verilog/counter.v \
 	verilog/court.v \
-	verilog/ctlButtons.v \
 	verilog/digit.v \
 	verilog/dynamicGame.v \
 	verilog/dynamicNumber.v \

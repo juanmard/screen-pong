@@ -7,6 +7,7 @@ package components is
     component ctlButtons
         port (
             clk       : in  std_logic;
+            reset     : in  std_logic;
             ply1_up   : in  std_logic;
             ply1_down : in  std_logic;
             ply2_up   : in  std_logic;

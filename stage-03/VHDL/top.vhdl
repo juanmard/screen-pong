@@ -25,7 +25,8 @@ use work.streams.all;
 --// Entity top.
 entity top is
     port (
-        CLK : in std_logic; -- System clock (16Mhz).
+        CLK : in std_logic;             -- System clock (16Mhz).
+        reset : in std_logic;           -- Reset.
 
         Player_One_Up   : in std_logic; -- Player 1 - Up button.
         Player_One_Down : in std_logic; -- Player 1 - Down button.
@@ -46,13 +47,12 @@ end top;
 --// Architecture top_A.
 architecture top_A of top is
 
-    --// Module wire conections.
+    --// Module signals.
     signal px_clk   : std_logic;                     -- Pixel clk.
     signal endframe : std_logic;                     -- End frame signal.
     signal pos_ply1 : std_logic_vector (9 downto 0); -- Position player 1.
     signal pos_ply2 : std_logic_vector (9 downto 0); -- Position player 2.
-    signal reset    : std_logic;
-    signal play     : std_logic;
+    signal play     : std_logic;                     -- Start the game.
     signal strVGA   : strVGA_t;                      -- Stream VGA.
     signal strRGB   : strRGB_t;                      -- Stream RGB.
 
@@ -77,6 +77,7 @@ begin
     ctlButtons_0: ctlButtons
     port map (
         clk       => endframe,
+        reset     => reset,
         ply1_up   => Player_One_Up,
         ply1_down => Player_One_Down,
         ply2_up   => Player_Two_Up,
@@ -100,6 +101,7 @@ begin
         left     => Audio_Left
     );
 
+    --// Unzip stream RGB out.
     VGA_R     <= strRGB.R;
     VGA_G     <= strRGB.G;
     VGA_B     <= strRGB.B;

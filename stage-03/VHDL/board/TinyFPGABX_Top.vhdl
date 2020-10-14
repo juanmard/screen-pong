@@ -21,6 +21,7 @@ context ieee.ieee_std_context;
 entity TinyFPGABX_Top is
   port (
     CLK    : in  std_logic; -- System clock (16Mhz).
+    PIN_15 : in  std_logic; -- Reset.
 
     PIN_21 : in  std_logic; -- Player 1 - Up button.
     PIN_22 : in  std_logic; -- Player 1 - Down button.
@@ -50,6 +51,7 @@ begin
   DesignTop: entity work.top
   port map (
     CLK             => CLK,
+    reset           => '0', --PIN_15,
     Player_One_Up   => PIN_21,
     Player_One_Down => PIN_22,
     Player_Two_Up   => PIN_23,
