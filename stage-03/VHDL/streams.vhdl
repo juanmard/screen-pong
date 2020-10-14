@@ -20,5 +20,4 @@ package streams is
         strVGA: strVGA_t;
     end record;
 
-
 end streams;

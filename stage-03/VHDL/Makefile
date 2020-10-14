@@ -1,9 +1,9 @@
 # TinyFPGA-BX
-PNRFLAGS  ?= --lp8k --package cm81 --pcf tinyfpga.pcf -q
+PNRFLAGS  ?= --lp8k --package cm81 --pcf board/tinyfpga.pcf -q
 BOARD_TOP = TinyFPGABX_Top
 
 # Icestick
-#PNRFLAGS  ?= --hx1k --package tq144 --pcf icestick.pcf -q
+#PNRFLAGS  ?= --hx1k --package tq144 --pcf board/icestick.pcf -q
 #BOARD_TOP = Icestick_Top
 
 #--
@@ -24,25 +24,26 @@ VHDL_SYN_FILES = \
 	strVGAGen.vhdl \
 	pongGame.vhdl \
 	top.vhdl \
-	$(BOARD_TOP).vhdl
+	board/$(BOARD_TOP).vhdl
 
 VERILOG_SYN_FILES = \
-	ball.v \
-	counter.v \
-	court.v ctlButtons.v digit.v \
-	dynamicGame.v \
-	dynamicNumber.v \
-	number.v \
-	player.v \
-	pongGame.v \
-	pxClkGen.v \
-	SB_PLL40_CORE.v \
-	scoreboard.v \
-	soundCard.v \
-	syncVGAGen.v \
-	unzipRGB.v \
-	verticalPlayers.v \
-	endframeVGA.v
+	verilog/ball.v \
+	verilog/counter.v \
+	verilog/court.v \
+	verilog/ctlButtons.v \
+	verilog/digit.v \
+	verilog/dynamicGame.v \
+	verilog/dynamicNumber.v \
+	verilog/number.v \
+	verilog/player.v \
+	verilog/pongGame.v \
+	verilog/pxClkGen.v \
+	verilog/SB_PLL40_CORE.v \
+	verilog/scoreboard.v \
+	verilog/soundCard.v \
+	verilog/syncVGAGen.v \
+	verilog/verticalPlayers.v \
+	verilog/endframeVGA.v
 
 # Default target: run all required targets to build the image.
 all: pong.bin
@@ -81,6 +82,6 @@ load: pong.bin
 
 # Cleanup the generated files.
 clean:
-	rm -fr *.cf *.json *-report.txt *.asc *.bin
+	rm -fr *.cf *.json *-report.txt *.asc *.bin abc.history
 
 .PHONY: clean

@@ -47,23 +47,23 @@ end top;
 architecture top_A of top is
 
     --// Module wire conections.
-    signal px_clk     : std_logic;                       --// Pixel clk.
-    signal endframe   : std_logic;                       --// End frame signal.
-    signal pos_ply1   : std_logic_vector (9 downto 0);   --// Position player 1.
-    signal pos_ply2   : std_logic_vector (9 downto 0);   --// Position player 2.
-    signal reset      : std_logic;
-    signal play       : std_logic;
-    signal strVGA     : strVGA_t;                       --// Stream VGA.
-    signal strRGB     : strRGB_t;                       --// Stream RGB.
+    signal px_clk   : std_logic;                     -- Pixel clk.
+    signal endframe : std_logic;                     -- End frame signal.
+    signal pos_ply1 : std_logic_vector (9 downto 0); -- Position player 1.
+    signal pos_ply2 : std_logic_vector (9 downto 0); -- Position player 2.
+    signal reset    : std_logic;
+    signal play     : std_logic;
+    signal strVGA   : strVGA_t;                      -- Stream VGA.
+    signal strRGB   : strRGB_t;                      -- Stream RGB.
 
 begin
 
     --// Generated VGA stream module.
     strVGAGen_0: entity work.strVGAGen
     port map (
-            sys_clk => CLK,
-            px_clk => px_clk,
-            strVGA => strVGA
+        sys_clk => CLK,
+        px_clk  => px_clk,
+        strVGA  => strVGA
     );
 
     --// Generated VGA endframe module.
