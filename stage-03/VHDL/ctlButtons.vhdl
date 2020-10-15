@@ -19,11 +19,10 @@ library ieee;
     context ieee.ieee_std_context;
     use ieee.numeric_std.all;
 
-
---// Entity top.
+--// Entity ctlButtons.
 entity ctlButtons is
     generic (
-        speed: positive := 5
+        speed: unsigned(9 downto 0) := to_unsigned(5, 10)
      );
     port (
         clk       : in  std_logic;
@@ -41,41 +40,44 @@ end ctlButtons;
 architecture ctlButtons_A of ctlButtons is
     --// Constans for vertical players.
     constant screen_height : positive := 600;
-    constant tope_sup      : positive := 5;
-    constant tope_inf      : positive := screen_height - 10;
-
-    --// Signals.
-    signal reg1, reg1_n   : unsigned (9 downto 0);
-    signal reg2, reg2_n   : unsigned (9 downto 0);
+    constant margen        : positive := 5;
+    constant tope_sup      : unsigned(9 downto 0) := to_unsigned(margen, 10);
+    constant tope_inf      : unsigned(9 downto 0) := to_unsigned(screen_height - margen, 10);
+    constant init_pos1     : unsigned(9 downto 0) := to_unsigned((screen_height/2) - 100, 10);
+    constant init_pos2     : unsigned(9 downto 0) := to_unsigned((screen_height/2) + 100, 10);
 
 begin
-    pos_ply1 <= std_logic_vector(reg1);
-    pos_ply2 <= std_logic_vector(reg2);
+    --// Control for player 1.
+    ply1: entity work.ctlUpDown
+    generic map (
+      speed     => speed,
+      init_pos  => init_pos1,
+      tope_sup  => tope_sup,
+      tope_inf  => tope_inf
+    )
+    port map (
+        clk      => clk,
+        reset    => reset,
+        ply_up   => ply1_up,
+        ply_down => ply1_down,
+        pos_ply  => pos_ply1
+    );
 
-    --// Check buttons.
-    process(clk, reset)
-    begin
-      if rising_edge(clk) then
-        if (reset = '1') then 
-          reg1 <= to_unsigned ((screen_height/2)-100, reg1'length);
-          reg2 <= to_unsigned ((screen_height/2)+100, reg2'length);
-        else
-          reg1 <= reg1_n;
-          reg2 <= reg2_n;
-        end if;
-      end if;
-    end process;
+    --// Control for player 2.
+    ply2: entity work.ctlUpDown
+    generic map (
+      speed     => speed,
+      init_pos  => init_pos2,
+      tope_sup  => tope_sup,
+      tope_inf  => tope_inf
+    )
+    port map (
+        clk      => clk,
+        reset    => reset,
+        ply_up   => ply2_up,
+        ply_down => ply2_down,
+        pos_ply  => pos_ply2
+    );
 
-    reg1_n <= to_unsigned (tope_sup, reg1'length)     when reg1 < to_unsigned (tope_sup, reg1'length) else
-              to_unsigned (tope_inf, reg1'length)     when reg1 > to_unsigned (tope_inf, reg1'length) else
-              reg1 + to_unsigned (speed, reg1'length) when ply1_up   else
-              reg1 - to_unsigned (speed, reg1'length) when ply1_down else
-              reg1;
-
-    reg2_n <= to_unsigned (tope_sup, reg1'length)     when reg2 < to_unsigned (tope_sup, reg2'length) else
-              to_unsigned (tope_inf, reg1'length)     when reg2 > to_unsigned (tope_inf, reg2'length) else
-              reg2 + to_unsigned (speed, reg2'length) when ply2_up   else
-              reg2 - to_unsigned (speed, reg2'length) when ply2_down else
-              reg2;
 end ctlButtons_A;
 

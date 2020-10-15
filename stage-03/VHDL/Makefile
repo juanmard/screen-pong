@@ -23,6 +23,7 @@ VHDL_SYN_FILES = \
 	endframeVGA.vhdl \
 	strVGAGen.vhdl \
 	pongGame.vhdl \
+	ctlUpDown.vhdl \
 	ctlButtons.vhdl \
 	top.vhdl \
 	board/$(BOARD_TOP).vhdl

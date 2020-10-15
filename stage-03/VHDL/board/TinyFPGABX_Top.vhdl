@@ -51,7 +51,7 @@ begin
   DesignTop: entity work.top
   port map (
     CLK             => CLK,
-    reset           => '0', --PIN_15,
+    reset           => PIN_15,
     Player_One_Up   => PIN_21,
     Player_One_Down => PIN_22,
     Player_Two_Up   => PIN_23,
