@@ -37,14 +37,12 @@ VERILOG_SYN_FILES = \
 	verilog/dynamicNumber.v \
 	verilog/number.v \
 	verilog/player.v \
-	verilog/pongGame.v \
 	verilog/pxClkGen.v \
 	verilog/SB_PLL40_CORE.v \
 	verilog/scoreboard.v \
 	verilog/soundCard.v \
 	verilog/syncVGAGen.v \
-	verilog/verticalPlayers.v \
-	verilog/endframeVGA.v
+	verilog/verticalPlayers.v
 
 # Default target: run all required targets to build the image.
 all: pong.bin
