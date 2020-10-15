@@ -20,6 +20,7 @@ ICEPACK     ?= icepack
 VHDL_SYN_FILES = \
 	components.vhdl \
 	streams.vhdl \
+	verticalPlayers.vhdl \
 	scoreboard.vhdl \
 	court.vhdl \
 	endframeVGA.vhdl \
@@ -41,8 +42,7 @@ VERILOG_SYN_FILES = \
 	verilog/pxClkGen.v \
 	verilog/SB_PLL40_CORE.v \
 	verilog/soundCard.v \
-	verilog/syncVGAGen.v \
-	verilog/verticalPlayers.v
+	verilog/syncVGAGen.v
 
 # Default target: run all required targets to build the image.
 all: pong.bin
