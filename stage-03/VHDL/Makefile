@@ -20,6 +20,7 @@ ICEPACK     ?= icepack
 VHDL_SYN_FILES = \
 	components.vhdl \
 	streams.vhdl \
+	court.vhdl \
 	endframeVGA.vhdl \
 	strVGAGen.vhdl \
 	pongGame.vhdl \
@@ -31,7 +32,6 @@ VHDL_SYN_FILES = \
 VERILOG_SYN_FILES = \
 	verilog/ball.v \
 	verilog/counter.v \
-	verilog/court.v \
 	verilog/digit.v \
 	verilog/dynamicGame.v \
 	verilog/dynamicNumber.v \

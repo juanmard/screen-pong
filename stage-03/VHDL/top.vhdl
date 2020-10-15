@@ -74,7 +74,7 @@ begin
     );
 
     --// Control game module.
-    ctlButtons_0: ctlButtons
+    ctlButtons_0: entity work.ctlButtons
     port map (
         clk       => endframe,
         reset     => reset,
@@ -87,7 +87,7 @@ begin
     );
 
     --// Game module.
-    pongGame_0: entity work.pongGame_vhdl
+    pongGame_0: entity work.pongGame
     port map (
         px_clk   => px_clk,
         strVGA   => strVGA,
