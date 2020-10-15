@@ -20,6 +20,7 @@ ICEPACK     ?= icepack
 VHDL_SYN_FILES = \
 	components.vhdl \
 	streams.vhdl \
+	ball.vhdl \
 	verticalPlayers.vhdl \
 	scoreboard.vhdl \
 	court.vhdl \
@@ -32,7 +33,6 @@ VHDL_SYN_FILES = \
 	board/$(BOARD_TOP).vhdl
 
 VERILOG_SYN_FILES = \
-	verilog/ball.v \
 	verilog/counter.v \
 	verilog/digit.v \
 	verilog/dynamicGame.v \

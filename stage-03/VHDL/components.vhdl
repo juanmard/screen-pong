@@ -48,17 +48,6 @@ package components is
         );
     end component;
 
-    --// Draw ball.
-    component ball
-        port (
-            px_clk    : in  std_logic;
-            strRGB_i  : in  std_logic_vector (25 downto 0);
-            pos_x     : in  std_logic_vector (9 downto 0);
-            pos_y     : in  std_logic_vector (9 downto 0);
-            strRGB_o  : out std_logic_vector (25 downto 0)
-        );
-    end component;
-
     --// Sound card module.
     component soundCard
         port (

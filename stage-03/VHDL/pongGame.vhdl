@@ -39,7 +39,6 @@ end pongGame;
 architecture pongGame_A of pongGame is
 
     --// Signals.
-    signal strRGB_p2_stdv, strRGB_p3_stdv : std_logic_vector (25 downto 0);  --// Local streams RGB.
     signal strRGB_p0, strRGB_p1, strRGB_p2 : strRGB_t;
 
     signal endframe    : std_logic;
@@ -83,33 +82,15 @@ begin
         strRGB_o => strRGB_p2
     );
 
-    strRGB_p2_stdv (25)             <= strRGB_p2.R;
-    strRGB_p2_stdv (24)             <= strRGB_p2.G;
-    strRGB_p2_stdv (23)             <= strRGB_p2.B;
-    strRGB_p2_stdv (22 downto 13)   <= std_logic_vector(strRGB_p2.strVGA.x);
-    strRGB_p2_stdv (12 downto 3)    <= std_logic_vector(strRGB_p2.strVGA.y);
-    strRGB_p2_stdv (2)              <= strRGB_p2.strVGA.hsync;
-    strRGB_p2_stdv (1)              <= strRGB_p2.strVGA.vsync;
-    strRGB_p2_stdv (0)              <= strRGB_p2.strVGA.active;
-
     --// Draw ball.
-    ball_0: ball
+    ball_0: entity work.ball
     port map (
         px_clk   => px_clk,
-        strRGB_i => strRGB_p2_stdv,
+        strRGB_i => strRGB_p2,
         pos_x    => x_ball,
         pos_y    => y_ball,
-        strRGB_o => strRGB_p3_stdv
+        strRGB_o => strRGB
     );
-
-    strRGB.R             <= strRGB_p3_stdv(25);
-    strRGB.G             <= strRGB_p3_stdv(24);
-    strRGB.B             <= strRGB_p3_stdv(23);
-    strRGB.strVGA.x      <= unsigned(strRGB_p3_stdv(22 downto 13));
-    strRGB.strVGA.y      <= unsigned(strRGB_p3_stdv(12 downto 3));
-    strRGB.strVGA.hsync  <= strRGB_p3_stdv(2);
-    strRGB.strVGA.vsync  <= strRGB_p3_stdv(1);
-    strRGB.strVGA.active <= strRGB_p3_stdv(0);
 
     --// Sound card module.
     soundCard_0: soundCard
