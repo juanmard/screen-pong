@@ -20,6 +20,7 @@ ICEPACK     ?= icepack
 VHDL_SYN_FILES = \
 	components.vhdl \
 	streams.vhdl \
+	scoreboard.vhdl \
 	court.vhdl \
 	endframeVGA.vhdl \
 	strVGAGen.vhdl \
@@ -39,7 +40,6 @@ VERILOG_SYN_FILES = \
 	verilog/player.v \
 	verilog/pxClkGen.v \
 	verilog/SB_PLL40_CORE.v \
-	verilog/scoreboard.v \
 	verilog/soundCard.v \
 	verilog/syncVGAGen.v \
 	verilog/verticalPlayers.v

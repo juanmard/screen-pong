@@ -40,7 +40,7 @@ architecture pongGame_A of pongGame is
 
     --// Signals.
     signal strRGB_p0_stdv, strRGB_p1_stdv, strRGB_p2_stdv, strRGB_p3_stdv : std_logic_vector (25 downto 0);  --// Local streams RGB.
-    signal strRGB_p0 : strRGB_t;
+    signal strRGB_p0, strRGB_p1 : strRGB_t;
 
     signal endframe    : std_logic;
     signal reset_goals : std_logic;
@@ -61,26 +61,26 @@ begin
         strRGB => strRGB_p0
     );
 
-    strRGB_p0_stdv (25)             <= strRGB_p0.R;
-    strRGB_p0_stdv (24)             <= strRGB_p0.G;
-    strRGB_p0_stdv (23)             <= strRGB_p0.B;
-    strRGB_p0_stdv (22 downto 13)   <= std_logic_vector(strRGB_p0.strVGA.x);
-    strRGB_p0_stdv (12 downto 3)    <= std_logic_vector(strRGB_p0.strVGA.y);
-    strRGB_p0_stdv (2)              <= strRGB_p0.strVGA.hsync;
-    strRGB_p0_stdv (1)              <= strRGB_p0.strVGA.vsync;
-    strRGB_p0_stdv (0)              <= strRGB_p0.strVGA.active;
-
     --// Draw scoreboard.
-    scoreboard_0: scoreboard
+    scoreboard_0: entity work.scoreboard
     port map (
         px_clk    => px_clk,
-        strRGB_i  => strRGB_p0_stdv,
+        strRGB_i  => strRGB_p0,
         dyn_clk   => endframe,
         reset     => reset_goals,
         goal_ply1 => goal_ply1,
         goal_ply2 => goal_ply2,
-        strRGB_o  => strRGB_p1_stdv
+        strRGB_o  => strRGB_p1
     );
+
+    strRGB_p1_stdv (25)             <= strRGB_p1.R;
+    strRGB_p1_stdv (24)             <= strRGB_p1.G;
+    strRGB_p1_stdv (23)             <= strRGB_p1.B;
+    strRGB_p1_stdv (22 downto 13)   <= std_logic_vector(strRGB_p1.strVGA.x);
+    strRGB_p1_stdv (12 downto 3)    <= std_logic_vector(strRGB_p1.strVGA.y);
+    strRGB_p1_stdv (2)              <= strRGB_p1.strVGA.hsync;
+    strRGB_p1_stdv (1)              <= strRGB_p1.strVGA.vsync;
+    strRGB_p1_stdv (0)              <= strRGB_p1.strVGA.active;
 
     --// Draw players.
     verticalPlayers_0: verticalPlayers

@@ -1,18 +1,25 @@
 library ieee;
 context ieee.ieee_std_context;
 
+use work.streams.all;
+
+
 package components is
 
-    --// Draw scoreboard.
-    component scoreboard
+    --// Counter (two digits).
+    component counter 
+        generic (
+            color : std_logic_vector(2 downto 0) := "110"
+        );
         port (
-            px_clk    : in  std_logic;
-            strRGB_i  : in  std_logic_vector (25 downto 0);
-            dyn_clk   : in  std_logic;
-            reset     : in  std_logic;
-            goal_ply1 : in  std_logic;
-            goal_ply2 : in  std_logic;
-            strRGB_o  : out std_logic_vector (25 downto 0)
+            px_clk   : in  std_logic;
+            strRGB_i : in  std_logic_vector (25 downto 0);
+            pos_x    : in  std_logic_vector (9 downto 0);
+            pos_y    : in  std_logic_vector (9 downto 0);
+            dyn_clk  : in  std_logic;
+            reset    : in  std_logic;
+            inc      : in  std_logic;
+            strRGB_o : out std_logic_vector (25 downto 0)
         );
     end component;
 
