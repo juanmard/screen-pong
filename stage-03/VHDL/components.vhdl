@@ -37,24 +37,6 @@ package components is
         );
     end component;
 
-    --// Dynamic's game.
-    component dynamicGame
-        port (
-            dyn_clk     : in std_logic;
-            reset       : in  std_logic;
-            play        : in  std_logic;
-            pos_ply1    : in  std_logic_vector (9 downto 0);
-            pos_ply2    : in  std_logic_vector (9 downto 0);
-            reset_goals : out std_logic;
-            goal_ply1   : out std_logic;
-            goal_ply2   : out std_logic;
-            x_ball      : out std_logic_vector (9 downto 0);
-            y_ball      : out std_logic_vector (9 downto 0);
-            channel     : out std_logic_vector (1 downto 0);
-            sound       : out std_logic_vector (1 downto 0)
-        );
-    end component;
-
     --// Pixel clock generator.
     component pxClkGen
     port (

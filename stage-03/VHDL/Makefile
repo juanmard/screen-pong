@@ -20,6 +20,7 @@ ICEPACK     ?= icepack
 VHDL_SYN_FILES = \
 	components.vhdl \
 	streams.vhdl \
+	dynamicGame.vhdl \
 	soundCard.vhdl \
 	ball.vhdl \
 	verticalPlayers.vhdl \
@@ -36,7 +37,6 @@ VHDL_SYN_FILES = \
 VERILOG_SYN_FILES = \
 	verilog/counter.v \
 	verilog/digit.v \
-	verilog/dynamicGame.v \
 	verilog/dynamicNumber.v \
 	verilog/number.v \
 	verilog/player.v \

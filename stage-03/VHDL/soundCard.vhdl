@@ -54,8 +54,8 @@ architecture soundCard_A of soundCard is
 
     --// Check type of sound.
     tick_sound <= '1' when 
-                        (sound = ping and divcounter(15) = '1') or 
-                        (sound = pong and divcounter(17) = '1') or 
+                        (sound = ping and divcounter(14) = '1') or 
+                        (sound = pong and divcounter(16) = '1') or 
                         (sound = goal and divcounter(18) = '1')
                     else '0';
 

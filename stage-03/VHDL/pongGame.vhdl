@@ -66,7 +66,7 @@ begin
         px_clk    => px_clk,
         strRGB_i  => strRGB_p0,
         dyn_clk   => endframe,
-        reset     => reset_goals,
+        reset     => reset,
         goal_ply1 => goal_ply1,
         goal_ply2 => goal_ply2,
         strRGB_o  => strRGB_p1
@@ -110,18 +110,18 @@ begin
     );
 
     --// Change dynamic's game every frame.
-    dynamicGame_0: dynamicGame
+    dynamicGame_0: entity work.dynamicGame
     port map (
         dyn_clk     => endframe,
         reset       => reset,
         play        => play,
-        pos_ply1    => pos_ply1,
-        pos_ply2    => pos_ply2,
+        pos_ply1_i  => pos_ply1,
+        pos_ply2_i  => pos_ply2,
         reset_goals => reset_goals,
-        goal_ply1   => goal_ply1,
-        goal_ply2   => goal_ply2,
-        x_ball      => x_ball,
-        y_ball      => y_ball,
+        goal_ply1_o => goal_ply1,
+        goal_ply2_o => goal_ply2,
+        x_ball_o    => x_ball,
+        y_ball_o    => y_ball,
         channel     => channel,
         sound       => sound
     );
