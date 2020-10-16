@@ -37,28 +37,6 @@ package components is
         );
     end component;
 
-    --// Draw players.
-    component verticalPlayers
-        port (
-            px_clk    : in  std_logic;
-            strRGB_i  : in  std_logic_vector (25 downto 0);
-            pos_ply1  : in  std_logic_vector (9 downto 0);
-            pos_ply2  : in  std_logic_vector (9 downto 0);
-            strRGB_o  : out std_logic_vector (25 downto 0)
-        );
-    end component;
-
-    --// Sound card module.
-    component soundCard
-        port (
-            snd_clk : in std_logic;
-            channel : in std_logic_vector (1 downto 0);
-            sound   : in std_logic_vector (1 downto 0);
-            right_o : out std_logic;
-            left_o  : out std_logic
-        );
-    end component;
-
     --// Dynamic's game.
     component dynamicGame
         port (

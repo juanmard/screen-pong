@@ -93,7 +93,7 @@ begin
     );
 
     --// Sound card module.
-    soundCard_0: soundCard
+    soundCard_0: entity work.soundCard
     port map (
         snd_clk => snd_clk,
         channel => channel,
@@ -103,7 +103,7 @@ begin
     );
 
     --// Get endframe signal for dynamic logic.
-    endframeVGA_0: entity work.endframeVGA 
+    endframeVGA_0: entity work.endframeVGA
     port map (
         strVGA   => strVGA,
         endframe => endframe
