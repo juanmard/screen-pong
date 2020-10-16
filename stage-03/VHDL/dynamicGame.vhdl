@@ -72,6 +72,9 @@ architecture dynamicGame_A of dynamicGame is
     signal dx_n : std_logic;
     signal dy_n : std_logic;
 
+    --// For random register.
+    signal random : unsigned (3 downto 0);
+
     --// Ball position.
     signal x_ball   : integer := 100;
     signal y_ball   : integer := 100;
@@ -118,10 +121,12 @@ begin
     dx_n <= not dx when hit_goal_left or
                         hit_goal_right or
                         hit_player_left or
-                        hit_player_right else dx;
+                        hit_player_right else
+                        '1' when reset and random(0) else dx;
 
     dy_n <= not dy when hit_top or
-                        hit_bottom else dy;
+                        hit_bottom else
+                        '1' when reset and random(1) else dy;
 
     --// Change position.
     x_ball_n <= x_ball + speed_x when dx else x_ball - speed_x;
@@ -146,6 +151,7 @@ begin
                  left  when hit_player_left  or hit_goal_left else
                  both  when hit_top or hit_bottom else channel;
 
+
     --// Update the ball.
     process (dyn_clk, reset)
     begin
@@ -155,8 +161,6 @@ begin
                 reset_goals <= '1';
                 x_ball <= width_screen/2  - size_ball/2;
                 y_ball <= height_screen/2 - size_ball/2;
-                dx <= '1';
-                dy <= '1';
                 sound <= ping;
                 channel <= none;
                 mseg <= 0;
@@ -168,6 +172,9 @@ begin
                 --// Update ball direction.
                 dx <= dx_n;
                 dy <= dy_n;
+
+                --// Update random.
+                random <= random + 1;
 
                 --// Update sound.
                 sound <= sound_n;
