@@ -41,10 +41,11 @@ architecture ctlButtons_A of ctlButtons is
     --// Constans for vertical players.
     constant screen_height : positive := 600;
     constant margen        : positive := 5;
+    constant size_player    : positive := 80;
     constant tope_sup      : unsigned(9 downto 0) := to_unsigned(margen, 10);
     constant tope_inf      : unsigned(9 downto 0) := to_unsigned(screen_height - margen, 10);
-    constant init_pos1     : unsigned(9 downto 0) := to_unsigned((screen_height/2) - 100, 10);
-    constant init_pos2     : unsigned(9 downto 0) := to_unsigned((screen_height/2) + 100, 10);
+    constant init_pos1     : unsigned(9 downto 0) := to_unsigned(screen_height/2 - size_player/2, 10);
+    constant init_pos2     : unsigned(9 downto 0) := to_unsigned(screen_height/2 - size_player/2, 10);
 
 begin
     --// Control for player 1.

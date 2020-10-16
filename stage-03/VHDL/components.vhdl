@@ -6,20 +6,6 @@ use work.streams.all;
 
 package components is
 
-    --// Player
-    component player 
-        generic (
-            type_ply   : std_logic := '0';
-            pos_offset : std_logic_vector (9 downto 0)
-        );
-        port (
-            px_clk   : in  std_logic;
-            strRGB_i : in  std_logic_vector (25 downto 0);
-            pos      : in  std_logic_vector (9 downto 0);
-            strRGB_o : out std_logic_vector (25 downto 0)
-        );
-    end component;
-
     --// Counter (two digits).
     component counter 
         generic (

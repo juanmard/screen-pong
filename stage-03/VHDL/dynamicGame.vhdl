@@ -129,8 +129,8 @@ begin
                         '1' when reset and random(1) else dy;
 
     --// Change position.
-    x_ball_n <= x_ball + speed_x when dx else x_ball - speed_x;
-    y_ball_n <= y_ball + speed_y when dy else y_ball - speed_y;
+    x_ball_n <= x_ball + speed_x when dx_n else x_ball - speed_x;
+    y_ball_n <= y_ball + speed_y when dy_n else y_ball - speed_y;
 
     --// Check goals.
     goal_ply1_o <= '1' when hit_goal_right  else '0';

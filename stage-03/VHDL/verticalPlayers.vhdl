@@ -17,7 +17,6 @@
 library ieee;
     context ieee.ieee_std_context;
     use ieee.numeric_std.all;
-    use work.components.all;
     use work.streams.all;
 
 
@@ -37,55 +36,37 @@ architecture verticalPlayers_A of verticalPlayers is
     constant width_screen  : positive := 800;
     constant width_player  : positive := 10;
     constant offset        : positive := 20;
-    constant xply1_off     : unsigned (9 downto 0) := to_unsigned(offset, 10);
-    constant xply2_off     : unsigned (9 downto 0) := to_unsigned(width_screen - width_player - offset, 10);
+    constant xply1_off     : integer := offset;
+    constant xply2_off     : integer := width_screen - offset - width_player;
 
     --// Signals.
-    signal strRGB_i_stdv, strRGB_p0_stdv, strRGB_o_stdv : std_logic_vector (25 downto 0);
+    signal strRGB_p0 : strRGB_t;
 
 begin
-    strRGB_i_stdv (25)             <= strRGB_i.R;
-    strRGB_i_stdv (24)             <= strRGB_i.G;
-    strRGB_i_stdv (23)             <= strRGB_i.B;
-    strRGB_i_stdv (22 downto 13)   <= std_logic_vector(strRGB_i.strVGA.x);
-    strRGB_i_stdv (12 downto 3)    <= std_logic_vector(strRGB_i.strVGA.y);
-    strRGB_i_stdv (2)              <= strRGB_i.strVGA.hsync;
-    strRGB_i_stdv (1)              <= strRGB_i.strVGA.vsync;
-    strRGB_i_stdv (0)              <= strRGB_i.strVGA.active;
-
     --// Draw a player 1.
-    player_1 : player
+    player_1 : entity work.player
     generic map (
         type_ply   => '0',
-        pos_offset => std_logic_vector(xply1_off)
+        pos_offset => xply1_off
     )
     port map (
         px_clk   => px_clk,
-        strRGB_i => strRGB_i_stdv,
-        pos      => pos_ply1,
-        strRGB_o => strRGB_p0_stdv
+        strRGB_i => strRGB_i,
+        pos      => to_integer(signed(pos_ply1)),
+        strRGB_o => strRGB_p0
     );
 
     --// Draw a player 2.
-    player_2 : player
+    player_2 : entity work.player
     generic map (
         type_ply   => '0',
-        pos_offset => std_logic_vector(xply2_off)
+        pos_offset => xply2_off
     )
     port map (
         px_clk   => px_clk,
-        strRGB_i => strRGB_p0_stdv,
-        pos      => pos_ply2,
-        strRGB_o => strRGB_o_stdv
+        strRGB_i => strRGB_p0,
+        pos      => to_integer(signed(pos_ply2)),
+        strRGB_o => strRGB_o
     );
-
-    strRGB_o.R             <= strRGB_o_stdv(25);
-    strRGB_o.G             <= strRGB_o_stdv(24);
-    strRGB_o.B             <= strRGB_o_stdv(23);
-    strRGB_o.strVGA.x      <= unsigned(strRGB_o_stdv(22 downto 13));
-    strRGB_o.strVGA.y      <= unsigned(strRGB_o_stdv(12 downto 3));
-    strRGB_o.strVGA.hsync  <= strRGB_o_stdv(2);
-    strRGB_o.strVGA.vsync  <= strRGB_o_stdv(1);
-    strRGB_o.strVGA.active <= strRGB_o_stdv(0);
 
 end verticalPlayers_A;
