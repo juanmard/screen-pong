@@ -18,7 +18,6 @@
 library ieee;
 context ieee.ieee_std_context;
 
-use work.components.all;
 use work.streams.all;
 
 entity pongGame is

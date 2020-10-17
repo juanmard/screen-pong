@@ -32,6 +32,11 @@ entity verticalPlayers is
 end verticalPlayers;
 
 architecture verticalPlayers_A of verticalPlayers is
+    --// Colors.
+    constant yellow  : std_logic_vector(2 downto 0) := "110";
+    constant green   : std_logic_vector(2 downto 0) := "010";
+    constant violet  : std_logic_vector(2 downto 0) := "101";
+
     --// Screen dimentions.
     constant width_screen  : positive := 800;
     constant width_player  : positive := 10;
@@ -47,7 +52,8 @@ begin
     player_1 : entity work.player
     generic map (
         type_ply   => '0',
-        pos_offset => xply1_off
+        pos_offset => xply1_off,
+        color => green
     )
     port map (
         px_clk   => px_clk,
@@ -60,7 +66,8 @@ begin
     player_2 : entity work.player
     generic map (
         type_ply   => '0',
-        pos_offset => xply2_off
+        pos_offset => xply2_off,
+        color => violet
     )
     port map (
         px_clk   => px_clk,

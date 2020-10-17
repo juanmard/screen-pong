@@ -21,8 +21,9 @@ library ieee;
 
 entity player is
     generic (
-        type_ply   : std_logic := '0';      --// Type of player. [Horizontal, Vertical]
-        pos_offset : integer := 100         --// Offset from border.
+        type_ply   : std_logic := '0';                      --// Type of player. [Horizontal, Vertical]
+        pos_offset : integer := 100;                        --// Offset from border.
+        color : std_logic_vector (2 downto 0) := "111"      --// Player color.
     );
     port (
         px_clk   : in std_logic;        --// Pixel clock.
@@ -33,17 +34,9 @@ entity player is
 end player;
 
 architecture player_A of player is
-    --// Colors.
-    constant white      : std_logic_vector(2 downto 0) := "111";
-    constant yellow     : std_logic_vector(2 downto 0) := "110";
-    constant blue       : std_logic_vector(2 downto 0) := "001";
-    constant green      : std_logic_vector(2 downto 0) := "010";
-    constant red        : std_logic_vector(2 downto 0) := "100";
-
     -- // Ball dimension and color.
     constant size_player  : positive := 80;
     constant width_player : positive := 10;
-    constant color      : std_logic_vector(2 downto 0) := green;
 
     -- // Signals.
     signal strRGB_n     : strRGB_t;

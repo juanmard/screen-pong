@@ -6,8 +6,8 @@ use work.streams.all;
 
 package components is
 
-    --// Counter (two digits).
-    component counter 
+    --// Digit with segments.
+    component digit 
         generic (
             color : std_logic_vector(2 downto 0) := "110"
         );
@@ -16,9 +16,7 @@ package components is
             strRGB_i : in  std_logic_vector (25 downto 0);
             pos_x    : in  std_logic_vector (9 downto 0);
             pos_y    : in  std_logic_vector (9 downto 0);
-            dyn_clk  : in  std_logic;
-            reset    : in  std_logic;
-            inc      : in  std_logic;
+            number   : in  std_logic_vector (3 downto 0);
             strRGB_o : out std_logic_vector (25 downto 0)
         );
     end component;
