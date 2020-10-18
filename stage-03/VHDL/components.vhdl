@@ -6,21 +6,6 @@ use work.streams.all;
 
 package components is
 
-    --// Digit with segments.
-    component digit 
-        generic (
-            color : std_logic_vector(2 downto 0) := "110"
-        );
-        port (
-            px_clk   : in  std_logic;
-            strRGB_i : in  std_logic_vector (25 downto 0);
-            pos_x    : in  std_logic_vector (9 downto 0);
-            pos_y    : in  std_logic_vector (9 downto 0);
-            number   : in  std_logic_vector (3 downto 0);
-            strRGB_o : out std_logic_vector (25 downto 0)
-        );
-    end component;
-
     --// Pixel clock generator.
     component pxClkGen
     port (

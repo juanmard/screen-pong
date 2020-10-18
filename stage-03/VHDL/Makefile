@@ -20,6 +20,7 @@ ICEPACK     ?= icepack
 VHDL_SYN_FILES = \
 	components.vhdl \
 	streams.vhdl \
+	digit.vhdl \
 	number.vhdl \
 	counter.vhdl \
 	player.vhdl \
@@ -38,7 +39,6 @@ VHDL_SYN_FILES = \
 	board/$(BOARD_TOP).vhdl
 
 VERILOG_SYN_FILES = \
-	verilog/digit.v \
 	verilog/pxClkGen.v \
 	verilog/SB_PLL40_CORE.v \
 	verilog/syncVGAGen.v

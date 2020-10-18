@@ -41,41 +41,22 @@ end number;
 architecture number_A of number is
     --// Signals.
     signal number, number_n : integer;
-    signal strRGB_i_stdv, strRGB_o_stdv : std_logic_vector (25 downto 0);
 
 begin
 
-    strRGB_i_stdv (25)             <= strRGB_i.R;
-    strRGB_i_stdv (24)             <= strRGB_i.G;
-    strRGB_i_stdv (23)             <= strRGB_i.B;
-    strRGB_i_stdv (22 downto 13)   <= std_logic_vector(strRGB_i.strVGA.x);
-    strRGB_i_stdv (12 downto 3)    <= std_logic_vector(strRGB_i.strVGA.y);
-    strRGB_i_stdv (2)              <= strRGB_i.strVGA.hsync;
-    strRGB_i_stdv (1)              <= strRGB_i.strVGA.vsync;
-    strRGB_i_stdv (0)              <= strRGB_i.strVGA.active;
-
     --// Draw digit.
-    digit_0 : digit
+    digit_0 : entity work.digit
     generic map (
         color => color
     )
     port map (
         px_clk   => px_clk,
-        strRGB_i => strRGB_i_stdv,
-        pos_x    => std_logic_vector(to_signed(pos_x, 10)),
-        pos_y    => std_logic_vector(to_signed(pos_y, 10)),
-        number   => std_logic_vector(to_signed(number, 4)),
-        strRGB_o => strRGB_o_stdv
+        strRGB_i => strRGB_i,
+        pos_x    => pos_x,
+        pos_y    => pos_y,
+        num      => number,
+        strRGB_o => strRGB_o
     );
-
-    strRGB_o.R             <= strRGB_o_stdv(25);
-    strRGB_o.G             <= strRGB_o_stdv(24);
-    strRGB_o.B             <= strRGB_o_stdv(23);
-    strRGB_o.strVGA.x      <= unsigned(strRGB_o_stdv(22 downto 13));
-    strRGB_o.strVGA.y      <= unsigned(strRGB_o_stdv(12 downto 3));
-    strRGB_o.strVGA.hsync  <= strRGB_o_stdv(2);
-    strRGB_o.strVGA.vsync  <= strRGB_o_stdv(1);
-    strRGB_o.strVGA.active <= strRGB_o_stdv(0);
 
     number_n <= number + 1 when inc else
                 number - 1 when dec else
