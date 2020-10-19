@@ -59,14 +59,11 @@ architecture scoreboard_A of scoreboard is
     constant white   : std_logic_vector(2 downto 0) := "111";
 
     --// Signals.
-    signal strRGB_n : strRGB_t;
 
     -- // Array blocks. Definition and initialization.
     type property_block_t is record
         x     : integer;                        -- // Position x of the block.
         y     : integer;                        -- // Position y of the block.
-        x_end : integer;                        -- // End position x of the block.
-        y_end : integer;                        -- // Rnd position y of the block.
         num   : integer;                        -- // Number in the block.
         color : std_logic_vector (2 downto 0);  -- // Color of the number.
     end record;
@@ -74,25 +71,10 @@ architecture scoreboard_A of scoreboard is
 
     --constant test : property_block_t := (x => 100, y => 100, num => 3, color=>"110");
     signal data : blocks_t := (
-        -- 0 => (x => pos_xply1,                           y => pos_y, num => 0, color => white),
-        -- 1 => (x => pos_xply1 + width_digit + separator, y => pos_y, num => 1, color => white),
-        -- 2 => (x => pos_xply2,                           y => pos_y, num => 2, color => white),
-        -- 3 => (x => pos_xply2 + width_digit + separator, y => pos_y, num => 3, color => white)
-        0 => (x     => pos_xply1,          y     => pos_y,       
-              x_end => pos_xply1 + hblock, y_end => pos_y + hblock,
-              num => 0, color => white),
-
-        1 => (x     => pos_xply1,           y     => pos_y + 70,
-              x_end => pos_xply1 + hblock,  y_end => pos_y + 70 + hblock,
-              num => 1, color => white),
-
-        2 => (x     => pos_xply2,            y     => pos_y + 140, 
-              x_end => pos_xply2 + hblock,   y_end => pos_y + 140 + hblock,
-              num => 2, color => white),
-
-        3 => (x     => pos_xply2,            y     => pos_y + 210,
-              x_end => pos_xply2 + hblock,   y_end => pos_y + 210 + hblock,
-              num => 3, color => white)
+        0 => (x => pos_xply1,                           y => pos_y, num => 0, color => white),
+        1 => (x => pos_xply1 + width_digit + separator, y => pos_y, num => 1, color => white),
+        2 => (x => pos_xply2,                           y => pos_y, num => 2, color => white),
+        3 => (x => pos_xply2 + width_digit + separator, y => pos_y, num => 3, color => white)
         );
 
     type test_t is Array (0 to 3) of integer;
@@ -100,7 +82,7 @@ architecture scoreboard_A of scoreboard is
 
     signal x_px, y_px : integer;
     signal x_digit, y_digit, num_digit : integer;
-    signal blk : integer;
+    signal blk, blk_q : integer;
     signal goals_1, goals_2 : integer;
     signal edge_goal1, edge_goal1_q : integer;
     signal edge_goal2, edge_goal2_q : integer;
@@ -125,18 +107,19 @@ begin
        nums (3) <= score_2u;
 
     -- // Which block we are drawing?
-    blk <= 0 when x_px > data(0).x and x_px < data(0).x_end and
-                  y_px > data(0).y and y_px < data(0).y_end else
-           1 when x_px > data(1).x and x_px < data(1).x_end and
-                  y_px > data(1).y and y_px < data(1).y_end else
-           2 when x_px > data(2).x and x_px < data(2).x_end and
-                  y_px > data(2).y and y_px < data(2).y_end else
-           3 when x_px > data(3).x and x_px < data(3).x_end and
-                  y_px > data(3).y and y_px < data(3).y_end else 1;
+    blk_q <= 0 when x_px > data(0).x and x_px < data(0).x + wblock and
+                    y_px > data(0).y and y_px < data(0).y + hblock else
+             1 when x_px > data(1).x and x_px < data(1).x + wblock and
+                    y_px > data(1).y and y_px < data(1).y + hblock else
+             2 when x_px > data(2).x and x_px < data(2).x + wblock and
+                    y_px > data(2).y and y_px < data(2).y + hblock else
+             3 when x_px > data(3).x and x_px < data(3).x + wblock and
+                    y_px > data(3).y and y_px < data(3).y + hblock else 1;
 
     --// Get digit block data.
     x_digit <= data(blk).x;
     y_digit <= data(blk).y;
+    -- num_digit <= data(blk).num;
     num_digit <= nums(blk);
 
 -- look_for:   for ind in 0 to 3 generate
@@ -160,41 +143,52 @@ begin
         pos_y    => y_digit,
         num      => num_digit,
         ----------------------
-        strRGB_o => strRGB_n
+        strRGB_o => strRGB_o
     );
 
 
     -- // Test. Not final code. 
-    score_1u_q <= score_1u + 1 when edge_goal1 = 300 else
+    score_1u_q <= score_1u + 1 when edge_goal1 = 100 else
                              0 when score_1u = 10  else score_1u;
     score_1d_q <= score_1d + 1 when score_1u = 10  else score_1d;
 
 
-    score_2u_q <= score_2u + 1 when edge_goal2 = 300 else
+    score_2u_q <= score_2u + 1 when edge_goal2 = 200 else
                              0 when score_2u = 10  else score_2u;
     score_2d_q <= score_2d + 1 when score_2u = 10  else score_2d;
 
     -- // Update goals numbers.
-    process (px_clk)
+    process (px_clk, reset)
     begin
         if rising_edge(px_clk) then
-            strRGB_o <= strRGB_n;
-            score_1u <= score_1u_q;
-            score_1d <= score_1d_q;
-            score_2u <= score_2u_q;
-            score_2d <= score_2d_q;
-            edge_goal1 <= edge_goal1_q;
-            edge_goal2 <= edge_goal2_q;
-        end if;
-        if goal_ply1 = '1' and edge_goal1 < 300 then
-            edge_goal1_q <= edge_goal1 + 1;
-        else
-            edge_goal1_q <= 0;
-        end if;
-        if goal_ply2 = '1' and edge_goal2 < 300 then
-            edge_goal2_q <= edge_goal2 + 1;
-        else
-            edge_goal2_q <= 0;
+            if reset then
+                score_1u <= 0;
+                score_1d <= 0;
+                score_2u <= 0;
+                score_2d <= 0;
+                edge_goal1 <= 0;
+                edge_goal2 <= 0;
+            else
+                score_1u <= score_1u_q;
+                score_1d <= score_1d_q;
+                score_2u <= score_2u_q;
+                score_2d <= score_2d_q;
+                edge_goal1 <= edge_goal1_q;
+                edge_goal2 <= edge_goal2_q;
+                blk <= blk_q;
+            end if;
+
+            --// Detect goals.
+            if goal_ply1 = '1' and edge_goal1 < 100 then
+                edge_goal1_q <= edge_goal1 + 1;
+            else
+                edge_goal1_q <= 0;
+            end if;
+            if goal_ply2 = '1' and edge_goal2 < 200 then
+                edge_goal2_q <= edge_goal2 + 1;
+            else
+                edge_goal2_q <= 0;
+            end if;
         end if;
     end process;
 
