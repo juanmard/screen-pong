@@ -83,12 +83,12 @@ architecture scoreboard_A of scoreboard is
     signal x_px, y_px : integer;
     signal x_digit, y_digit, num_digit : integer;
     signal blk, blk_q : integer;
-    signal goals_1, goals_2 : integer;
-    signal edge_goal1, edge_goal1_q : integer;
-    signal edge_goal2, edge_goal2_q : integer;
     signal score_1u, score_1d, score_1u_q, score_1d_q : integer;
     signal score_2u, score_2d, score_2u_q, score_2d_q : integer;
 
+    --// Goal signals.
+    signal counter : integer := 10;          -- // Counter 1/70 Hz *10 ~ 0.15s
+    signal goal_1, goal_2 : std_logic;
 
 begin
     -- // Extract actual pixel.
@@ -148,12 +148,12 @@ begin
 
 
     -- // Test. Not final code. 
-    score_1u_q <= score_1u + 1 when edge_goal1 = 100 else
+    score_1u_q <= score_1u + 1 when counter = 20 and goal_1 = '1' else
                              0 when score_1u = 10  else score_1u;
     score_1d_q <= score_1d + 1 when score_1u = 10  else score_1d;
 
 
-    score_2u_q <= score_2u + 1 when edge_goal2 = 200 else
+    score_2u_q <= score_2u + 1 when counter = 20 and goal_2 = '1' else
                              0 when score_2u = 10  else score_2u;
     score_2d_q <= score_2d + 1 when score_2u = 10  else score_2d;
 
@@ -161,34 +161,37 @@ begin
     process (px_clk, reset)
     begin
         if rising_edge(px_clk) then
+
             if reset then
                 score_1u <= 0;
                 score_1d <= 0;
                 score_2u <= 0;
                 score_2d <= 0;
-                edge_goal1 <= 0;
-                edge_goal2 <= 0;
             else
+                blk <= blk_q;
                 score_1u <= score_1u_q;
                 score_1d <= score_1d_q;
                 score_2u <= score_2u_q;
                 score_2d <= score_2d_q;
-                edge_goal1 <= edge_goal1_q;
-                edge_goal2 <= edge_goal2_q;
-                blk <= blk_q;
             end if;
 
-            --// Detect goals.
-            if goal_ply1 = '1' and edge_goal1 < 100 then
-                edge_goal1_q <= edge_goal1 + 1;
+            --// Detect goals and filter signals.
+            if goal_ply1 = '1' then
+                counter <= 1000;
+                goal_1 <= '1';
+            elsif goal_ply2 = '1' then
+                counter <= 1000;
+                goal_2 <= '1';
             else
-                edge_goal1_q <= 0;
+                if counter > 0 then
+                    counter <= counter - 1;
+                else
+                    counter <= 0;
+                    goal_1 <= '0';
+                    goal_2 <= '0';
+                end if;
             end if;
-            if goal_ply2 = '1' and edge_goal2 < 200 then
-                edge_goal2_q <= edge_goal2 + 1;
-            else
-                edge_goal2_q <= 0;
-            end if;
+
         end if;
     end process;
 
