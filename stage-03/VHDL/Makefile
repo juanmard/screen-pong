@@ -18,17 +18,14 @@ NEXTPNR     ?= nextpnr-ice40
 ICEPACK     ?= icepack
 
 VHDL_SYN_FILES = \
+	board/$(BOARD_TOP).vhdl \
 	components.vhdl \
 	streams.vhdl \
-	digit.vhdl \
-	number.vhdl \
-	counter.vhdl \
 	player.vhdl \
 	dynamicGame.vhdl \
 	soundCard.vhdl \
 	ball.vhdl \
 	verticalPlayers.vhdl \
-	scoreboard.vhdl \
 	court.vhdl \
 	endframeVGA.vhdl \
 	strVGAGen.vhdl \
@@ -36,7 +33,10 @@ VHDL_SYN_FILES = \
 	ctlUpDown.vhdl \
 	ctlButtons.vhdl \
 	top.vhdl \
-	board/$(BOARD_TOP).vhdl
+	digit.vhdl \
+	scoreboard.vhdl
+#	number.vhdl \
+	counter.vhdl \
 
 VERILOG_SYN_FILES = \
 	verilog/pxClkGen.v \
