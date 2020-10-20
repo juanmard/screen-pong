@@ -4,3 +4,6 @@
 [submodule "stage-02/colections/collection-Pong"]
 	path = stage-02/colections/collection-Pong
 	url = https://github.com/juanmard/collection-Pong
+[submodule "stage-03/VHDL/vboard"]
+	path = stage-03/VHDL/vboard
+	url = https://github.com/dbhi/vboard
