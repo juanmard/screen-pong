@@ -28,20 +28,22 @@ VHDL_SYN_FILES = \
 	verticalPlayers.vhdl \
 	court.vhdl \
 	endframeVGA.vhdl \
-	strVGAGen.vhdl \
 	pongGame.vhdl \
 	ctlUpDown.vhdl \
 	ctlButtons.vhdl \
 	top.vhdl \
 	digit.vhdl \
-	scoreboard.vhdl
-#	number.vhdl \
-	counter.vhdl \
+	scoreboard.vhdl \
+ 	vboard/vga/src/VGA_config_pkg.vhd  \
+ 	vboard/vga/src/VGA_sync_gen.vhd \
+	vboard/vga/src/VGA_sync_gen_cfg.vhd \
+	vboard/vga/src/VGA_sync_gen_idx.vhd
+#	strVGAGen.vhdl
 
 VERILOG_SYN_FILES = \
 	verilog/pxClkGen.v \
 	verilog/SB_PLL40_CORE.v \
-	verilog/syncVGAGen.v
+#	verilog/syncVGAGen.v
 
 # Default target: run all required targets to build the image.
 all: pong.bin

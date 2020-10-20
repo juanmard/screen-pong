@@ -21,6 +21,8 @@ context ieee.ieee_std_context;
 
 use work.components.all;
 use work.streams.all;
+use work.VGA_config.all;
+
 
 --// Entity top.
 entity top is
@@ -47,6 +49,9 @@ end top;
 --// Architecture top_A.
 architecture top_A of top is
 
+    -- // Configuration VGA.
+    constant cfg : VGA_config_t := VGA_configs(18);
+
     --// Module signals.
     signal px_clk   : std_logic;                     -- Pixel clk.
     signal endframe : std_logic;                     -- End frame signal.
@@ -56,15 +61,40 @@ architecture top_A of top is
     signal strVGA   : strVGA_t;                      -- Stream VGA.
     signal strRGB   : strRGB_t;                      -- Stream RGB.
 
+    signal x_tmp, y_tmp : integer;
+
 begin
 
     --// Generated VGA stream module.
-    strVGAGen_0: entity work.strVGAGen
+    -- strVGAGen_0: entity work.strVGAGen
+    -- port map (
+    --     sys_clk => CLK,
+    --     px_clk  => px_clk,
+    --     strVGA  => strVGA
+    -- );
+
+    --// Pixel clock generator.
+    pxClkGen_0: pxClkGen
     port map (
         sys_clk => CLK,
-        px_clk  => px_clk,
-        strVGA  => strVGA
+        px_clk => px_clk
     );
+
+    i_sync: entity work.VGA_sync_gen_cfg
+    generic map ( cfg )
+    port map (
+      CLK   => px_clk,
+      EN    => '1',
+      RST   => '0',
+      HSYNC => strVGA.hsync,
+      VSYNC => strVGA.vsync,
+      X     => x_tmp,
+      Y     => y_tmp
+    );
+
+    strVGA.x <= to_unsigned (x_tmp,10);
+    strVGA.y <= to_unsigned (y_tmp,10);
+    strVGA.active <= '1' when x_tmp /= -1 and y_tmp /= -1 else '0';
 
     --// Generated VGA endframe module.
     endframeVGA_0: entity work.endframeVGA
