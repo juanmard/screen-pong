@@ -9,9 +9,10 @@
 -- // Dependencies: 
 -- //
 -- // Revisions: 
--- //     0.01 - File created.
+-- //     0.02 - File created.
 -- //
 -- // Additional Comments:
+-- //   - Pass color like a port.
 -- //
 -- ////////////////////////////////////////////////////////////////////////////////
 library ieee;
@@ -20,16 +21,14 @@ library ieee;
     use work.streams.all;
 
 entity digit is
-generic (
-    color  : std_logic_vector(2 downto 0) := "111"
-);
 port (
-    px_clk   : std_logic;       -- // Pixel clock.
-    strRGB_i : in strRGB_t;     -- // Input RGB stream.
-    pos_x    : in integer;      -- // X number position.
-    pos_y    : in integer;      -- // Y number position.
-    num      : in integer;      -- // Number to stream.
-    strRGB_o : out strRGB_t     -- // Output RGB stream.
+    px_clk   : std_logic;                        -- // Pixel clock.
+    strRGB_i : in strRGB_t;                      -- // Input RGB stream.
+    pos_x    : in integer;                       -- // X number position.
+    pos_y    : in integer;                       -- // Y number position.
+    num      : in integer;                       -- // Number to stream.
+    color    : in std_logic_vector(2 downto 0);  -- // Color for a digit. 
+    strRGB_o : out strRGB_t                      -- // Output RGB stream.
 );
 end digit;
 

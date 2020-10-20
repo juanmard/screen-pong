@@ -23,7 +23,7 @@ entity scoreboard is
     port (
         px_clk    : in std_logic;     --// Pixel clock.
         strRGB_i  : in strRGB_t;      --// Input RGB stream.
-        dyn_clk   : in std_logic;     --// Dynamic clock.
+        dyn_clk   : in std_logic;     --// Dynamic clock (not used in this implementation).
         reset     : in std_logic;     --// Reset scoreboard.
         goal_ply1 : in std_logic;     --// Increment goal for player 1.
         goal_ply2 : in std_logic;     --// Increment goal for player 2.
@@ -70,21 +70,23 @@ architecture scoreboard_A of scoreboard is
 
     -- // Data blocks of digits.
     signal data : blocks_t := (
-        0 => (x => pos_xply1,                           y => pos_y, num => 0, color => white),  -- // Goals player 1 decens.
-        1 => (x => pos_xply1 + width_digit + separator, y => pos_y, num => 1, color => white),  -- // Goals player 1 units.
-        2 => (x => pos_xply2,                           y => pos_y, num => 2, color => white),  -- // Goals player 2 decens.
-        3 => (x => pos_xply2 + width_digit + separator, y => pos_y, num => 3, color => white)   -- // Goals player 2 units.
+        0 => (x => pos_xply1,                           y => pos_y, num => 0, color => green),   -- // Goals player 1 tens.
+        1 => (x => pos_xply1 + width_digit + separator, y => pos_y, num => 1, color => yellow),  -- // Goals player 1 units.
+        2 => (x => pos_xply2,                           y => pos_y, num => 2, color => violet),  -- // Goals player 2 tens.
+        3 => (x => pos_xply2 + width_digit + separator, y => pos_y, num => 3, color => white)    -- // Goals player 2 units.
         );
 
     -- // Test for numbers.
     type test_t is Array (0 to 3) of integer;
     signal nums : test_t;
 
+    -- // Signals.
     signal x_px, y_px : integer;
     signal x_digit, y_digit, num_digit : integer;
+    signal color_digit : std_logic_vector (2 downto 0);
     signal blk, blk_q : integer;
-    signal score_1u, score_1d, score_1u_q, score_1d_q : integer;
-    signal score_2u, score_2d, score_2u_q, score_2d_q : integer;
+    signal score_1u, score_1t, score_1u_q, score_1t_q : integer;
+    signal score_2u, score_2t, score_2u_q, score_2t_q : integer;
 
     -- // Goals signals to filter.
     signal counter, counter_q : integer;
@@ -98,13 +100,13 @@ begin
 
     -- // Update numbers in blocks.
     -- WARNING: This don't work. If you try to change data, the scoreboard disappear.
-    -- data(0).num <= score_1d;
+    -- data(0).num <= score_1t;
     -- data(1).num <= score_1u;
-    -- data(2).num <= score_2d;
+    -- data(2).num <= score_2t;
     -- data(3).num <= score_2u;
-       nums (0) <= score_1d;
+       nums (0) <= score_1t;
        nums (1) <= score_1u;
-       nums (2) <= score_2d;
+       nums (2) <= score_2t;
        nums (3) <= score_2u;
 
     -- // Which block we are drawing?
@@ -129,34 +131,36 @@ begin
     y_digit <= data(blk).y;
     -- num_digit <= data(blk).num; -- (Don't work).
     num_digit <= nums(blk);
+    color_digit <= data(blk).color;
 
     --// Draw digits.
-    counter_ply1 : entity work.digit 
-    generic map (
-        color => green  -- data(blk).color -- (Need to pass like port)
-        )
-    port map (
-        px_clk   => px_clk,
-        strRGB_i => strRGB_i,
-        pos_x    => x_digit,
-        pos_y    => y_digit,
-        num      => num_digit,
-        strRGB_o => strRGB_o
-    );
+    draw_digits :  entity work.digit 
+        port map (
+            px_clk   => px_clk,
+            strRGB_i => strRGB_i,
+            pos_x    => x_digit,
+            pos_y    => y_digit,
+            num      => num_digit,
+            color    => color_digit,
+            strRGB_o => strRGB_o
+        );
 
     -- // Update the score.
     score_1u_q <= score_1u + 1 when counter = 0 and goal_1 = '1' else
                              0 when score_1u = 10  else score_1u;
-    score_1d_q <= score_1d + 1 when score_1u = 10  else
-                             0 when score_1d = 10  else score_1d;
+    score_1t_q <= score_1t + 1 when score_1u = 10  else
+                             0 when score_1t = 10  else score_1t;
 
     score_2u_q <= score_2u + 1 when counter = 0 and goal_2 = '1' else
                              0 when score_2u = 10  else score_2u;
-    score_2d_q <= score_2d + 1 when score_2u = 10  else
-                             0 when score_2d = 10  else score_2d;
+    score_2t_q <= score_2t + 1 when score_2u = 10  else
+                             0 when score_2t = 10  else score_2t;
 
-    -- // Filter goals signals.
+    -- // Filter input goals signals.
+       -- Active counter to filter.
     counter_q <= 1000 when goal_ply1 = '1' or goal_ply2 = '1' else counter;
+       -- Keep goals 1 and 2 active in first active external signal goals
+       --  and meanwhile counter is counting.
     goal_1_q <= '1' when (goal_ply1 = '1' or goal_1 = '1') and counter > 0 else '0'; 
     goal_2_q <= '1' when (goal_ply2 = '1' or goal_2 = '1') and counter > 0 else '0'; 
 
@@ -165,23 +169,27 @@ begin
     begin
         if rising_edge(px_clk) then
             if reset then
-                score_1d <= 0;
+                -- // Reset the scoreboard.
+                score_1t <= 0;
                 score_1u <= 0;
-                score_2d <= 0;
+                score_2t <= 0;
                 score_2u <= 0;
             else
+                -- // Update signals.
                 blk <= blk_q;
+                goal_1 <= goal_1_q;
+                goal_2 <= goal_2_q;
+                score_1t <= score_1t_q;
+                score_1u <= score_1u_q;
+                score_2t <= score_2t_q;
+                score_2u <= score_2u_q;
+
+                -- // Update filter counter.
                 if counter > 0 then
                     counter <= counter_q - 1;
                 else
                     counter <= counter_q;
                 end if;
-                goal_1 <= goal_1_q;
-                goal_2 <= goal_2_q;
-                score_1d <= score_1d_q;
-                score_1u <= score_1u_q;
-                score_2d <= score_2d_q;
-                score_2u <= score_2u_q;
             end if;
         end if;
     end process;
