@@ -41,27 +41,32 @@ architecture player_A of player is
     -- // Signals.
     signal strRGB_n     : strRGB_t;
     signal draw_player  : std_logic;
+    signal x_pixel, y_pixel : integer;
 
 begin
     --// Clone VGA stream in an output RGB stream.
     strRGB_n.strVGA <= strRGB_i.strVGA;
 
+    -- // Actual position pixel.
+    x_pixel <= to_integer(strRGB_i.strVGA.x);
+    y_pixel <= to_integer(strRGB_i.strVGA.y);
+
     --// Draw player.
     draw_player <= '1' when
                         --// Vertical player.
                         (
-                        strRGB_i.strVGA.y > pos and
-                        strRGB_i.strVGA.y < pos + size_player and
-                        strRGB_i.strVGA.x > pos_offset and
-                        strRGB_i.strVGA.x < pos_offset + width_player and
+                        y_pixel > pos and
+                        y_pixel < pos + size_player and
+                        x_pixel > pos_offset and
+                        x_pixel < pos_offset + width_player and
                         type_ply = '0'
                         ) or
                         --// Horizontal player.
                         (
-                        strRGB_i.strVGA.x > pos and
-                        strRGB_i.strVGA.x < pos + size_player and
-                        strRGB_i.strVGA.y > pos_offset and
-                        strRGB_i.strVGA.y < pos_offset + width_player and
+                        x_pixel > pos and
+                        x_pixel < pos + size_player and
+                        y_pixel > pos_offset and
+                        y_pixel < pos_offset + width_player and
                         type_ply = '1'
                         ) else '0';
 

@@ -77,16 +77,18 @@ architecture scoreboard_A of scoreboard is
         );
 
     -- // Test for numbers.
-    type test_t is Array (0 to 3) of integer;
-    signal nums : test_t;
+    type test_t is Array (0 to 3) of integer range 0 to 15;
+    signal nums : test_t := (others => 0);
 
     -- // Signals.
     signal x_px, y_px : integer;
-    signal x_digit, y_digit, num_digit : integer;
+    signal x_digit, y_digit : integer;
+    signal num_digit : integer range 0 to 15;
     signal color_digit : std_logic_vector (2 downto 0);
-    signal blk, blk_q : integer;
-    signal score_1u, score_1t, score_1u_q, score_1t_q : integer;
-    signal score_2u, score_2t, score_2u_q, score_2t_q : integer;
+    signal blk : integer range 0 to 3 := 0;
+    signal blk_q : integer range 0 to 3 := 0;
+    signal score_1u, score_1t, score_1u_q, score_1t_q : integer range 0 to 10;
+    signal score_2u, score_2t, score_2u_q, score_2t_q : integer range 0 to 10;
 
     -- // Goals signals to filter.
     signal counter, counter_q : integer;
