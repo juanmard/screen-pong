@@ -26,9 +26,12 @@ use work.VGA_config.all;
 
 --// Entity top.
 entity top is
+    generic (
+        G_SCREEN : natural := 18
+      );
     port (
-        CLK : in std_logic;             -- System clock (16Mhz).
-        reset : in std_logic;           -- Reset.
+        px_clk : in std_logic;           -- System clock (16Mhz).
+        reset  : in std_logic;           -- Reset.
 
         Player_One_Up   : in std_logic; -- Player 1 - Up button.
         Player_One_Down : in std_logic; -- Player 1 - Down button.
@@ -50,10 +53,10 @@ end top;
 architecture top_A of top is
 
     -- // Configuration VGA.
-    constant cfg : VGA_config_t := VGA_configs(18);
+    constant cfg : VGA_config_t := VGA_configs(G_SCREEN);
 
     --// Module signals.
-    signal px_clk   : std_logic;                     -- Pixel clk.
+    --signal px_clk   : std_logic;                     -- Pixel clk.
     signal endframe : std_logic;                     -- End frame signal.
     signal pos_ply1 : std_logic_vector (9 downto 0); -- Position player 1.
     signal pos_ply2 : std_logic_vector (9 downto 0); -- Position player 2.
@@ -61,7 +64,7 @@ architecture top_A of top is
     signal strVGA   : strVGA_t;                      -- Stream VGA.
     signal strRGB   : strRGB_t;                      -- Stream RGB.
 
-    signal x_tmp, y_tmp : integer;
+    signal x_tmp, y_tmp : integer range -1 to cfg.width;
 
 begin
 
@@ -74,26 +77,26 @@ begin
     -- );
 
     --// Pixel clock generator.
-    pxClkGen_0: pxClkGen
-    port map (
-        sys_clk => CLK,
-        px_clk => px_clk
-    );
+  --  pxClkGen_0: pxClkGen
+  --  port map (
+  --      sys_clk => CLK,
+  --      px_clk => px_clk
+  --  );
 
     i_sync: entity work.VGA_sync_gen_cfg
     generic map ( cfg )
     port map (
       CLK   => px_clk,
       EN    => '1',
-      RST   => '0',
+      RST   => reset,
       HSYNC => strVGA.hsync,
       VSYNC => strVGA.vsync,
       X     => x_tmp,
       Y     => y_tmp
     );
 
-    strVGA.x <= to_unsigned (x_tmp,10);
-    strVGA.y <= to_unsigned (y_tmp,10);
+    strVGA.x <= to_unsigned (x_tmp,10) when x_tmp /= -1 else (others=>'0');
+    strVGA.y <= to_unsigned (y_tmp,10) when y_tmp /= -1 else (others=>'0');
     strVGA.active <= '1' when x_tmp /= -1 and y_tmp /= -1 else '0';
 
     --// Generated VGA endframe module.
@@ -123,7 +126,7 @@ begin
         strVGA   => strVGA,
         reset    => reset,
         play     => play,
-        snd_clk  => CLK,
+        snd_clk  => px_clk,
         pos_ply1 => pos_ply1,
         pos_ply2 => pos_ply2,
         strRGB   => strRGB,

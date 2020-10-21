@@ -18,7 +18,7 @@ NEXTPNR     ?= nextpnr-ice40
 ICEPACK     ?= icepack
 
 VHDL_SYN_FILES = \
-	board/$(BOARD_TOP).vhdl \
+	$(BOARD_TOP).vhd \
 	components.vhdl \
 	streams.vhdl \
 	player.vhdl \
@@ -37,7 +37,10 @@ VHDL_SYN_FILES = \
  	vboard/vga/src/VGA_config_pkg.vhd  \
  	vboard/vga/src/VGA_sync_gen.vhd \
 	vboard/vga/src/VGA_sync_gen_cfg.vhd \
-	vboard/vga/src/VGA_sync_gen_idx.vhd
+	vboard/vga/src/VGA_sync_gen_idx.vhd \
+	vboard/vga/device/ICE40/ICE40_components_pkg.vhd \
+	vboard/vga/device/ICE40/ICE40_PLL_config_pkg.vhd \
+	vboard/vga/board/tinyfpgabx/TinyFPGABX_PLL_config_pkg.vhd
 #	strVGAGen.vhdl
 
 VERILOG_SYN_FILES = \

@@ -26,7 +26,7 @@ port (
     strRGB_i : in strRGB_t;                      -- // Input RGB stream.
     pos_x    : in integer;                       -- // X number position.
     pos_y    : in integer;                       -- // Y number position.
-    num      : in integer;                       -- // Number to stream.
+    num      : in integer range 0 to 15;         -- // Number to stream.
     color    : in std_logic_vector(2 downto 0);  -- // Color for a digit. 
     strRGB_o : out strRGB_t                      -- // Output RGB stream.
 );
@@ -65,6 +65,7 @@ architecture digit_A of digit is
     signal x_pixel, y_pixel : integer;
     signal draw_pixel : std_logic;
     signal segments : std_logic_vector (6 downto 0);
+    signal num_test : integer range 0 to 15;
 
 begin
     -- // Clone VGA stream from in to an out RGB stream.
@@ -75,7 +76,8 @@ begin
     y_pixel <= to_integer(strRGB_i.strVGA.y);
 
     -- // Get segments.
-    segments <= numbers (num);
+    num_test <= num when num >= 0 and num < 16 else 0;
+    segments <= numbers (num_test);
 
     -- // Draw the number.
     draw_pixel <= '1' when 
