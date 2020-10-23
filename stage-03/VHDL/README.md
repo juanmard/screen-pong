@@ -33,3 +33,9 @@ PATH=./fomu-toolchain-Windows/bin/:$PATH make load
 
 ```
 
+## Testing in this branch...
+In this branch (**vga-test**) VGA virtual screen is generated and simulated.
+To do this, enter the *virtual_screen* subdirectory and execute the *run.sh* command.
+This will generate different PNG files in the *out* folder and at the end of the simulation, a GIF with all the images.
+
+![view](https://github.com/juanmard/screen-pong/blob/vga-test/stage-03/VHDL/gallery/simula-4.gif)
