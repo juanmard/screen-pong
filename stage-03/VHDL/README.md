@@ -33,3 +33,10 @@ PATH=./fomu-toolchain-Windows/bin/:$PATH make load
 
 ```
 
+## Testing in this branch...
+In this branch (**tkinter-test**) VGA virtual screen is generated and simulated in a new window.
+To do this, enter the *tkinter* subdirectory and execute the *run.sh* command.
+This will open a window and show every frame simulation.
+
+![view](https://github.com/juanmard/screen-pong/blob/tkinter-test/stage-03/VHDL/gallery/simulation-tkinter.png)
+
