@@ -9,13 +9,19 @@ if ! command -v "$PY"; then
   PY="python"
 fi
 
-echo "> Analyze ../src/*.vhd and ./hdl/*.vhd"
-ghdl -a --std=08 -frelaxed ../vboard/vga/src/VGA_config_pkg.vhd
-ghdl -a --std=08 -frelaxed ../vboard/vga/src/VGA_sync_gen_idx.vhd
-ghdl -a --std=08 -frelaxed ../vboard/vga/src/VGA_sync_gen.vhd
-ghdl -a --std=08 -frelaxed ../vboard/vga/src/VGA_sync_gen_cfg.vhd
-#ghdl -a --std=08 -frelaxed ../vboard/vga/src/Design_Top.vhd
-#ghdl -a --std=08 -frelaxed ../../src/demo.vhd
+# All need subdirectories.
+TKINTER="../vboard/vga/test/tkinter"
+SRC="../vboard/vga/src"
+HDL="../vboard/vga/test/hdl"
+
+echo "> Analyze... vhd and vhdl files."
+# Analyze VGA modules.
+ghdl -a --std=08 -frelaxed $SRC/VGA_config_pkg.vhd
+ghdl -a --std=08 -frelaxed $SRC/VGA_sync_gen_idx.vhd
+ghdl -a --std=08 -frelaxed $SRC/VGA_sync_gen.vhd
+ghdl -a --std=08 -frelaxed $SRC/VGA_sync_gen_cfg.vhd
+
+# Analyze all project files.
 ghdl -a --std=08 -frelaxed ../streams.vhdl
 ghdl -a --std=08 -frelaxed ../components.vhdl
 ghdl -a --std=08 -frelaxed ../endFrameVGA.vhdl
@@ -32,29 +38,32 @@ ghdl -a --std=08 -frelaxed ../verticalPlayers.vhdl
 ghdl -a --std=08 -frelaxed ../pongGame.vhdl
 ghdl -a --std=08 -frelaxed ../top.vhdl
 
+# Analyze VGA screen HDL.
+ghdl -a --std=08 -frelaxed $HDL/VGA_screen_pkg.vhd
+ghdl -a --std=08 -frelaxed $HDL/VGA_screen.vhd
 
-ghdl -a --std=08 -frelaxed ../vboard/vga/test/hdl/VGA_screen_pkg.vhd
-ghdl -a --std=08 -frelaxed ../vboard/vga/test/hdl/VGA_screen.vhd
-#ghdl -a --std=08 -frelaxed ../vboard/vga/test/hdl/VGA_tb.vhd
+# Analyze testbench file.
 ghdl -a --std=08 -frelaxed ./VGA_tb.vhd
 
-
+# Build caux.
 echo "> Build caux.so"
 ghdl -e \
   --std=08 \
   -frelaxed \
   -Wl,-fPIC \
-  -Wl,caux.c \
+  -Wl,$TKINTER/caux.c \
   -Wl,-shared \
-  -Wl,-Wl,--version-script=./py.ver \
+  -Wl,-Wl,--version-script=$TKINTER/py.ver \
   -Wl,-Wl,-u,ghdl_main \
   -o caux.so \
   tb_vga
 
+# Clean.
 rm *.o *.cf
 
 #echo "> Execute tb (save wave.ghw)"
 #./tb --wave=wave.ghw
 
+# Show and execute.
 echo "> Execute run.py"
-$PY run.py --wave=wave.ghw
+$PY $TKINTER/run.py --wave=wave.ghw
