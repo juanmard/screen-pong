@@ -15,7 +15,6 @@ end entity;
 architecture arch of tb_vga is
 
 constant clk_period : time := (1.0/real(VGA_configs(SCREEN).clk)) * 1 ms;
---constant clk_period : time := (1.0/real(50000)) * 1 ms;
 signal clk, rst, save_video: std_logic := '0';
 signal down : std_logic := '0';
 signal up : std_logic := '0';
@@ -101,9 +100,9 @@ begin
       Player_Two_Down => '0',
       VGA_VSync       => vga.vsync,
       VGA_HSync       => vga.hsync,
-      VGA_R           => vga.rgb(2),
+      VGA_R           => vga.rgb(0),
       VGA_G           => vga.rgb(1),
-      VGA_B           => vga.rgb(0),
+      VGA_B           => vga.rgb(2),
       Audio_Right     => open,
       Audio_Left      => open
     );
