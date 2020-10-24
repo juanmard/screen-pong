@@ -1,7 +1,7 @@
 --////////////////////////////////////////////////////////////////////////////////
 --// Company:     Ridotech
 --// Engineer:    Juan Manuel Rico
---// Create Date: 27/04/2020
+--// Create Date: 24/10/2020
 --// Module Name: top.vhdl
 --//
 --// Description: Top module from 'pong' game.
@@ -9,10 +9,12 @@
 --// Dependencies:
 --//
 --// Revisions:
---//     0.01 - File created.
+--//     0.02 - File created.
 --//
 --// Additional Comments:
---//
+--//   * Integration with the PLL is eliminated.
+--//     It is synthesized as a specific feature of the device.
+--// 
 --////////////////////////////////////////////////////////////////////////////////
 
 --// Libraries.
@@ -27,25 +29,25 @@ use work.VGA_config.all;
 --// Entity top.
 entity top is
     generic (
-        G_SCREEN : natural := 18
+        G_SCREEN : natural := 17         -- VGA Mode.
       );
     port (
-        px_clk : in std_logic;           -- System clock (16Mhz).
+        px_clk : in std_logic;           -- Pixel clock.
         reset  : in std_logic;           -- Reset.
 
-        Player_One_Up   : in std_logic; -- Player 1 - Up button.
-        Player_One_Down : in std_logic; -- Player 1 - Down button.
-        Player_Two_Up   : in std_logic; -- Player 2 - Up button.
-        Player_Two_Down : in std_logic; -- Player 2 - Down button.
+        Player_One_Up   : in std_logic;  -- Player 1 - Up button.
+        Player_One_Down : in std_logic;  -- Player 1 - Down button.
+        Player_Two_Up   : in std_logic;  -- Player 2 - Up button.
+        Player_Two_Down : in std_logic;  -- Player 2 - Down button.
 
-        VGA_VSync : out std_logic; -- VGA - VSync.
-        VGA_HSync : out std_logic; -- VGA - HSync.
-        VGA_R     : out std_logic; -- VGA - R.
-        VGA_G     : out std_logic; -- VGA - G.
-        VGA_B     : out std_logic; -- VGA - B.
+        VGA_VSync : out std_logic;       -- VGA - VSync.
+        VGA_HSync : out std_logic;       -- VGA - HSync.
+        VGA_R     : out std_logic;       -- VGA - R.
+        VGA_G     : out std_logic;       -- VGA - G.
+        VGA_B     : out std_logic;       -- VGA - B.
 
-        Audio_Right : out std_logic; -- Right channel.
-        Audio_Left  : out std_logic  -- Left channel.
+        Audio_Right : out std_logic;     -- Right channel.
+        Audio_Left  : out std_logic      -- Left channel.
     );
 end top;
 
@@ -56,7 +58,6 @@ architecture top_A of top is
     constant cfg : VGA_config_t := VGA_configs(G_SCREEN);
 
     --// Module signals.
-    --signal px_clk   : std_logic;                     -- Pixel clk.
     signal endframe : std_logic;                     -- End frame signal.
     signal pos_ply1 : std_logic_vector (9 downto 0); -- Position player 1.
     signal pos_ply2 : std_logic_vector (9 downto 0); -- Position player 2.
@@ -67,21 +68,6 @@ architecture top_A of top is
     signal x_tmp, y_tmp : integer range -1 to cfg.width;
 
 begin
-
-    --// Generated VGA stream module.
-    -- strVGAGen_0: entity work.strVGAGen
-    -- port map (
-    --     sys_clk => CLK,
-    --     px_clk  => px_clk,
-    --     strVGA  => strVGA
-    -- );
-
-    --// Pixel clock generator.
-  --  pxClkGen_0: pxClkGen
-  --  port map (
-  --      sys_clk => CLK,
-  --      px_clk => px_clk
-  --  );
 
     i_sync: entity work.VGA_sync_gen_cfg
     generic map ( cfg )
@@ -95,6 +81,7 @@ begin
       Y     => y_tmp
     );
 
+    -- // Type casting.
     strVGA.x <= to_unsigned (x_tmp,10) when x_tmp /= -1 else (others=>'0');
     strVGA.y <= to_unsigned (y_tmp,10) when y_tmp /= -1 else (others=>'0');
     strVGA.active <= '1' when x_tmp /= -1 and y_tmp /= -1 else '0';

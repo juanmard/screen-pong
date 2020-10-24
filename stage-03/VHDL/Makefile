@@ -17,36 +17,36 @@ YOSYS       ?= yosys
 NEXTPNR     ?= nextpnr-ice40
 ICEPACK     ?= icepack
 
+SRC = vboard/vga/src
+DEV_ICE40 = vboard/vga/device/ICE40
+BRD_TINY = vboard/vga/board/tinyfpgabx
+
 VHDL_SYN_FILES = \
-	$(BOARD_TOP).vhd \
-	components.vhdl \
+	$(DEV_ICE40)/ICE40_components_pkg.vhd \
+	$(DEV_ICE40)/ICE40_PLL_config_pkg.vhd \
+ 	$(SRC)/VGA_config_pkg.vhd  \
+ 	$(SRC)/VGA_sync_gen.vhd \
+	$(SRC)/VGA_sync_gen_cfg.vhd \
+	$(SRC)/VGA_sync_gen_idx.vhd \
+	$(BRD_TINY)/TinyFPGABX_PLL_config_pkg.vhd \
+	board/$(BOARD_TOP).vhdl \
 	streams.vhdl \
+	components.vhdl \
 	player.vhdl \
-	dynamicGame.vhdl \
-	soundCard.vhdl \
-	ball.vhdl \
 	verticalPlayers.vhdl \
 	court.vhdl \
-	endframeVGA.vhdl \
-	pongGame.vhdl \
-	ctlUpDown.vhdl \
-	ctlButtons.vhdl \
-	top.vhdl \
+	ball.vhdl \
 	digit.vhdl \
 	scoreboard.vhdl \
- 	vboard/vga/src/VGA_config_pkg.vhd  \
- 	vboard/vga/src/VGA_sync_gen.vhd \
-	vboard/vga/src/VGA_sync_gen_cfg.vhd \
-	vboard/vga/src/VGA_sync_gen_idx.vhd \
-	vboard/vga/device/ICE40/ICE40_components_pkg.vhd \
-	vboard/vga/device/ICE40/ICE40_PLL_config_pkg.vhd \
-	vboard/vga/board/tinyfpgabx/TinyFPGABX_PLL_config_pkg.vhd
-#	strVGAGen.vhdl
+	endframeVGA.vhdl \
+	dynamicGame.vhdl \
+	soundCard.vhdl \
+	ctlUpDown.vhdl \
+	ctlButtons.vhdl \
+	pongGame.vhdl \
+	top.vhdl \
 
-VERILOG_SYN_FILES = \
-	verilog/pxClkGen.v \
-	verilog/SB_PLL40_CORE.v \
-#	verilog/syncVGAGen.v
+VERILOG_SYN_FILES = 
 
 # Default target: run all required targets to build the image.
 all: pong.bin
