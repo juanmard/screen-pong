@@ -1,10 +1,20 @@
+ifeq ($(VGA_BOARD),tinyfpgabx)
 # TinyFPGA-BX
-PNRFLAGS  ?= --lp8k --package cm81 --pcf board/tinyfpga.pcf -q
+DEVICE = lp8k
+PACKAGE = cm81
+CONSTRAINTS_NAME = TinyFPGA-BX
 BOARD_TOP = TinyFPGABX_Top
-
+BOARD_FILES = vboard/vga/board/$(VGA_BOARD)/TinyFPGABX_PLL_config_pkg.vhd
+else
 # Icestick
-#PNRFLAGS  ?= --hx1k --package tq144 --pcf board/icestick.pcf -q
-#BOARD_TOP = Icestick_Top
+VGA_BOARD = icestick
+DEVICE = hx1k
+PACKAGE = tq144
+CONSTRAINTS_NAME = IceStick
+BOARD_TOP = Icestick_Top
+BOARD_FILES = vboard/vga/board/$(VGA_BOARD)/Icestick_PLL_config_pkg.vhd
+$(info Default VGA_BOARD value: 'icestick' (allowed: 'tinyfpgabx' or 'icestick'))
+endif
 
 #--
 
@@ -19,7 +29,6 @@ ICEPACK     ?= icepack
 
 SRC = vboard/vga/src
 DEV_ICE40 = vboard/vga/device/ICE40
-BRD_TINY = vboard/vga/board/tinyfpgabx
 
 VHDL_SYN_FILES = \
 	$(DEV_ICE40)/ICE40_components_pkg.vhd \
@@ -28,7 +37,7 @@ VHDL_SYN_FILES = \
  	$(SRC)/VGA_sync_gen.vhd \
 	$(SRC)/VGA_sync_gen_cfg.vhd \
 	$(SRC)/VGA_sync_gen_idx.vhd \
-	$(BRD_TINY)/TinyFPGABX_PLL_config_pkg.vhd \
+	$(BOARD_FILES) \
 	board/$(BOARD_TOP).vhdl \
 	streams.vhdl \
 	components.vhdl \
@@ -44,9 +53,10 @@ VHDL_SYN_FILES = \
 	ctlUpDown.vhdl \
 	ctlButtons.vhdl \
 	pongGame.vhdl \
-	top.vhdl \
+	top.vhdl
 
-VERILOG_SYN_FILES = 
+
+VERILOG_SYN_FILES =
 
 # Default target: run all required targets to build the image.
 all: pong.bin
@@ -59,7 +69,7 @@ all: pong.bin
 pong.json: $(VHDL_SYN_FILES) $(VERILOG_SYN_FILES)
 	$(YOSYS) $(YOSYS_FLAGS) \
 		-p \
-		"$(GHDL_SYNTH) $(GHDL_FLAGS) $(VHDL_SYN_FILES) -e $(TOPLEVEL); \
+		"$(GHDL_SYNTH) $(GHDL_FLAGS) $(VHDL_SYN_FILES) -e $(BOARD_TOP); \
 		$(YOSYS_SYNTH) \
 		-top $(BOARD_TOP) \
 		-json $@" -q $(VERILOG_SYN_FILES) 2>&1 | tee yosys-report.txt
@@ -68,7 +78,9 @@ pong.json: $(VHDL_SYN_FILES) $(VERILOG_SYN_FILES)
 # This is called the **place** and **route** step.
 pong.asc: pong.json
 	$(NEXTPNR) \
-		$(PNRFLAGS) \
+		$(NEXTPNR_FLAGS) \
+		--$(DEVICE) --package "$(PACKAGE)" \
+		--pcf "vboard/constraints/boards/$(CONSTRAINTS_NAME)/constraints.pcf" \
 		--json $< \
 		--asc $@
 

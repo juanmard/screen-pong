@@ -14,7 +14,7 @@
 --// Additional Comments:
 --//   * Integration with the PLL is eliminated.
 --//     It is synthesized as a specific feature of the device.
---// 
+--//
 --////////////////////////////////////////////////////////////////////////////////
 
 --// Libraries.
