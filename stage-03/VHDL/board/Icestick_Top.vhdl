@@ -1,45 +1,61 @@
 library ieee;
 context ieee.ieee_std_context;
 
+use work.ICE40_components.all;
+use work.ICE40_PLL_config.ICE40_PLL_config_t;
+use work.ICE40_PLL_config.ICE40_Screen_configs;
+use work.Icestick_PLL_config.Icestick_PLL_configs;
+
 entity Icestick_Top is
+  generic (
+    SCREEN : natural := 22
+  );
   port (
-    CLK : in std_logic; -- System clock (12Mhz).
-
-    --PIN_21 : in std_logic; -- Player 1 - Up button.
-    --PIN_22 : in std_logic; -- Player 1 - Down button.
-    --PIN_23 : in std_logic; -- Player 2 - Up button.
-    --PIN_24 : in std_logic; -- Player 2 - Down button.
-
-    --PIN_20 : out std_logic; -- Right channel.
-    --PIN_19 : out std_logic; -- Left channel.
-
-    LED4 : out std_logic; -- VGA - VSync.
-    LED5 : out std_logic; -- VGA - HSync.
-    LED1 : out std_logic; -- VGA - R.
-    LED2 : out std_logic; -- VGA - G.
-    LED3 : out std_logic  -- VGA - B.
+    IceStick_CLK   : in  std_logic; -- System clock (12 Mhz)
+    IceStick_PMOD7 : out std_logic; -- VGA vsync
+    IceStick_PMOD8 : out std_logic; -- VGA HSync
+    IceStick_PMOD1 : out std_logic; -- VGA R
+    IceStick_PMOD2 : out std_logic; -- VGA G
+    IceStick_PMOD3 : out std_logic  -- VGA B
   );
 end;
 
 architecture arch of Icestick_Top is
 
+  constant PLL_cfg : ICE40_PLL_config_t := Icestick_PLL_configs(ICE40_Screen_configs(SCREEN));
+
+  signal clki : std_logic;
+
 begin
 
-  -- TODO Adjust system clock 16 MHz vs 12 Mhz
+  PLL_0: SB_PLL40_CORE
+  generic map (
+    DIVF => to_unsigned( PLL_cfg.DIVF, 7),
+    DIVQ => to_unsigned( PLL_cfg.DIVQ, 3)
+  )
+  port map (
+    REFERENCECLK => IceStick_CLK,
+    PLLOUTCORE   => clki,
+    BYPASS       => '0',
+    RESETB       => '1'
+  );
 
   DesignTop: entity work.top
+  generic map (
+    G_SCREEN => SCREEN
+  )
   port map (
-    CLK             => CLK,
+    px_clk          => clki,
     reset           => '0',
     Player_One_Up   => '0',
     Player_One_Down => '0',
     Player_Two_Up   => '0',
     Player_Two_Down => '0',
-    VGA_VSync       => LED4,
-    VGA_HSync       => LED5,
-    VGA_R           => LED1,
-    VGA_G           => LED2,
-    VGA_B           => LED3,
+    VGA_VSync       => IceStick_PMOD7,
+    VGA_HSync       => IceStick_PMOD8,
+    VGA_R           => IceStick_PMOD1,
+    VGA_G           => IceStick_PMOD2,
+    VGA_B           => IceStick_PMOD3,
     Audio_Right     => open,
     Audio_Left      => open
   );

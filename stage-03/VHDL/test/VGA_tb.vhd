@@ -56,10 +56,6 @@ begin
     wait for 500 ms;
     up <= '1';
     wait for 500 ms;
-    down <= '1';
-    wait for 500 ms;
-    up <= '0';
-    wait for 500 ms;
     report "end simulation" severity note;
     save_video <= '1';
     wait for 500 ns;
@@ -86,7 +82,7 @@ begin
     port map (
       px_clk          => clk,
       reset           => rst,
-      Player_One_Up   => up,
+      Player_One_Up   => '0',
       Player_One_Down => down,
       Player_Two_Up   => '0',
       Player_Two_Down => '0',
@@ -98,5 +94,5 @@ begin
       Audio_Right     => open,
       Audio_Left      => open
     );
-  
+
 end architecture;
