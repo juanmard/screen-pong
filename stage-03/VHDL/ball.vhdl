@@ -1,7 +1,7 @@
 -- ////////////////////////////////////////////////////////////////////////////////
 -- // Company:     Ridotech
 -- // Engineer:    Juan Manuel Rico
--- // Create Date: 16/10/2020
+-- // Create Date: 28/10/2020
 -- // Module Name: ball.vhdl
 -- //
 -- // Description: Draw a simple square ball in a stream RGB.
@@ -9,7 +9,7 @@
 -- // Dependencies: 
 -- //
 -- // Revisions: 
--- //     0.01 - File created.
+-- //     0.02 - File created.
 -- //
 -- // Additional Comments:
 -- //
@@ -20,6 +20,9 @@ library ieee;
     use work.streams.all;
 
 entity ball is
+    generic (
+        color : std_logic_vector(2 downto 0) := "111"  -- := white
+    );
     port (
         px_clk   : in  std_logic;                         --// Pixel clock.
         strRGB_i : in  strRGB_t;                          --// Stream RGB input.
@@ -32,15 +35,9 @@ end ball;
 
 --// Draw a ball in a RGB stream.
 architecture ball_A of ball is
-    --// Colors.
-    constant white      : std_logic_vector(2 downto 0) := "111";
-    constant yellow     : std_logic_vector(2 downto 0) := "110";
-    constant blue       : std_logic_vector(2 downto 0) := "001";
-    constant red        : std_logic_vector(2 downto 0) := "100";
 
-    -- // Ball dimension and color.
+    -- // Ball dimension.
     constant size_ball  : positive := 10;
-    constant color      : std_logic_vector(2 downto 0) := yellow;
 
     -- // Signals.
     signal strRGB_reg : strRGB_t;
@@ -56,7 +53,7 @@ begin
         upos_x <= unsigned(pos_x);
 
         --// Draw ball square?
-        draw_ball <= '1' when 
+        draw_ball <= '1' when
                         (strRGB_i.strVGA.y > upos_y)             and
                         (strRGB_i.strVGA.y < upos_y + size_ball) and
                         (strRGB_i.strVGA.x > upos_x)             and
@@ -64,9 +61,9 @@ begin
                         else '0';
 
         --// Draw ball color or background color.
-        strRGB_reg.R <= color(2) when (draw_ball = '1') else strRGB_i.R;
-        strRGB_reg.G <= color(1) when (draw_ball = '1') else strRGB_i.G;
-        strRGB_reg.B <= color(0) when (draw_ball = '1') else strRGB_i.B;
+        strRGB_reg.R <= color(2) when draw_ball else strRGB_i.R;
+        strRGB_reg.G <= color(1) when draw_ball else strRGB_i.G;
+        strRGB_reg.B <= color(0) when draw_ball else strRGB_i.B;
 
     process (px_clk)
     begin

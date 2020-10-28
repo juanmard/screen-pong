@@ -21,7 +21,7 @@ library ieee;
 
 entity player is
     generic (
-        type_ply   : std_logic := '0';                      --// Type of player. [Horizontal, Vertical]
+        type_ply   : std_logic := '0';                      --// Type of player. [Horizontal=1, Vertical=0]
         pos_offset : integer := 100;                        --// Offset from border.
         color : std_logic_vector (2 downto 0) := "111"      --// Player color.
     );

@@ -1,7 +1,7 @@
 -- ////////////////////////////////////////////////////////////////////////////////
 -- // Company:     Ridotech
 -- // Engineer:    Juan Manuel Rico
--- // Create Date: 15/10/2020
+-- // Create Date: 28/10/2020
 -- // Module Name: verticalPlayers.vhdl
 -- //
 -- // Description: Draw two vertical players in a stream RGB.
@@ -9,7 +9,7 @@
 -- // Dependencies: 
 -- //
 -- // Revisions: 
--- //     0.01 - File created.
+-- //     0.02 - File created.
 -- //
 -- // Additional Comments:
 -- //
@@ -21,6 +21,12 @@ library ieee;
 
 
 entity verticalPlayers is
+    generic (
+        width_screen   : positive := 800;
+        color_ply1     : std_logic_vector(2 downto 0) := "111"; -- := white
+        color_ply2     : std_logic_vector(2 downto 0) := "111"  -- := white
+    );
+
     port (
         px_clk    : in std_logic;                        --// Pixel clock.
         strRGB_i  : in strRGB_t;                         --// Input RGB stream.
@@ -32,17 +38,11 @@ entity verticalPlayers is
 end verticalPlayers;
 
 architecture verticalPlayers_A of verticalPlayers is
-    --// Colors.
-    constant yellow  : std_logic_vector(2 downto 0) := "110";
-    constant green   : std_logic_vector(2 downto 0) := "010";
-    constant violet  : std_logic_vector(2 downto 0) := "101";
-
     --// Screen dimentions.
-    constant width_screen  : positive := 800;
     constant width_player  : positive := 10;
     constant offset        : positive := 20;
-    constant xply1_off     : integer := offset;
-    constant xply2_off     : integer := width_screen - offset - width_player;
+    constant xoff_ply1     : integer := offset;
+    constant xoff_ply2     : integer := width_screen - offset - width_player;
 
     --// Signals.
     signal strRGB_p0 : strRGB_t;
@@ -51,9 +51,8 @@ begin
     --// Draw a player 1.
     player_1 : entity work.player
     generic map (
-        type_ply   => '0',
-        pos_offset => xply1_off,
-        color => green
+        pos_offset => xoff_ply1,
+        color => color_ply1
     )
     port map (
         px_clk   => px_clk,
@@ -65,9 +64,8 @@ begin
     --// Draw a player 2.
     player_2 : entity work.player
     generic map (
-        type_ply   => '0',
-        pos_offset => xply2_off,
-        color => violet
+        pos_offset => xoff_ply2,
+        color => color_ply2
     )
     port map (
         px_clk   => px_clk,

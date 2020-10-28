@@ -99,6 +99,9 @@ begin
 
     --// Control game module.
     ctlButtons_0: entity work.ctlButtons
+    generic map (
+        height_screen => cfg.height
+    )
     port map (
         clk       => endframe,
         reset     => reset,
@@ -112,6 +115,10 @@ begin
 
     --// Game module.
     pongGame_0: entity work.pongGame
+    generic map (
+        width_screen => cfg.width,
+        height_screen => cfg.height
+    )
     port map (
         px_clk   => px_clk,
         strVGA   => strVGA,

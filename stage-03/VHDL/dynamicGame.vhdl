@@ -1,7 +1,7 @@
 -- ////////////////////////////////////////////////////////////////////////////////
 -- // Company:     Ridotech
 -- // Engineer:    Juan Manuel Rico
--- // Create Date: 16/10/2020
+-- // Create Date: 28/10/2020
 -- // Module Name: dynamicGame.vhdl
 -- //
 -- // Description: Dynamic behavior Pong's game.
@@ -9,7 +9,7 @@
 -- // Dependencies: 
 -- //
 -- // Revisions: 
--- //     0.01 - File created.
+-- //     0.02 - File created.
 -- //
 -- // Additional Comments:
 -- //
@@ -18,6 +18,10 @@ library ieee;
 context ieee.ieee_std_context;
 
 entity dynamicGame is
+generic (
+    width_screen   : positive := 800;
+    height_screen  : positive := 600
+);
 port(
     dyn_clk     : in std_logic;                      --// Dynamic clock.
     reset       : in std_logic;                      --// Reset the game.
@@ -37,8 +41,6 @@ end dynamicGame;
 
 architecture dynamicGame_A of dynamicGame is
     -- // Screen parameters.
-    constant width_screen   : positive := 800;
-    constant height_screen  : positive := 600;
     constant size_ball      : positive := 10;
     constant size_player    : positive := 80;
     constant size_corner    : positive := 20;

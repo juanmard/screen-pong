@@ -8,12 +8,12 @@ use work.TinyFPGABX_PLL_config.TinyFPGABX_PLL_configs;
 
 entity TinyFPGABX_Top is
     generic (
-        SCREEN : natural := 16
+        SCREEN : natural := 22
       );
         port (
       TinyFPGABX_CLK    : in  std_logic; -- Pixel clock.
       TinyFPGABX_PIN_15 : in  std_logic; -- Reset.
-  
+
       TinyFPGABX_PIN_21 : in  std_logic; -- Player 1 - Up button.
       TinyFPGABX_PIN_22 : in  std_logic; -- Player 1 - Down button.
       TinyFPGABX_PIN_23 : in  std_logic; -- Player 2 - Up button.

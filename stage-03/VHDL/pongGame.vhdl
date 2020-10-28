@@ -1,7 +1,7 @@
 --////////////////////////////////////////////////////////////////////////////////
 --// Company:
 --// Engineer:
---// Create Date: 15/10/2020
+--// Create Date: 28/10/2020
 --// Module Name: pongGame.vhdl
 --//
 --// Description: Draw a tennis court in a stream RGB.
@@ -9,7 +9,7 @@
 --// Dependencies:
 --//
 --// Revisions:
---//     0.01 - File created.
+--//     0.02 - File created.
 --//
 --// Additional Comments:
 --//
@@ -21,7 +21,11 @@ context ieee.ieee_std_context;
 use work.streams.all;
 
 entity pongGame is
-    port (
+generic (
+    width_screen  : natural;
+    height_screen : natural
+);
+port (
         px_clk   : in  std_logic;
         strVGA   : in  strVGA_t;
         reset    : in  std_logic;
@@ -36,6 +40,14 @@ entity pongGame is
 end pongGame;
 
 architecture pongGame_A of pongGame is
+    -- // Colors.
+    constant white  : std_logic_vector(2 downto 0) := "111";
+    constant yellow : std_logic_vector(2 downto 0) := "110";
+    constant blue   : std_logic_vector(2 downto 0) := "001";
+    constant red    : std_logic_vector(2 downto 0) := "100";
+    constant green  : std_logic_vector(2 downto 0) := "010";
+    constant violet : std_logic_vector(2 downto 0) := "101";
+
 
     --// Signals.
     signal strRGB_p0, strRGB_p1, strRGB_p2 : strRGB_t;
@@ -50,18 +62,26 @@ architecture pongGame_A of pongGame is
     signal y_ball      : std_logic_vector (9 downto 0);
 
 begin
-
     --// Draw a tenis court.
     court_0: entity work.court
+    generic map (
+        width_screen => width_screen,
+        height_screen => height_screen,
+        color => white
+    )
     port map (
         px_clk => px_clk,
         strVGA => strVGA,
         strRGB => strRGB_p0
     );
 
-   --// Draw scoreboard.
-   scoreboard_0: entity work.scoreboard
-   port map (
+    --// Draw scoreboard.
+    scoreboard_0: entity work.scoreboard
+    generic map (
+        width_screen => width_screen,
+        height_screen => height_screen
+    )
+    port map (
        px_clk    => px_clk,
        strRGB_i  => strRGB_p0,
        dyn_clk   => endframe,
@@ -73,6 +93,11 @@ begin
 
     --// Draw players.
     verticalPlayers_0: entity work.verticalPlayers
+    generic map (
+        width_screen => width_screen,
+        color_ply1 => green,
+        color_ply2 => violet
+    )
     port map (
         px_clk   => px_clk,
         strRGB_i => strRGB_p1,
@@ -83,6 +108,9 @@ begin
 
     --// Draw ball.
     ball_0: entity work.ball
+    generic map (
+        color => white
+    )
     port map (
         px_clk   => px_clk,
         strRGB_i => strRGB_p2,
@@ -103,6 +131,10 @@ begin
 
     --// Get endframe signal for dynamic logic.
     endframeVGA_0: entity work.endframeVGA
+    generic map (
+        width_screen => width_screen,
+        height_screen => height_screen
+    )
     port map (
         strVGA   => strVGA,
         endframe => endframe
@@ -110,6 +142,10 @@ begin
 
     --// Change dynamic's game every frame.
     dynamicGame_0: entity work.dynamicGame
+    generic map (
+        width_screen => width_screen,
+        height_screen => height_screen
+    )
     port map (
         dyn_clk     => endframe,
         reset       => reset,
