@@ -59,37 +59,37 @@ begin
         strRGB => strRGB_p0
     );
 
---    --// Draw scoreboard.
---    scoreboard_0: entity work.scoreboard
---    port map (
---        px_clk    => px_clk,
---        strRGB_i  => strRGB_p0,
---        dyn_clk   => endframe,
---        reset     => reset,
---        goal_ply1 => goal_ply1,
---        goal_ply2 => goal_ply2,
---        strRGB_o  => strRGB_p1
---    );
+   --// Draw scoreboard.
+   scoreboard_0: entity work.scoreboard
+   port map (
+       px_clk    => px_clk,
+       strRGB_i  => strRGB_p0,
+       dyn_clk   => endframe,
+       reset     => reset,
+       goal_ply1 => goal_ply1,
+       goal_ply2 => goal_ply2,
+       strRGB_o  => strRGB_p1
+   );
 
     --// Draw players.
     verticalPlayers_0: entity work.verticalPlayers
     port map (
         px_clk   => px_clk,
-        strRGB_i => strRGB_p0,
+        strRGB_i => strRGB_p1,
         pos_ply1 => pos_ply1,
         pos_ply2 => pos_ply2,
-        strRGB_o => strRGB
+        strRGB_o => strRGB_p2
     );
 
---    --// Draw ball.
---    ball_0: entity work.ball
---    port map (
---        px_clk   => px_clk,
---        strRGB_i => strRGB_p2,
---        pos_x    => x_ball,
---        pos_y    => y_ball,
---        strRGB_o => strRGB
---    );
+    --// Draw ball.
+    ball_0: entity work.ball
+    port map (
+        px_clk   => px_clk,
+        strRGB_i => strRGB_p2,
+        pos_x    => x_ball,
+        pos_y    => y_ball,
+        strRGB_o => strRGB
+    );
 
     --// Sound card module.
     soundCard_0: entity work.soundCard

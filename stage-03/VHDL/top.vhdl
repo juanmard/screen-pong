@@ -29,7 +29,7 @@ use work.VGA_config.all;
 --// Entity top.
 entity top is
     generic (
-        G_SCREEN : natural := 17         -- VGA Mode.
+        G_SCREEN : natural := 18         -- VGA Mode.
       );
     port (
         px_clk : in std_logic;           -- Pixel clock.
@@ -66,6 +66,7 @@ architecture top_A of top is
     signal strRGB   : strRGB_t;                      -- Stream RGB.
 
     signal x_tmp, y_tmp : integer range -1 to cfg.width;
+    signal active : std_logic;
 
 begin
 
@@ -81,10 +82,13 @@ begin
       Y     => y_tmp
     );
 
+    -- // Active video.
+    active <= '1' when x_tmp /= -1 and y_tmp /= -1 else '0';
+
     -- // Type casting.
-    strVGA.x <= to_unsigned (x_tmp,10) when x_tmp /= -1 else (others=>'0');
-    strVGA.y <= to_unsigned (y_tmp,10) when y_tmp /= -1 else (others=>'0');
-    strVGA.active <= '1' when x_tmp /= -1 and y_tmp /= -1 else '0';
+    strVGA.x <= to_unsigned (x_tmp,10) when active else (others=>'0');
+    strVGA.y <= to_unsigned (y_tmp,10) when active else (others=>'0');
+    strVGA.active <= active;
 
     --// Generated VGA endframe module.
     endframeVGA_0: entity work.endframeVGA
@@ -122,9 +126,9 @@ begin
     );
 
     --// Unzip stream RGB out.
-    VGA_R     <= strRGB.R;
-    VGA_G     <= strRGB.G;
-    VGA_B     <= strRGB.B;
+    VGA_R     <= strRGB.R when active else '0';
+    VGA_G     <= strRGB.G when active else '0';
+    VGA_B     <= strRGB.B when active else '0';
     VGA_HSync <= strRGB.strVGA.hsync;
     VGA_VSync <= strRGB.strVGA.vsync;
 

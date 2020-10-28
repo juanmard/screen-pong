@@ -5,6 +5,7 @@ PACKAGE = cm81
 CONSTRAINTS_NAME = TinyFPGA-BX
 BOARD_TOP = TinyFPGABX_Top
 BOARD_FILES = vboard/vga/board/$(VGA_BOARD)/TinyFPGABX_PLL_config_pkg.vhd
+PROG = tinyprog -p
 else
 # Icestick
 VGA_BOARD = icestick
@@ -13,6 +14,7 @@ PACKAGE = tq144
 CONSTRAINTS_NAME = IceStick
 BOARD_TOP = Icestick_Top
 BOARD_FILES = vboard/vga/board/$(VGA_BOARD)/Icestick_PLL_config_pkg.vhd
+PROG = iceprog 
 $(info Default VGA_BOARD value: 'icestick' (allowed: 'tinyfpgabx' or 'icestick'))
 endif
 
@@ -82,7 +84,7 @@ pong.asc: pong.json
 		--$(DEVICE) --package "$(PACKAGE)" \
 		--pcf "vboard/constraints/boards/$(CONSTRAINTS_NAME)/constraints.pcf" \
 		--json $< \
-		--asc $@
+		--asc $@ 2>&1 | tee nextpnr-report.txt
 
 # Use icepack to convert the FPGA configuration into a "bitstream" loadable onto the FPGA.
 # This is called the bitstream generation step.
@@ -91,7 +93,7 @@ pong.bin: pong.asc
 
 # Use tinyprog to load the image onto the TinyFPGA-BX.
 load: pong.bin
-	tinyprog -p $<
+	$(PROG) $<
 
 .PHONY: load
 
